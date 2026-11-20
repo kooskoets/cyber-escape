@@ -40,6 +40,8 @@
   .opdr.klaar{color:var(--groen)} .opdr.klaar .vink{background:var(--groen);color:#000;box-shadow:var(--bevel)}
   .opdr .waar{font-weight:600;color:var(--zacht);font-size:12px;margin-left:auto}
   #bonusRegel{margin-top:6px;font-size:13px;color:var(--geel);font-weight:800}
+  #verenRegel{font-size:13px;color:var(--paars);font-weight:800}
+  .opdr.opslot{color:#8a8a8a}
   #hudTop{position:absolute;top:12px;left:50%;transform:translateX(-50%);display:flex;gap:10px}
   #timer{font-family:var(--pix);font-size:18px;min-width:130px;text-align:center;line-height:1.6}
   #timer.krap{color:var(--rood);animation:knipper 1s infinite}
@@ -51,7 +53,7 @@
   #hudRight{position:absolute;top:12px;right:12px;padding:6px}
   #minimap{display:block;image-rendering:pixelated}
   #codeBar{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;font-family:var(--pix);font-size:10px}
-  .codeslot{width:48px;height:56px;background:#8b8b8b;box-shadow:inset 3px 3px 0 #373737, inset -3px -3px 0 #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--pix);font-size:16px;color:#3a3a3a;gap:4px}
+  .codeslot{width:40px;height:52px;background:#8b8b8b;box-shadow:inset 3px 3px 0 #373737, inset -3px -3px 0 #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--pix);font-size:16px;color:#3a3a3a;gap:4px}
   .codeslot span{font-size:13px;line-height:1}
   .codeslot.gevonden{color:#fff;text-shadow:2px 2px 0 #1e5a14;background:#7fbf55}
   #besturing{position:absolute;bottom:14px;left:12px;font-size:12px;color:var(--zacht);line-height:1.8}
@@ -171,8 +173,8 @@
   .keypad{display:grid;grid-template-columns:repeat(3,74px);gap:8px;justify-content:center;margin-top:14px}
   .keypad button{height:62px;border:3px solid #000;box-shadow:var(--bevel);background:#6f6f6f;color:#fff;font-family:var(--pix);font-size:18px;text-shadow:2px 2px 0 #333}
   .keypad button:hover{background:#7d8fd6}
-  .kpDisplay{display:flex;gap:10px;justify-content:center}
-  .kpDisplay div{width:56px;height:68px;background:#111;box-shadow:var(--bevelIn);border:3px solid #000;display:grid;place-items:center;font-family:var(--pix);font-size:24px;color:var(--neon)}
+  .kpDisplay{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+  .kpDisplay div{width:46px;height:60px;background:#111;box-shadow:var(--bevelIn);border:3px solid #000;display:grid;place-items:center;font-family:var(--pix);font-size:24px;color:var(--neon)}
   .shake{animation:shake .4s}
   @keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
 
@@ -277,6 +279,25 @@
     .vl.heeftLinks .vl-links{max-height:calc(100dvh - 92px);overflow:auto;padding-right:4px}
   }
 
+  /* Opdracht: rode vlaggen */
+  .rv[data-id]{cursor:pointer;border-radius:4px;outline:2px dashed transparent;transition:background .15s}
+  .rv[data-id]:hover{background:rgba(255,227,90,.45)}
+  .rv.gevonden{background:rgba(255,85,85,.3);outline:2px solid #ff5555}
+  .rv.geenrisico{background:rgba(120,120,120,.2)}
+  .rv.gemist{background:rgba(255,160,40,.35);outline:2px solid #ff9f1a}
+  .shop{background:#fff;color:#111;border:3px solid #000;border-radius:10px;overflow:hidden}
+  .shopUrl{background:#e8eaf0;padding:7px 10px;font-family:ui-monospace,Consolas,monospace;font-size:13px}
+  .shopBody{display:flex;gap:12px;padding:10px 12px;font-size:14px;line-height:1.6}
+  .shopFoto{font-size:64px;background:#f3f3f3;border-radius:8px;width:100px;height:100px;display:grid;place-items:center;flex:0 0 100px}
+  /* Opdracht: instellingen */
+  .instelPaneel{background:#1b2230;border:3px solid #000;box-shadow:var(--bevel);padding:10px}
+  .instelKop{font-family:var(--pix);font-size:10px;color:var(--cyaan);margin-bottom:8px}
+  .instelRij{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 8px;border-bottom:2px solid #2b3446;font-weight:800;font-size:14px}
+  .instelRij.ok{background:rgba(95,211,74,.18)} .instelRij.nok{background:rgba(255,85,85,.22)}
+  .instelRij .switch{width:56px;height:28px} .instelRij .switch:after{width:18px;height:18px}
+  .instelRij .switch.aan:after{left:30px}
+  @media (max-height:560px){ .instelRij{padding:4px 6px;font-size:12px} .shopBody{font-size:12px;line-height:1.4} .shopFoto{font-size:40px;width:64px;height:64px;flex-basis:64px} }
+
   /* Geluid */
   #geluidKnop{pointer-events:auto;cursor:pointer;color:#fff;font-size:22px;min-width:58px;line-height:1.6}
   #geluidKnop:hover{background:rgba(70,70,110,.95)}
@@ -337,7 +358,7 @@
     #hudTop small{font-size:6px}
     #geluidKnop{font-size:16px;min-width:46px}
     #hudRight{top:max(6px, env(safe-area-inset-top));right:max(6px, env(safe-area-inset-right));padding:3px}
-    #minimap{width:150px;height:93px}
+    #minimap{width:130px;height:112px}
     #codeBar{top:calc(max(6px, env(safe-area-inset-top)) + 54px);bottom:auto;font-size:0;gap:4px;padding:4px 6px}
     .codeslot{width:34px;height:40px;font-size:12px;gap:2px}
     .codeslot span{font-size:10px}
@@ -371,14 +392,15 @@
   <div id="hudLeft" class="hudbox">
     <h3>OPDRACHTEN</h3>
     <div id="opdrLijst"></div>
-    <div id="bonusRegel">⭐ Verborgen risico's: 0/5</div>
+    <div id="bonusRegel">⭐ Verborgen risico's: 0/10</div>
+    <div id="verenRegel">🪶 Veren: 0/8</div>
   </div>
   <div id="hudTop">
     <div class="hudbox" id="timer"><small>TIJD</small><span id="tijdTekst">25:00</span></div>
     <div class="hudbox" id="scoreBox"><small>XP</small><span id="scoreTekst">0</span><div id="xpBalk"><div></div></div></div>
     <button class="hudbox" id="geluidKnop" title="Geluid (sneltoets M)"><small style="display:block;font-family:var(--pix);font-size:8px;color:var(--zacht)">GELUID</small><span id="geluidIcoon">🔊</span></button>
   </div>
-  <div id="hudRight" class="hudbox"><canvas id="minimap" width="200" height="124"></canvas></div>
+  <div id="hudRight" class="hudbox"><canvas id="minimap" width="200" height="172"></canvas></div>
   <div id="codeBar" class="hudbox">🔒 Deurcode: <div id="codeSlots" style="display:flex;gap:8px"></div></div>
   <div id="besturing" class="hudbox">
     <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> lopen · <kbd>Shift</kbd> rennen<br>
@@ -416,7 +438,7 @@
       <span class="avatar"></span>
       <h1>Cyber Escape:<br><span>Het Gehackte Huis</span></h1>
     </div>
-    <p class="verhaal">Sam is even chips halen. Jij past op het huis. Wat kan er misgaan? Nou... alles. 🙃 <b>Hacker Kraai</b> heeft het slimme huis overgenomen. De voordeur zit op slot met een <b>code van 6 cijfers</b>. Los bij elk apparaat de vragen op. Heb je <b>minstens de helft goed</b>? Dan krijg je een cijfer. Vind alle cijfers en ontsnap op tijd!</p>
+    <p class="verhaal">Sam is even chips halen. Jij past op het huis. Wat kan er misgaan? Nou... alles. 🙃 <b>Hacker Kraai</b> heeft het slimme huis overgenomen. De voordeur zit op slot met een <b>code van 9 cijfers</b>. Sommige kamers zitten ook op slot: die gaan pas open als je een opdracht hebt opgelost. Los bij elk apparaat de vragen op. Heb je <b>minstens de helft goed</b>? Dan krijg je een cijfer. Vind alle cijfers en ontsnap op tijd!</p>
     <div class="grid2">
       <div class="blok">
         <h3>🎯 Wat moet je doen?</h3>
@@ -424,9 +446,12 @@
         🎮 Gameconsole (woonkamer): <b>wachtwoorden</b><br>
         📱 Telefoon (keuken): <b>privacy & oplichting</b><br>
         🖥️ Computer (woonkamer): <b>virussen & wifi</b><br>
-        📷 Slimme camera (werkkamer): <b>slimme apparaten</b><br>
-        📲 Tablet (gameroom): <b>AI & deepfakes</b><br>
-        ⭐ Bonus: vind 5 <b>verborgen risico's</b>
+        📷 Slimme camera (werkkamer 🔒): <b>slimme apparaten</b><br>
+        📲 Tablet (gameroom 🔒): <b>AI & deepfakes</b><br>
+        🪞 Slimme spiegel (badkamer 🔒): <b>online pesten</b><br>
+        🛒 Verkoop-laptop (garage 🔒): <b>kopen & verkopen</b><br>
+        🍪 Oude pc (hobbykamer 🔒): <b>privacy</b><br>
+        ⭐ Geheimen: 10 <b>verborgen risico's</b>, 8 <b>kraaienveren</b> en nog iets... 👀
       </div>
       <div class="blok">
         <h3>🎮 Besturing</h3>
@@ -451,7 +476,7 @@
     <label for="naam" class="label">Wat is je naam?</label>
     <div class="naamrij">
       <input id="naam" maxlength="30" placeholder="Bijv. Yara of Daan" autocomplete="off">
-      <select id="speeltijd" aria-label="Speeltijd" class="tijdKeuze"><option value="30">⏱️ 30 min</option><option value="40" selected>⏱️ 40 min</option><option value="50">⏱️ 50 min</option></select>
+      <select id="speeltijd" aria-label="Speeltijd" class="tijdKeuze"><option value="40">⏱️ 40 min</option><option value="50" selected>⏱️ 50 min</option><option value="60">⏱️ 60 min</option></select>
       <button class="knop groen" id="startKnop">▶ Start de game</button>
     </div>
     <div class="fouttekst" id="naamFout"></div>
@@ -735,14 +760,17 @@ const THEMAS = {
   social:     { naam: "Social engineering & privacy", icoon: "🕵️", ding: "Telefoon",    kamer: "keuken",     kleur: "#4ecdc4" },
   malware:    { naam: "Malware, updates & wifi",      icoon: "🦠", ding: "Computer",    kamer: "woonkamer",  kleur: "#a78bfa" },
   iot:        { naam: "Slimme apparaten (IoT)",        icoon: "📷", ding: "Slimme camera", kamer: "werkkamer", kleur: "#ff9f43" },
-  ai:         { naam: "AI, deepfakes & nepnieuws",     icoon: "🤖", ding: "Tablet",      kamer: "gameroom",   kleur: "#5ad1ff" }
+  ai:         { naam: "AI, deepfakes & nepnieuws",     icoon: "🤖", ding: "Tablet",      kamer: "gameroom",   kleur: "#5ad1ff" },
+  pesten:     { naam: "Online pesten",                 icoon: "🪞", ding: "Slimme spiegel", kamer: "badkamer", kleur: "#ff7eb6" },
+  shoppen:    { naam: "Online kopen & verkopen",       icoon: "🛒", ding: "Verkoop-laptop", kamer: "garage",   kleur: "#7dff5a" },
+  privacy:    { naam: "Privacy & jouw gegevens",       icoon: "🍪", ding: "Oude pc",     kamer: "hobbykamer", kleur: "#c9a46a" }
 };
-const VOLGORDE = ["phishing", "wachtwoord", "social", "malware", "iot", "ai"];
-let SPEELTIJD = 40 * 60;
+const VOLGORDE = ["phishing", "wachtwoord", "social", "malware", "iot", "ai", "pesten", "shoppen", "privacy"];
+let SPEELTIJD = 50 * 60;
 
 const S = {
   naam: "", score: 0, tijd: SPEELTIJD, bezig: false, klaar: false,
-  stations: {}, bonus: {}, resultaten: {}, lessen: [], hints: 0, foutTeller: 0,
+  stations: {}, bonus: {}, veren: {}, geheim: false, resultaten: {}, lessen: [], hints: 0, foutTeller: 0,
   gewaarschuwd5: false, gewaarschuwd1: false
 };
 VOLGORDE.forEach(t => {
@@ -1154,7 +1182,300 @@ const STATIONS = {
     maakStappen: () => trek(POT.ai, 6) }
 };
 
+
+/* ===== Uitbreiding: extra vragen in de bestaande potten ===== */
+POT.phishing.push(
+  chat({ wie: "Sms van PakjesPost", berichten: [
+      "Je pakket wacht op een nieuwe bezorgtijd.",
+      "Kies een tijd via: pakjespost.nl.bezorg-info.com"],
+    phishing: true,
+    uitleg: "Nep! Het adres begint met pakjespost.nl, maar eindigt op <b>bezorg-info.com</b>. Alleen het einde telt.",
+    hint: "Lees de link tot het einde.", les: "Een link die met een bekende naam begint, kan toch nep zijn. Kijk naar het einde." }),
+  mail({ context: "Je hebt een boek geleend bij de bibliotheek.",
+    van: "Bibliotheek Twente", adres: "noreply@bieb-twente.nl", onderwerp: "Je boek moet over 3 dagen terug",
+    body: "Hoi Sam,<br><br>Je boek moet over 3 dagen terug. Wil je langer lezen? Verleng het in de bieb-app.",
+    phishing: false,
+    uitleg: "Echt. Het past bij wat je zelf deed. Er staat geen link in en ze vragen niks geheims.",
+    hint: "Past het bij iets wat je zelf deed?", les: "Een bericht dat klopt met wat jij deed en niks vraagt, is meestal echt." })
+);
+POT.wachtwoord.push(
+  mc({ vraag: "Wat is een <b>passkey</b>?",
+    opties: [{ t: "Inloggen met je vingerafdruk of gezicht in plaats van een wachtwoord", ok: true }, { t: "Een sleutel voor je fietsslot" }, { t: "Een wachtwoord dat je met vrienden deelt" }, { t: "Een geheime toets op je toetsenbord" }],
+    uitleg: "Met een passkey log je in met je telefoon, vingerafdruk of gezicht. Er is geen wachtwoord dat een hacker kan stelen.",
+    hint: "Het heeft met je telefoon of vinger te maken.", les: "Een passkey is een veilige manier van inloggen zonder wachtwoord." }),
+  mc({ context: "Je bent klaar op een computer van school.",
+    vraag: "Wat doe je?",
+    opties: [{ t: "Gewoon weglopen, iemand anders sluit wel af" }, { t: "Uitloggen bij al je accounts", ok: true }, { t: "Je wachtwoord opslaan in de browser" }, { t: "Het scherm uitzetten, dan ziet niemand het" }],
+    uitleg: "Ben je nog ingelogd, dan kan de volgende persoon in jouw account. Log dus altijd uit.",
+    hint: "Wat ziet de volgende persoon?", les: "Op een gedeelde computer altijd uitloggen." })
+);
+POT.social.push(
+  mc({ context: "Iemand die je alleen online kent, zegt: \"Dit is ons geheimpje. Vertel het niet aan je ouders.\"",
+    vraag: "Wat doe je?",
+    opties: [{ t: "Het geheim houden, dat is lief" }, { t: "Het juist vertellen aan een volwassene die je vertrouwt", ok: true }, { t: "Vragen om nog meer geheimpjes" }, { t: "Je wachtwoord geven als bewijs van vriendschap" }],
+    uitleg: "Een online 'vriend' die geheimpjes wil voor je ouders, is een alarmsignaal. Vertel het altijd aan iemand die je vertrouwt.",
+    hint: "Waarom zou iemand dat geheim willen houden?", les: "Online geheimpjes voor je ouders = alarmsignaal. Vertel het aan een volwassene." }),
+  chat({ wie: "Onbekend account", berichten: ["Ben jij dit op deze video?? 😱😱", "insta-video-link.click/sam"],
+    vraag: "Wat doe je?",
+    opties: [{ t: "Snel klikken, je wilt het weten" }, { t: "Niet klikken: dit is een bekende truc om je account te stelen", ok: true }, { t: "Klikken en dan je wachtwoord intypen" }, { t: "De link naar al je vrienden sturen" }],
+    uitleg: "Deze truc maakt je nieuwsgierig of bang. De link leidt naar een nep-inlogpagina die je wachtwoord steelt.",
+    hint: "Waarom gebruiken ze zoveel 😱?", les: "'Ben jij dit op de video?' + link = nep. Niet klikken." })
+);
+POT.malware.push(
+  mc({ context: "Je computer is ineens heel traag en er komen steeds rare pop-ups.",
+    vraag: "Wat doe je?",
+    opties: [{ t: "Niks, het gaat vanzelf over" }, { t: "Een virusscan doen en hulp vragen aan iemand die er verstand van heeft", ok: true }, { t: "Alle pop-ups wegklikken met 'Ja'" }, { t: "Nog meer programma's downloaden die beloven dat ze helpen" }],
+    uitleg: "Traag + rare pop-ups kan een virus zijn. Doe een scan en vraag hulp. Download geen 'wondermiddelen'.",
+    hint: "Wat kan de oorzaak zijn?", les: "Rare pop-ups en traag? Virusscan doen en hulp vragen." }),
+  mc({ vraag: "Wat is <b>spyware</b>?",
+    opties: [{ t: "Software die stiekem meekijkt wat je doet", ok: true }, { t: "Een spel voor spionnen" }, { t: "Een app die je batterij oplaadt" }, { t: "Een update van je virusscanner" }],
+    uitleg: "Spyware kijkt stiekem mee: wat je typt, waar je bent of wat je bekijkt. Daarna stuurt het dat door.",
+    hint: "'Spy' betekent spion.", les: "Spyware kijkt stiekem mee en stuurt gegevens door." })
+);
+POT.iot.push(
+  mc({ context: "Je wilt een speelgoedrobot met camera en wifi kopen.",
+    vraag: "Wat check je eerst?",
+    opties: [{ t: "Alleen de kleur" }, { t: "Of de maker updates geeft en of je het wachtwoord kunt veranderen", ok: true }, { t: "Of hij veel geluid maakt" }, { t: "Of hij op batterijen werkt" }],
+    uitleg: "Ook speelgoed met internet kan gehackt worden. Kies iets van een maker die updates geeft.",
+    hint: "Wat heb je geleerd over slimme apparaten?", les: "Koop slimme apparaten die updates krijgen en een eigen wachtwoord toestaan." })
+);
+POT.ai.push(
+  mc({ vraag: "Mag je een tekst van AI inleveren als je eigen huiswerk?",
+    opties: [{ t: "Ja, niemand merkt het" }, { t: "Nee, tenzij je docent zegt dat het mag. Vertel altijd dat je AI gebruikte", ok: true }, { t: "Ja, als je een paar woorden verandert" }, { t: "Alleen bij lange opdrachten" }],
+    uitleg: "Werk van AI is niet jouw werk. Vraag je docent wat mag, en zeg eerlijk wanneer je AI hebt gebruikt.",
+    hint: "Wie heeft het eigenlijk geschreven?", les: "Gebruik je AI? Alleen als het mag, en zeg het eerlijk." })
+);
+
+/* ===== Nieuwe potten ===== */
+POT.pesten = [
+  mc({ context: "In de klassengroep maakt iemand steeds gemene grappen over een klasgenoot.",
+    vraag: "Wat doe je?",
+    opties: [{ t: "Meelachen, anders ben jij de volgende" }, { t: "Niet meedoen, de klasgenoot steunen en het melden bij een docent of mentor", ok: true }, { t: "Er een meme van maken" }, { t: "Uit de groep gaan en niks zeggen" }],
+    uitleg: "Meelachen maakt het erger. Steun de klasgenoot en meld het. Samen kun je pesten stoppen.",
+    hint: "Wat helpt de klasgenoot echt?", les: "Doe niet mee met online pesten. Steun en meld." }),
+  mc({ context: "Je wordt zelf online gepest.",
+    vraag: "Wat is slim?",
+    opties: [{ t: "Terugschelden" }, { t: "Screenshots maken, de pester blokkeren en het vertellen aan iemand die je vertrouwt", ok: true }, { t: "Alles snel verwijderen" }, { t: "Niks zeggen en hopen dat het stopt" }],
+    uitleg: "Met screenshots heb je bewijs. Blokkeer de pester en praat erover. Je hoeft het niet alleen op te lossen.",
+    hint: "Wat heb je nodig om het te melden?", les: "Online gepest? Screenshot, blokkeren en erover praten." }),
+  mc({ vraag: "Waarom maak je een screenshot van pestberichten?",
+    opties: [{ t: "Om ze later nog eens te lezen" }, { t: "Als bewijs, voor als je het meldt", ok: true }, { t: "Om ze door te sturen naar de klas" }, { t: "Dat hoeft niet, je kunt het gewoon vertellen" }],
+    uitleg: "Berichten kunnen verwijderd worden. Met een screenshot kun je laten zien wat er gebeurd is.",
+    hint: "Wat als de pester het bericht verwijdert?", les: "Screenshots zijn bewijs als je pesten meldt." }),
+  mc({ context: "Een vriend stuurt een gênante foto van een klasgenoot door: \"haha kijk!\"",
+    vraag: "Wat doe je?",
+    opties: [{ t: "Doorsturen naar je beste vriend" }, { t: "De foto liken" }, { t: "Niet doorsturen en zeggen dat dit niet oké is", ok: true }, { t: "De foto opslaan voor later" }],
+    uitleg: "Elke keer dat iemand doorstuurt, wordt het erger voor de klasgenoot. Stop de keten.",
+    hint: "Hoe zou jij het vinden als het jouw foto was?", les: "Stuur gênante foto's van anderen nooit door." }),
+  mc({ context: "Iemand stuurt een blote privéfoto van een klasgenoot rond.",
+    vraag: "Wat is waar?",
+    opties: [{ t: "Doorsturen mag, iedereen heeft hem al" }, { t: "Doorsturen is strafbaar en heel kwetsend. Niet doorsturen en melden bij een volwassene", ok: true }, { t: "Het is alleen erg als je hem zelf gemaakt hebt" }, { t: "Het is oké als je hem na een dag verwijdert" }],
+    uitleg: "Zo'n foto doorsturen is strafbaar, ook als je zelf jonger dan 18 bent. Meld het. Hulp vind je ook bij Helpwanted.nl.",
+    hint: "Mag dit van de wet?", les: "Privéfoto's van anderen doorsturen is strafbaar. Melden, niet delen." }),
+  mc({ context: "Een anoniem account post nep-roddels over iemand uit je klas.",
+    vraag: "Wat doe je?",
+    opties: [{ t: "Het account volgen om te zien wat er nog komt" }, { t: "Het account melden bij de app en het vertellen aan een volwassene", ok: true }, { t: "De roddels doorvertellen" }, { t: "Een eigen anoniem account maken om terug te pesten" }],
+    uitleg: "Apps halen pestaccounts weg als genoeg mensen ze melden. Vertel het ook aan iemand die kan helpen.",
+    hint: "Hoe krijg je het account offline?", les: "Pestaccount? Melden bij de app en bij een volwassene." }),
+  mc({ context: "Je bent boos en wilt een gemene reactie typen.",
+    vraag: "Wat is een goede regel?",
+    opties: [{ t: "Typen en meteen plaatsen" }, { t: "Zou je het ook in het echt zeggen? Nee? Dan niet plaatsen", ok: true }, { t: "Plaatsen en later verwijderen" }, { t: "Anoniem plaatsen, dan maakt het niet uit" }],
+    uitleg: "Online voelt het minder echt, maar het doet net zoveel pijn. En wat online staat, blijft vaak bestaan.",
+    hint: "Achter het scherm zit een echt mens.", les: "Typ online niks wat je in het echt niet zou zeggen." }),
+  mc({ vraag: "Waar kun je anoniem en gratis praten als je online gepest wordt?",
+    opties: [{ t: "Bij de Kindertelefoon", ok: true }, { t: "In de comments van een video" }, { t: "Bij een onbekende in een game" }, { t: "Nergens, je moet het zelf oplossen" }],
+    uitleg: "De Kindertelefoon (0800-0432) is gratis en anoniem. Je kunt ook chatten op kindertelefoon.nl.",
+    hint: "Er is een speciale hulplijn voor jongeren.", les: "De Kindertelefoon is gratis en anoniem: 0800-0432." }),
+  mc({ vraag: "Wat is <b>trollen</b>?",
+    opties: [{ t: "Expres online mensen boos of verdrietig maken", ok: true }, { t: "Een spel met trollen spelen" }, { t: "Heel veel volgers krijgen" }, { t: "Een filmpje maken in het bos" }],
+    uitleg: "Trollen willen reacties uitlokken. Het beste wat je kunt doen: niet reageren, blokkeren en melden.",
+    hint: "Wat willen ze bereiken?", les: "Trollen? Niet reageren, blokkeren en melden." })
+];
+
+POT.shoppen = [
+  mc({ context: "Je verkoopt je oude fiets online. Een koper schrijft: \"Ik betaal vooruit. Klik even op deze link om €0,01 te ontvangen ter controle.\"",
+    vraag: "Wat doe je?",
+    opties: [{ t: "Klikken, je krijgt toch geld" }, { t: "Niet klikken: dit is een bekende oplichtingstruc", ok: true }, { t: "Je bankgegevens invullen op de link" }, { t: "De link naar je ouders sturen zodat zij inloggen" }],
+    uitleg: "Via die link log je in op een nep-bank. Dan nemen ze je rekening over. Echte kopers betalen gewoon.",
+    hint: "Waarom zou een koper jou een link sturen?", les: "Koper stuurt een betaal-link 'ter controle'? Oplichting. Niet klikken." }),
+  mc({ context: "Een webshop verkoopt nieuwe sneakers van €180 voor €29.",
+    vraag: "Wat is het waarschijnlijkst?",
+    opties: [{ t: "Een supergoede uitverkoop" }, { t: "Een nepwebshop", ok: true }, { t: "Een foutje dat je snel moet benutten" }, { t: "Tweedehands sneakers" }],
+    uitleg: "Zulke enorme kortingen zijn een lokmiddel. Je betaalt, maar krijgt niks of iets nepperigs.",
+    hint: "Te mooi om waar te zijn?", les: "Megakorting op dure spullen = vaak een nepwebshop." }),
+  mc({ vraag: "Hoe check je of een webshop te vertrouwen is?",
+    opties: [{ t: "Kijken of de site mooie plaatjes heeft" }, { t: "Reviews op andere sites zoeken en kijken of er een adres en KvK-nummer op staan", ok: true }, { t: "Kijken of er een slotje is, dan is het altijd goed" }, { t: "Kijken hoeveel korting er is" }],
+    uitleg: "Zoek reviews op andere websites. Een echte winkel heeft een adres en een KvK-nummer. Een slotje alleen zegt niet genoeg.",
+    hint: "Wat zeggen andere klanten?", les: "Check reviews elders, een adres en een KvK-nummer." }),
+  mc({ vraag: "Wat betekent het slotje 🔒 naast het webadres?",
+    opties: [{ t: "De site is altijd betrouwbaar" }, { t: "De verbinding is beveiligd, maar de site kan nog steeds nep zijn", ok: true }, { t: "De site is van de overheid" }, { t: "Je kunt niet gehackt worden" }],
+    uitleg: "Het slotje beschermt de verbinding. Maar ook oplichters hebben een slotje op hun nep-sites.",
+    hint: "Kan een oplichter ook een slotje hebben?", les: "Slotje = beveiligde verbinding, niet per se een eerlijke winkel." }),
+  mc({ context: "Je wilt een tweedehands telefoon kopen. De verkoper wil alleen vooraf geld en niet afspreken.",
+    vraag: "Wat is slim?",
+    opties: [{ t: "Snel betalen voordat een ander hem koopt" }, { t: "Liever ophalen en betalen bij het ophalen", ok: true }, { t: "Alvast de helft betalen" }, { t: "Betalen met cadeaukaarten" }],
+    uitleg: "Wie alleen vooraf geld wil en niet wil afspreken, is vaak een oplichter. Bekijk de spullen eerst.",
+    hint: "Waarom wil hij niet afspreken?", les: "Tweedehands kopen? Liefst ophalen en dan betalen." }),
+  mc({ context: "Een webshop zegt: \"Betalen kan alleen met een cadeaukaart.\"",
+    vraag: "Wat doe je?",
+    opties: [{ t: "Snel een cadeaukaart kopen" }, { t: "Niet doen: betalen met cadeaukaarten is vaak oplichting", ok: true }, { t: "De code van de kaart in de chat zetten" }, { t: "Twee cadeaukaarten kopen voor extra korting" }],
+    uitleg: "Geld op een cadeaukaart krijg je nooit terug. Daarom vragen oplichters daar vaak om.",
+    hint: "Kun je je geld terugkrijgen?", les: "Betalen met cadeaukaarten voor een webshop = alarmsignaal." }),
+  mc({ context: "In een game wil een speler skins ruilen <b>buiten</b> de officiële shop.",
+    vraag: "Wat doe je?",
+    opties: [{ t: "Doen, je krijgt betere skins" }, { t: "Niet doen: je kunt je skins én je account kwijtraken", ok: true }, { t: "Eerst je wachtwoord geven als vertrouwen" }, { t: "Alleen als hij aardig is" }],
+    uitleg: "Buiten de officiële shop ben je niet beschermd. Oplichters houden je skins of stelen je account.",
+    hint: "Wie beschermt je buiten de shop?", les: "Ruil of koop alleen via de officiële shop van de game." }),
+  mc({ context: "Een advertentie: \"Gefeliciteerd! Je hebt een gratis spelcomputer! Betaal alleen €2 verzendkosten.\"",
+    vraag: "Wat is dit?",
+    opties: [{ t: "Een mooie actie" }, { t: "Nep: ze willen je betaalgegevens", ok: true }, { t: "Een cadeau van de winkel" }, { t: "Echt, want het kost maar €2" }],
+    uitleg: "Met die €2 krijgen ze je bankgegevens. Soms zit je daarna vast aan een duur abonnement.",
+    hint: "Heb je ergens aan meegedaan?", les: "'Gratis, alleen verzendkosten' = vaak oplichting." }),
+  chat({ wie: "+31 6 98 12 44 10", berichten: ["Hoi! Kun je even dit betaalverzoek betalen? 🙏", "betaalverzoek-snel.click/€49"],
+    vraag: "Wat doe je?",
+    opties: [{ t: "Betalen, het is maar €49" }, { t: "Niet betalen. Eerst checken wie dit is via een andere manier", ok: true }, { t: "Betalen en daarna vragen wie het is" }, { t: "De link doorsturen naar je klas" }],
+    uitleg: "Een betaalverzoek van een onbekend nummer is vaak nep. De link leidt naar een nep-bank. Check eerst wie het is.",
+    hint: "Ken je dit nummer?", les: "Betaalverzoek van een onbekende? Niet betalen, eerst checken." })
+];
+
+POT.privacy = [
+  mc({ vraag: "Waarom zijn veel apps gratis?",
+    opties: [{ t: "Omdat de makers aardig zijn" }, { t: "Ze verdienen geld met reclame en jouw gegevens", ok: true }, { t: "Omdat de overheid ze betaalt" }, { t: "Omdat apps niks kosten om te maken" }],
+    uitleg: "Is het gratis? Dan betaal je vaak met je gegevens. De app weet wat je leuk vindt en laat daarop reclame zien.",
+    hint: "Hoe verdient een gratis app geld?", les: "Gratis apps verdienen vaak aan je gegevens en reclame." }),
+  mc({ vraag: "Wat zijn <b>cookies</b> op websites?",
+    opties: [{ t: "Kleine bestandjes waarmee websites onthouden wat je doet", ok: true }, { t: "Koekjes die je kunt bestellen" }, { t: "Virussen" }, { t: "Wachtwoorden van de website" }],
+    uitleg: "Cookies onthouden bijvoorbeeld je winkelmand. Maar ze kunnen ook bijhouden welke sites je bezoekt.",
+    hint: "Wat onthoudt een website over jou?", les: "Cookies onthouden wat je doet op websites." }),
+  mc({ context: "Een website vraagt: \"Alle cookies accepteren?\"",
+    vraag: "Wat is het privacyvriendelijkst?",
+    opties: [{ t: "Alles accepteren, dan ben je snel klaar" }, { t: "Alleen noodzakelijke cookies kiezen", ok: true }, { t: "De website nooit meer bezoeken" }, { t: "Je mailadres invullen" }],
+    uitleg: "Noodzakelijke cookies heeft de site nodig om te werken. De rest is vaak voor reclame en volgen.",
+    hint: "Welke cookies heeft de site echt nodig?", les: "Kies 'alleen noodzakelijke cookies'." }),
+  mc({ vraag: "Je zet een openbare post online en verwijdert hem een uur later. Is hij dan weg?",
+    opties: [{ t: "Ja, verwijderd is verwijderd" }, { t: "Niet zeker: iemand kan een screenshot hebben gemaakt", ok: true }, { t: "Ja, als je je telefoon uitzet" }, { t: "Ja, na een uur verdwijnt alles" }],
+    uitleg: "Wat online staat, kan gekopieerd worden. Denk dus eerst na voordat je iets post.",
+    hint: "Wat kan iemand anders in dat uur doen?", les: "Online is bijna nooit echt weg. Denk na voor je post." }),
+  mc({ vraag: "Welke gegevens zijn het gevoeligst?",
+    opties: [{ t: "Je lievelingskleur" }, { t: "Je BSN, wachtwoorden en bankgegevens", ok: true }, { t: "Je favoriete game" }, { t: "Je schoenmaat" }],
+    uitleg: "Met je BSN, wachtwoorden of bankgegevens kunnen oplichters veel schade doen. Deel die nooit zomaar.",
+    hint: "Waarmee kan iemand doen alsof hij jou is?", les: "Deel nooit je BSN, wachtwoorden of bankgegevens." }),
+  mc({ vraag: "Wat is de <b>AVG</b>?",
+    opties: [{ t: "Een Europese wet over hoe bedrijven met jouw gegevens omgaan", ok: true }, { t: "Een nieuwe social media-app" }, { t: "Een soort virusscanner" }, { t: "Een game-genre" }],
+    uitleg: "Door de AVG moeten bedrijven zeggen wat ze met je gegevens doen. Je mag ook vragen wat ze over je weten.",
+    hint: "Het is een wet.", les: "De AVG is de privacywet die jouw gegevens beschermt." }),
+  mc({ vraag: "Wat doet <b>incognito</b> surfen?",
+    opties: [{ t: "Niemand kan zien wat je doet" }, { t: "Je browser onthoudt je geschiedenis niet, maar websites en school kunnen het nog wel zien", ok: true }, { t: "Je wordt onzichtbaar voor hackers" }, { t: "Je internet wordt sneller" }],
+    uitleg: "Incognito wist alleen de geschiedenis op je eigen apparaat. Websites, het netwerk van school en je provider zien het nog steeds.",
+    hint: "Wie ziet je verkeer nog meer?", les: "Incognito = geen geschiedenis op je apparaat, maar niet onzichtbaar." }),
+  mc({ context: "Een gratis quiz-app wil toegang tot je contacten, locatie en foto's.",
+    vraag: "Wat doe je?",
+    opties: [{ t: "Alles toestaan, anders werkt hij misschien niet" }, { t: "Weigeren of een andere app kiezen: een quiz heeft dat niet nodig", ok: true }, { t: "Alleen je foto's delen" }, { t: "De app aan je vrienden aanraden" }],
+    uitleg: "Een quiz heeft je contacten, locatie en foto's niet nodig. Zulke apps verzamelen gegevens.",
+    hint: "Wat heeft een quiz echt nodig?", les: "Geef apps alleen de rechten die ze echt nodig hebben." }),
+  mc({ vraag: "Mag een bedrijf jouw gegevens verkopen zonder dat je het weet?",
+    opties: [{ t: "Ja, dat mag altijd" }, { t: "Nee, ze moeten vertellen wat ze met je gegevens doen", ok: true }, { t: "Ja, als je jonger bent dan 16" }, { t: "Alleen in het weekend" }],
+    uitleg: "Volgens de AVG moeten bedrijven duidelijk zeggen wat ze met je gegevens doen. Stiekem verkopen mag niet.",
+    hint: "Denk aan de privacywet.", les: "Bedrijven moeten eerlijk zeggen wat ze met je gegevens doen." })
+];
+
+/* ===== Nieuwe opdrachten (taken) ===== */
+const TAKEN = {
+  phishMail: { soort: "vlaggen", titel: "Zoek de rode vlaggen",
+    instructie: "Deze mail is phishing. <b>Klik op de 6 rode vlaggen</b> (dingen die verraden dat hij nep is). Foute klik: -10 XP.",
+    html: `<div class="mail"><div class="mailkop"><div class="ond"><span class="rv" data-id="onderwerp">⚠️ DRINGEND: je pakket wordt vernietigd!!</span></div>
+      Van: <b>PakjesPost</b> <span class="adres rv" data-id="adres">&lt;klantenservice@pakjespost-nl.co&gt;</span><br>Aan: sam@mail.nl · <span class="rv" data-id="datum">19 nov 2026</span></div>
+      <div class="mailbody"><span class="rv" data-id="aanhef">Beste klant,</span><br><br>
+      <span class="rv" data-id="spelfout">Wij hebbe je pakket niet kunnen bezorgen.</span> <span class="rv" data-id="haast">Bevestig je adres binnen 24 uur, anders vernietigen we het.</span><br><br>
+      <span class="neplink rv" data-id="link">Adres bevestigen</span><br><br><span class="rv" data-id="groet">Met vriendelijke groet,<br>Team PakjesPost</span></div></div>`,
+    items: {
+      onderwerp: { vlag: true, uitleg: "Hoofdletters, uitroeptekens en dreigen: ze willen je bang maken." },
+      adres: { vlag: true, uitleg: "Het adres eindigt op <b>.co</b> en is niet van de echte bezorger." },
+      aanhef: { vlag: true, uitleg: "'Beste klant': een echt bedrijf kent je naam." },
+      spelfout: { vlag: true, uitleg: "'Wij hebbe' is een taalfout. Echte bedrijven controleren hun teksten." },
+      haast: { vlag: true, uitleg: "Haast ('binnen 24 uur') is een trucje zodat je niet nadenkt." },
+      link: { vlag: true, uitleg: "Een knop om je gegevens te 'bevestigen' is een klassieke phishing-truc. Ga zelf naar de website of app." },
+      datum: { vlag: false, uitleg: "De datum is normaal. Geen vlag." },
+      groet: { vlag: false, uitleg: "Een nette groet zegt niks. Ook oplichters zijn beleefd. Geen vlag." }
+    },
+    les: "Rode vlaggen: raar adres, 'Beste klant', taalfouten, haast, dreigen en een 'bevestig'-knop." },
+  nepShop: { soort: "vlaggen", titel: "Is deze webshop te vertrouwen?",
+    instructie: "Sam wil hier sneakers kopen. <b>Klik op de 5 rode vlaggen</b> van deze nepwebshop. Foute klik: -10 XP.",
+    html: `<div class="shop"><div class="shopUrl">🔒 <span class="rv" data-id="url">https://sneaker-outlet-goedkoop.shop</span></div>
+      <div class="shopBody"><div class="shopFoto">👟</div><div>
+        <div class="rv" data-id="naam" style="font-weight:800;font-size:16px">Witte sneaker – Maat 42</div>
+        <div><s>€180</s> <span class="rv" data-id="prijs" style="color:#e00;font-weight:900;font-size:20px">€29 (-85%!!)</span></div>
+        <div class="rv" data-id="timer" style="color:#e00;font-weight:800">⏰ Nog maar 2 minuten!</div>
+        <div class="rv" data-id="betaal">💳 Betalen: <b>alleen met cadeaukaart</b></div>
+        <div class="rv" data-id="contact">📞 Contact: alleen via WhatsApp</div>
+        <div class="rv" data-id="kleur">🎨 Kleur: wit</div>
+        <div style="margin-top:6px"><span class="rv" data-id="knop" style="background:#111;color:#fff;padding:6px 14px;border-radius:6px;font-weight:800">In winkelwagen</span></div>
+      </div></div></div>`,
+    items: {
+      url: { vlag: true, uitleg: "Een vreemd adres met 'goedkoop' en '.shop'. Echte merken hebben hun eigen adres." },
+      prijs: { vlag: true, uitleg: "85% korting op nieuwe sneakers? Te mooi om waar te zijn." },
+      timer: { vlag: true, uitleg: "Afteller = haast. Je moet snel beslissen zonder na te denken." },
+      betaal: { vlag: true, uitleg: "Alleen cadeaukaarten: daar krijg je je geld nooit van terug." },
+      contact: { vlag: true, uitleg: "Geen adres en geen KvK-nummer, alleen WhatsApp. Een echte winkel is bereikbaar." },
+      naam: { vlag: false, uitleg: "Een productnaam is normaal. Geen vlag." },
+      kleur: { vlag: false, uitleg: "De kleur zegt niks. Geen vlag." },
+      knop: { vlag: false, uitleg: "Elke webshop heeft zo'n knop. Geen vlag." }
+    },
+    les: "Nepwebshop: rare URL, megakorting, afteller, cadeaukaart, geen adres." },
+  router: { soort: "schakelaars", titel: "Beveilig de router",
+    instructie: "Dit is het instellingenmenu van de router. <b>Zet elke instelling goed</b> (aan of uit) en klik op <b>Controleer</b>.",
+    kop: "📶 Router-instellingen",
+    items: [
+      { t: "Standaard wachtwoord 'admin' veranderen", goed: true, start: false, uitleg: "Altijd veranderen. Hackers kennen de standaard wachtwoorden." },
+      { t: "Automatische updates", goed: true, start: false, uitleg: "Aan: updates maken gaten dicht." },
+      { t: "Apart gastnetwerk voor slimme apparaten", goed: true, start: false, uitleg: "Aan: een gehackte lamp of camera komt dan niet bij je laptop." },
+      { t: "WPS-knop (verbinden zonder wachtwoord)", goed: false, start: true, uitleg: "Uit: via WPS kunnen anderen makkelijker op je wifi komen." },
+      { t: "Wifi zonder wachtwoord (open netwerk)", goed: false, start: true, uitleg: "Uit: anders kan iedereen in de buurt op je wifi." },
+      { t: "Beheer op afstand via internet", goed: false, start: true, uitleg: "Uit: dan kan niemand van buiten aan je router zitten." }
+    ],
+    les: "Router: standaard wachtwoord weg, updates aan, gastnetwerk aan, WPS/open wifi/beheer op afstand uit." },
+  appRechten: { soort: "schakelaars", titel: "Welke rechten krijgt de app?",
+    instructie: "Sam installeert de app <b>FietsRoute</b>. Die laat je de weg zien op de fiets. <b>Geef alleen de rechten die de app echt nodig heeft</b> en klik op <b>Controleer</b>.",
+    kop: "🚲 FietsRoute wil toegang tot:",
+    items: [
+      { t: "📍 Locatie (tijdens gebruik)", goed: true, start: false, uitleg: "Aan: een route-app moet weten waar je bent." },
+      { t: "👥 Contacten", goed: false, start: true, uitleg: "Uit: voor een route heb je je contacten niet nodig." },
+      { t: "🎤 Microfoon", goed: false, start: true, uitleg: "Uit: de app hoeft niet te luisteren." },
+      { t: "🖼️ Al je foto's", goed: false, start: true, uitleg: "Uit: je foto's zijn niet nodig voor een route." },
+      { t: "📅 Agenda", goed: false, start: false, uitleg: "Uit: je agenda heeft niks met fietsen te maken." }
+    ],
+    les: "Geef apps alleen rechten die ze echt nodig hebben." }
+};
+
+/* ===== Stations aanpassen en toevoegen ===== */
+STATIONS.phishing.maakStappen = () => trek(POT.phishing, 7).concat([Object.assign({}, TAKEN.phishMail)]);
+STATIONS.wachtwoord.maakStappen = () => trek(POT.wachtwoord, 6).concat([{ soort: "bouwer" }]);
+STATIONS.social.maakStappen = () => [{ soort: "hotspot" }].concat(trek(POT.social, 5));
+STATIONS.malware.maakStappen = () => trek(POT.malware, 7);
+STATIONS.iot.maakStappen = () => trek(POT.iot, 5).concat([Object.assign({}, TAKEN.router)]);
+STATIONS.ai.maakStappen = () => trek(POT.ai, 6);
+STATIONS.pesten = { titel: "Slimme spiegel – Online pesten",
+  intro: "Ik heb de spiegel gehackt. Nu laat hij alle gemene berichten uit de klassengroep zien. Heel gezellig... not. 🪞",
+  uitlegIntro: "Vragen over <b>online pesten en hoe je met elkaar omgaat</b>. Meer dan de helft fout? Dan geen cijfer!",
+  weetje: "Doe niet mee met pesten. Maak screenshots, blokkeer en meld het. Stuur nooit foto's van anderen door. Praat erover met iemand die je vertrouwt, of bel de Kindertelefoon: 0800-0432 (gratis en anoniem).",
+  maakStappen: () => trek(POT.pesten, 6) };
+STATIONS.shoppen = { titel: "Verkoop-laptop – Online kopen en verkopen",
+  intro: "Sam verkoopt zijn oude fiets online. Ik doe alsof ik een koper ben. Hihi. 🛒",
+  uitlegIntro: "Vragen over <b>online kopen, verkopen en nepwebshops</b>. Meer dan de helft fout? Dan geen cijfer!",
+  weetje: "Te mooi om waar te zijn? Dan is het nep. Klik nooit op betaal-links van kopers. Check webshops via reviews, een adres en een KvK-nummer. Betaal nooit met cadeaukaarten.",
+  maakStappen: () => trek(POT.shoppen, 6).concat([Object.assign({}, TAKEN.nepShop)]) };
+STATIONS.privacy = { titel: "Oude pc – Privacy en jouw gegevens",
+  intro: "Op deze oude pc staat álles wat apps over Sam weten. Echt alles. Zelfs zijn zoekgeschiedenis. 🍪",
+  uitlegIntro: "Vragen over <b>privacy, cookies en jouw gegevens</b>. Meer dan de helft fout? Dan geen cijfer!",
+  weetje: "Gratis apps verdienen vaak aan je gegevens. Kies 'alleen noodzakelijke cookies'. Geef apps alleen de rechten die ze nodig hebben. De AVG beschermt je gegevens.",
+  maakStappen: () => trek(POT.privacy, 5).concat([Object.assign({}, TAKEN.appRechten)]) };
+
 const BONUS = {
+  slotscherm: { titel: "Inlogcode op het vergrendelscherm", tekst: "Op het vergrendelscherm staat een inlogcode. Iedereen kan die lezen! Zet bij je meldingen <b>'inhoud verbergen'</b> aan.", toast: "Hé, die code was voor MIJ bedoeld! 😤" },
+  wachtwoordlijst: { titel: "Wachtwoorden in een gewoon bestand", tekst: "Een bestand <b>wachtwoorden.xlsx</b> is makkelijk te stelen. En overal hetzelfde wachtwoord, ook nog! Gebruik een <b>wachtwoordmanager</b>.", toast: "Mijn favoriete bestand! Hoe vond je dat?! 📄" },
+  herstelcodes: { titel: "2FA-herstelcodes op het prikbord", tekst: "Met herstelcodes kom je in je account zonder je telefoon. Ze zijn net zo geheim als je wachtwoord. Bewaar ze veilig, niet op een prikbord.", toast: "Die codes had ik al overgeschreven... denk ik. 📝" },
+  grofvuil: { titel: "Laptop bij het grofvuil", tekst: "Gooi je een laptop of telefoon weg? <b>Wis hem eerst</b> (fabrieksinstellingen). Anders kan iemand je foto's en accounts terugvinden.", toast: "Die laptop wilde ik vannacht ophalen! 🌙" },
+  backupschijf: { titel: "Back-up-schijf altijd aangesloten", tekst: "Deze back-up-schijf zit altijd vast aan de computer. Bij ransomware gaat hij óók op slot. <b>Koppel je back-up los</b> als hij klaar is.", toast: "Pff, die schijf wilde ik ook versleutelen. 🔐" },
   vergrendel: { titel: "Computer niet vergrendeld", tekst: "De computer van papa staat open. Iedereen kan bij zijn mail en bank! Vergrendel je computer als je wegloopt: <b>Windows-toets + L</b>.", toast: "Nee! Via die open computer las ik alles! 😱" },
   schermslot: { titel: "Telefoon zonder schermslot", tekst: "Deze telefoon heeft geen pincode. Wie hem vindt, kan alles zien en je accounts gebruiken. Zet altijd een <b>schermvergrendeling</b> aan.", toast: "Die telefoon was mijn favoriete speeltje! 📱" },
   postit: { titel: "Wachtwoord op een briefje", tekst: "Op het briefje bij de laptop staat <b>'ww: Sam2010!'</b>. Iedereen die in de kamer komt, kan het lezen. Onthoud een wachtzin of gebruik een wachtwoordmanager.", toast: "Hé! Dat briefje was van MIJ! 😤" },
@@ -1170,13 +1491,13 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, IS_TOUCH ? 1.25 : 
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.insertBefore(renderer.domElement, document.body.firstChild);
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x7ec0ff);
+scene.background = new THREE.Color(0xa8dcff);
 const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.05, 80);
 camera.rotation.order = "YXZ";
 
 scene.add(new THREE.HemisphereLight(0xffffff, 0x8a93b8, 0.55));
 scene.add(new THREE.AmbientLight(0xffffff, 0.28));
-[[-5, -4, 0xffe2b8], [5, -4, 0xfff4e0], [-5, 4, 0xffe2b8], [5, 4, 0xffe2b8], [14, -4, 0xfff0d0], [14, 4, 0xd8c8ff]].forEach(([x, z, c]) => {
+[[-5, -4, 0xffe2b8], [5, -4, 0xfff4e0], [-5, 4, 0xffe2b8], [5, 4, 0xffe2b8], [14, -4, 0xfff0d0], [14, 4, 0xd8c8ff], [-5, -12, 0xf0f8ff], [5, -12, 0xffe2b8], [14, -12, 0xf4f4f4]].forEach(([x, z, c]) => {
   const l = new THREE.PointLight(c, 0.55, 13, 1.2); l.position.set(x, 2.5, z); scene.add(l);
   const lamp = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.4, 0.4), new THREE.MeshBasicMaterial({ color: 0xffe9a8 }));
   lamp.position.set(x, 2.6, z); scene.add(lamp);
@@ -1263,38 +1584,149 @@ vloer(10, 8, -5, -4, new THREE.MeshLambertMaterial({ color: 0x6f86d6, map: pixTe
 vloer(10, 8, 5, -4, new THREE.MeshLambertMaterial({ color: 0xffffff, map: pixTex(tegelCanvas, 5, 4) }));
 vloer(8, 8, 14, -4, new THREE.MeshLambertMaterial({ color: 0x8a6a4a, map: pixTex(plankCanvas, 8, 8) }));
 vloer(8, 8, 14, 4, new THREE.MeshLambertMaterial({ color: 0x6a4fb0, map: pixTex(wolCanvas, 8, 8) }));
-const plafond = new THREE.Mesh(new THREE.PlaneGeometry(28, 16), new THREE.MeshLambertMaterial({ color: 0xc9a46a, map: pixTex(plankCanvas, 28, 16) }));
-plafond.rotation.x = Math.PI / 2; plafond.position.set(4, H, 0); scene.add(plafond);
+vloer(10, 8, -5, -12, new THREE.MeshLambertMaterial({ color: 0xb8e0ff, map: pixTex(tegelCanvas, 5, 4) }));   // badkamer
+vloer(10, 8, 5, -12, new THREE.MeshLambertMaterial({ color: 0xc9935a, map: pixTex(plankCanvas, 10, 8) }));   // hobbykamer
+vloer(8, 8, 14, -12, new THREE.MeshLambertMaterial({ color: 0x9a9a9a, map: pixTex(blokCanvas, 8, 8) }));     // garage
+const plafond = new THREE.Mesh(new THREE.PlaneGeometry(28, 24), new THREE.MeshLambertMaterial({ color: 0xc9a46a, map: pixTex(plankCanvas, 28, 24) }));
+plafond.rotation.x = Math.PI / 2; plafond.position.set(4, H, -4); scene.add(plafond);
+
+/* Ramen: echte openingen met glas en kozijn */
+const glasMat = new THREE.MeshBasicMaterial({ color: 0xcfefff, transparent: true, opacity: 0.12, depthWrite: false, side: THREE.DoubleSide });
+const kozijnMat = new THREE.MeshLambertMaterial({ color: 0x6b4a2b, map: blokTex });
+const R_ONDER = 0.9, R_BOVEN = 2.1, R_BREED = 1.4, R_MID = 1.5;
+function raamKozijn(horiz, cx, cz) {
+  const D = T + 0.06;
+  const bar = (w, hh, d, x, y, z) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, hh, d), kozijnMat); m.position.set(x, y, z); scene.add(m); };
+  if (horiz) {
+    bar(0.08, 1.2, D, cx - 0.6, R_MID, cz); bar(0.08, 1.2, D, cx + 0.6, R_MID, cz); bar(0.05, 1.2, D * 0.6, cx, R_MID, cz);
+    bar(1.28, 0.08, D, cx, R_ONDER + 0.02, cz); bar(1.28, 0.08, D, cx, R_BOVEN - 0.02, cz); bar(1.2, 0.05, D * 0.6, cx, R_MID, cz);
+    const g = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 1.2), glasMat); g.position.set(cx, R_MID, cz); scene.add(g);
+  } else {
+    bar(D, 1.2, 0.08, cx, R_MID, cz - 0.6); bar(D, 1.2, 0.08, cx, R_MID, cz + 0.6); bar(D * 0.6, 1.2, 0.05, cx, R_MID, cz);
+    bar(D, 0.08, 1.28, cx, R_ONDER + 0.02, cz); bar(D, 0.08, 1.28, cx, R_BOVEN - 0.02, cz); bar(D * 0.6, 0.05, 1.2, cx, R_MID, cz);
+    const g = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 1.2), glasMat); g.position.set(cx, R_MID, cz); g.rotation.y = Math.PI / 2; scene.add(g);
+  }
+}
+function muurRamen(x1, z1, x2, z2, ramen) {
+  const horiz = z1 === z2;
+  const a = horiz ? Math.min(x1, x2) : Math.min(z1, z2), b = horiz ? Math.max(x1, x2) : Math.max(z1, z2);
+  const seg = (s, e, y1, y2) => horiz ? muur(s, z1, e, z1, y1, y2) : muur(x1, s, x1, e, y1, y2);
+  let cur = a;
+  ramen.slice().sort((p, q) => p - q).forEach(c => {
+    const s = c - R_BREED / 2, e = c + R_BREED / 2;
+    if (s > cur) seg(cur, s, 0, H);
+    seg(s, e, 0, R_ONDER); seg(s, e, R_BOVEN, H);
+    raamKozijn(horiz, horiz ? c : x1, horiz ? z1 : c);
+    cur = e;
+  });
+  if (cur < b) seg(cur, b, 0, H);
+}
 
 /* Muren */
-muur(-10, -8, 18, -8);
-muur(-10, 8, -0.8, 8); muur(0.8, 8, 18, 8); muur(-0.8, 8, 0.8, 8, 2.2, H);
-muur(-10, -8, -10, 8); muur(18, -8, 18, 8);
-// muur tussen oude en nieuwe kamers, met 2 deuren
+// buitenmuren met ramen
+muurRamen(-10, -16, 18, -16, [-6, 3, 7]);
+muurRamen(-10, 8, -0.8, 8, [-7, -3.5]); muurRamen(0.8, 8, 18, 8, [5, 12, 15.5]); muur(-0.8, 8, 0.8, 8, 2.2, H);
+muurRamen(-10, -16, -10, 8, [-12, -3, 1.0]);
+muurRamen(18, -16, 18, 8, [-12, -2, 3]);
+// tussenmuur noord (met 3 deuren naar badkamer, hobbykamer en garage)
+muur(-10, -8, -6.6, -8); muur(-5.0, -8, 1.2, -8); muur(2.8, -8, 10.9, -8); muur(12.5, -8, 18, -8);
+muur(-6.6, -8, -5.0, -8, 2.2, H); muur(1.2, -8, 2.8, -8, 2.2, H); muur(10.9, -8, 12.5, -8, 2.2, H);
+muur(0, -16, 0, -8); muur(10, -16, 10, -8);
+// muur tussen oude en oostelijke kamers, met 2 deuren
 muur(10, -8, 10, -2.6); muur(10, -1.2, 10, 5.4); muur(10, 6.8, 10, 8);
 muur(10, -2.6, 10, -1.2, 2.2, H); muur(10, 5.4, 10, 6.8, 2.2, H);
-// muur tussen werkkamer en gameroom, met deur
-muur(10, 0, 13.2, 0); muur(14.6, 0, 18, 0); muur(13.2, 0, 14.6, 0, 2.2, H);
+muur(10, 0, 18, 0); // werkkamer | gameroom (dicht)
 muur(-10, 0, -6.6, 0); muur(-5.0, 0, 3.6, 0); muur(5.2, 0, 10, 0);
 muur(-6.6, 0, -5.0, 0, 2.2, H); muur(3.6, 0, 5.2, 0, 2.2, H);
 muur(0, -8, 0, 0);
-// Plinten-accent
+// pixel-raam-textuur (voor de buurhuizen)
 const raamTex = pixTex(pixelCanvas(16, 12, (g) => {
-  for (let y = 0; y < 12; y++) for (let x = 0; x < 16; x++) px(g, x, y, y > 9 ? shade("#5fa83a", 0.85 + rnd() * 0.3) : shade("#7ec0ff", 1.08 - y / 30));
-  g.fillStyle = "#ffffff"; g.fillRect(2, 2, 5, 2); g.fillRect(3, 1, 3, 1); g.fillRect(10, 4, 4, 1);
+  for (let y = 0; y < 12; y++) for (let x = 0; x < 16; x++) px(g, x, y, shade("#9fd8ff", 1.05 - y / 40));
+  g.fillStyle = "#ffffff"; g.fillRect(2, 2, 3, 1);
   g.fillStyle = "#4a3320"; g.fillRect(7, 0, 2, 12); g.fillRect(0, 5, 16, 1);
   g.strokeStyle = "#4a3320"; g.lineWidth = 1; g.strokeRect(0.5, 0.5, 15, 11);
 }));
-function raam(x, y, z, rotY) { vlak(1.4, 1.0, raamTex, x, y, z, rotY); }
-raam(-6.5, 1.6, -7.89, 0);
-raam(17.89, 1.6, -2, -Math.PI / 2);
-raam(14, 1.6, -7.89, 0);
-raam(17.89, 1.6, 3, -Math.PI / 2);
-raam(12, 1.6, 7.89, Math.PI);
-raam(-5, 1.6, 7.89, Math.PI);
-raam(6, 1.6, 7.89, Math.PI);
-raam(-9.89, 1.6, -3, Math.PI / 2 * 1); // slaapkamer zijraam
-// (poster vervangt deze plek niet; poster staat verderop)
+
+/* ---------------- Buitenwereld ---------------- */
+scene.fog = new THREE.Fog(0xa8dcff, 30, 120);
+const zon = new THREE.DirectionalLight(0xfff2d0, 0.35); zon.position.set(30, 50, 25); scene.add(zon);
+const grasCanvas = pixelCanvas(16, 16, (g) => { for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) px(g, x, y, shade("#5fa83a", 0.82 + rnd() * 0.3)); });
+const grond = new THREE.Mesh(new THREE.PlaneGeometry(260, 260), new THREE.MeshLambertMaterial({ map: pixTex(grasCanvas, 130, 130) }));
+grond.rotation.x = -Math.PI / 2; grond.position.set(4, -0.02, 0); scene.add(grond);
+function buitenVlak(w, d, x, z, kleur, y = 0.005) { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), new THREE.MeshLambertMaterial({ color: kleur, map: blokTex })); m.rotation.x = -Math.PI / 2; m.position.set(x, y, z); scene.add(m); return m; }
+// straat, stoep, tuinpad, oprit
+buitenVlak(260, 6, 4, 16, 0x4a4a4f);
+for (let x = -120; x < 130; x += 6) buitenVlak(2.4, 0.25, x, 16, 0xf2f2f2, 0.01);
+buitenVlak(260, 1.6, 4, 12.4, 0xb9b9b9); buitenVlak(260, 1.6, 4, 19.6, 0xb9b9b9);
+buitenVlak(1.6, 3.4, 0, 9.8, 0xc9b28a);
+buitenVlak(4, 6, 21, -12, 0x8a8a8a);
+// hekje rond de tuin
+function hekje(x1, z1, x2, z2) {
+  const len = Math.hypot(x2 - x1, z2 - z1), n = Math.floor(len / 1.2);
+  for (let i = 0; i <= n; i++) { const t = i / n; B(0.12, 0.9, 0.12, 0xf3e9d2, x1 + (x2 - x1) * t, 0, z1 + (z2 - z1) * t); }
+  const horiz = z1 === z2;
+  B(horiz ? len : 0.06, 0.08, horiz ? 0.06 : len, 0xf3e9d2, (x1 + x2) / 2, 0.7, (z1 + z2) / 2);
+  B(horiz ? len : 0.06, 0.08, horiz ? 0.06 : len, 0xf3e9d2, (x1 + x2) / 2, 0.35, (z1 + z2) / 2);
+}
+hekje(-15, 11.2, -1.2, 11.2); hekje(1.2, 11.2, 18.5, 11.2); hekje(-15, -21, 24, -21); hekje(-15, -21, -15, 11.2);
+// bomen
+function boom(x, z, s = 1) {
+  B(0.5 * s, 2.2 * s, 0.5 * s, 0x6b4a2b, x, 0, z);
+  B(2.4 * s, 1.4 * s, 2.4 * s, 0x3c8a2a, x, 1.9 * s, z); B(1.6 * s, 0.9 * s, 1.6 * s, 0x4aa035, x, 3.2 * s, z);
+}
+[[-13, 6], [-13, -6], [-12.5, -18], [-4, -19], [8, -19], [22, -19], [23, 4], [-30, 9], [40, 9], [-20, 26], [12, 30], [30, 27], [-45, -10], [50, -15], [-8, 40], [26, -32]].forEach(([x, z], i) => boom(x, z, 0.9 + (i % 3) * 0.2));
+// bloemenperk en bankje links
+[[-13.5, 0], [-13.5, 1], [-13.5, 2], [-12.8, 0.5], [-12.8, 1.5]].forEach(([x, z], i) => { B(0.5, 0.3, 0.5, 0x6b4a2b, x, 0, z); B(0.25, 0.25, 0.25, [0xff5577, 0xffe35a, 0xb04dff][i % 3], x, 0.3, z); });
+B(1.6, 0.1, 0.5, 0x8a6a4a, -13, 0.45, -10); B(0.1, 0.45, 0.4, 0x555555, -13.7, 0, -10); B(0.1, 0.45, 0.4, 0x555555, -12.3, 0, -10);
+// trampoline in de achtertuin
+B(3, 0.6, 3, 0x2b2b2b, 4, 0, -19); B(2.6, 0.02, 2.6, 0, 4, 0.61, -19, false, new THREE.MeshLambertMaterial({ color: 0x1a7aff }));
+// buurhuizen
+function buurhuis(x, z, w, d, kleur, dak, draai) {
+  B(w, 3.2, d, kleur, x, 0, z);
+  for (let i = 0; i < 4; i++) B(w + 0.4 - i * (w / 4), 0.45, d + 0.4, dak, x, 3.2 + i * 0.45, z);
+  const voor = draai ? z + d / 2 + 0.01 : z - d / 2 - 0.01, rot = draai ? 0 : Math.PI;
+  [-w / 4, w / 4].forEach(dx => vlak(1.3, 1.0, raamTex, x + dx, 1.9, voor, rot));
+  B(1.0, 2.0, 0.05, 0x5a3a20, x, 0, voor + (draai ? 0.02 : -0.02));
+}
+buurhuis(-14, 27, 9, 7, 0xd9c29a, 0x8a3b2a, false); buurhuis(0, 27, 8, 7, 0xb0c4de, 0x3b4a6b, false);
+buurhuis(13, 27, 9, 7, 0xe8d8c8, 0x5a3a20, false); buurhuis(27, 27, 8, 7, 0xc7e0b0, 0x8a3b2a, false);
+buurhuis(-28, 0, 8, 9, 0xe6c3a0, 0x5a3a20, true); buurhuis(34, -2, 9, 9, 0xcfcfe8, 0x3b4a6b, true);
+// lantaarnpalen
+[-20, 0, 20, 40].forEach(x => { B(0.15, 3.6, 0.15, 0x333333, x, 0, 12.9); B(0.5, 0.25, 0.5, 0, x, 3.6, 12.9, false, new THREE.MeshBasicMaterial({ color: 0xfff2b0 })); });
+// het busje van Kraai
+(function () {
+  const bx = 6, bz = 15.4;
+  B(5, 2.0, 2.2, 0xf2f2f2, bx, 0.45, bz); B(1.4, 1.2, 2.2, 0xf2f2f2, bx - 3.2, 0.45, bz);
+  B(0.05, 0.7, 1.9, 0, bx - 3.92, 1.0, bz, false, new THREE.MeshBasicMaterial({ color: 0x223344 }));
+  [[-2.6, -1.1], [-2.6, 1.1], [1.6, -1.1], [1.6, 1.1]].forEach(([dx, dz]) => B(0.8, 0.8, 0.3, 0x111111, bx + dx, 0.05, bz + dz));
+  B(0.6, 0.12, 0.6, 0xdddddd, bx + 1, 2.45, bz); B(0.08, 0.5, 0.08, 0xdddddd, bx + 1, 2.57, bz);
+  const busTex = canvasTex(320, 120, (g) => {
+    g.fillStyle = "#f2f2f2"; g.fillRect(0, 0, 320, 120); g.fillStyle = "#3b3170"; g.font = "bold 40px sans-serif"; g.fillText("GRATIS WIFI", 22, 58);
+    g.font = "bold 22px sans-serif"; g.fillStyle = "#1a7a1a"; g.fillText("📶 Kraai Internet B.V.", 30, 98);
+  });
+  vlak(4.4, 1.65, busTex, bx, 1.45, bz - 1.11, Math.PI);
+})();
+// zon en wolken
+const zonBlok = new THREE.Mesh(new THREE.BoxGeometry(10, 10, 1), new THREE.MeshBasicMaterial({ color: 0xfff3a0, fog: false })); zonBlok.position.set(70, 55, -110); zonBlok.lookAt(4, 1.6, 0); scene.add(zonBlok);
+const wolken = [];
+for (let i = 0; i < 14; i++) {
+  const w = new THREE.Group(), wm = new THREE.MeshBasicMaterial({ color: 0xffffff, fog: false });
+  const a = new THREE.Mesh(new THREE.BoxGeometry(8 + (i % 4) * 3, 1.2, 4 + (i % 3) * 2), wm); w.add(a);
+  const c = new THREE.Mesh(new THREE.BoxGeometry(4, 1.2, 3), wm); c.position.set(2, 0.9, 0); w.add(c);
+  w.position.set(-100 + i * 16, 30 + (i % 3) * 5, -60 + (i * 37) % 120); scene.add(w); wolken.push(w);
+}
+// Bytes: de huiskraai van Kraai, op de vensterbank buiten de slaapkamer
+B(0.35, 0.06, 1.4, 0x6b4a2b, -10.25, 0.84, -3);
+const bytes = new THREE.Group(); bytes.position.set(-10.28, 0.9, -3); scene.add(bytes);
+(function () {
+  const zwart = new THREE.MeshLambertMaterial({ color: 0x15121f });
+  const lijf = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.2, 0.34), zwart); lijf.position.set(0, 0.14, 0); bytes.add(lijf);
+  const staart = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.06, 0.18), zwart); staart.position.set(0, 0.1, 0.24); bytes.add(staart);
+  const kop = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.16, 0.16), zwart); kop.position.set(0, 0.3, -0.14); bytes.add(kop); bytes.userData.kop = kop;
+  const snavel = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.05, 0.12), new THREE.MeshLambertMaterial({ color: 0xe0a020 })); snavel.position.set(0, 0.28, -0.26); bytes.add(snavel);
+  [-0.05, 0.05].forEach(dx => { const oog = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.03, 0.02), new THREE.MeshBasicMaterial({ color: 0x55ff55 })); oog.position.set(dx, 0.33, -0.225); bytes.add(oog); });
+})();
+bytes.rotation.y = -Math.PI / 2;
 
 /* ---- Slaapkamer ---- */
 B(1.6, 0.45, 2.3, 0x6b4f3a, -8.9, 0, -6.6, true);
@@ -1482,6 +1914,99 @@ const gamePosterTex = pixTex(pixelCanvas(12, 16, (g) => {
 }));
 vlak(0.9, 1.2, gamePosterTex, 11.5, 1.6, 0.115, 0, false);
 const kleed4 = new THREE.Mesh(new THREE.PlaneGeometry(3, 3), lambert(0x2fb6a5)); kleed4.rotation.x = -Math.PI / 2; kleed4.position.set(14, 0.01, 4.4); scene.add(kleed4);
+
+/* ---- Badkamer ---- */
+B(2.2, 0.6, 1.0, 0xf4f4f4, -8.6, 0, -15.3, true);
+B(2.0, 0.02, 0.8, 0, -8.6, 0.5, -15.3, false, new THREE.MeshBasicMaterial({ color: 0x7fd0ff }));
+B(1.4, 0.85, 0.55, 0xdddddd, -3, 0, -15.6, true); B(0.5, 0.05, 0.35, 0xbfe6ff, -3.3, 0.86, -15.6);
+B(1.1, 0.9, 0.06, 0x5a5a6a, -3, 1.15, -15.88);
+const spiegelTex = canvasTex(256, 200, (g) => {
+  const gr = g.createLinearGradient(0, 0, 256, 200); gr.addColorStop(0, "#bfe6ff"); gr.addColorStop(1, "#e8f6ff"); g.fillStyle = gr; g.fillRect(0, 0, 256, 200);
+  g.fillStyle = "rgba(20,30,60,.85)"; g.fillRect(14, 120, 228, 66); g.fillStyle = "#ff7eb6"; g.font = "bold 18px sans-serif"; g.fillText("💬 Klassengroep (12)", 24, 146);
+  g.fillStyle = "#fff"; g.font = "15px sans-serif"; g.fillText("'haha kijk deze foto 😂'", 24, 172);
+  g.fillStyle = "#3b3170"; g.font = "bold 20px sans-serif"; g.fillText("Goedemorgen Sam! ☀️", 24, 40);
+});
+vlak(1.0, 0.8, spiegelTex, -3, 1.6, -15.845, 0);
+B(0.15, 0.015, 0.3, 0x111111, -2.5, 0.86, -15.6);
+const slotTelTex = canvasTex(96, 180, (g) => { g.fillStyle = "#101828"; g.fillRect(0, 0, 96, 180); g.fillStyle = "#fff"; g.font = "bold 22px sans-serif"; g.fillText("07:42", 18, 40); g.fillStyle = "rgba(255,255,255,.9)"; g.fillRect(6, 70, 84, 46); g.fillStyle = "#111"; g.font = "bold 11px sans-serif"; g.fillText("InstaPlaats", 10, 86); g.fillText("Je code: 482913", 10, 106); });
+const slotTel = new THREE.Mesh(new THREE.PlaneGeometry(0.13, 0.27), new THREE.MeshBasicMaterial({ map: slotTelTex }));
+slotTel.rotation.x = -Math.PI / 2; slotTel.position.set(-2.5, 0.869, -15.6); scene.add(slotTel);
+B(0.5, 0.42, 0.6, 0xf4f4f4, -0.45, 0, -10.6, true); B(0.18, 0.7, 0.5, 0xf4f4f4, -0.18, 0.2, -10.6);
+B(0.06, 0.6, 0.5, 0, -9.86, 1.0, -9.3, false, new THREE.MeshLambertMaterial({ color: 0xff7eb6 }));
+const kleed5 = new THREE.Mesh(new THREE.PlaneGeometry(1.8, 1.1), lambert(0xffffff)); kleed5.rotation.x = -Math.PI / 2; kleed5.position.set(-8.6, 0.01, -14.2); scene.add(kleed5);
+
+/* ---- Hobbykamer ---- */
+B(1.8, 0.06, 0.8, 0xc8a27a, 5, 0.72, -15.45);
+[[4.15, -15.8], [5.85, -15.8], [4.15, -15.1], [5.85, -15.1]].forEach(([x, z]) => B(0.06, 0.72, 0.06, 0x8a6a4a, x, 0, z));
+colliders.push({ x1: 4.1, x2: 5.9, z1: -15.85, z2: -15.05 });
+B(0.62, 0.52, 0.5, 0xd8cfb0, 5, 0.78, -15.55);
+const oudePcTex = canvasTex(192, 160, (g) => {
+  g.fillStyle = "#001a00"; g.fillRect(0, 0, 192, 160); g.fillStyle = "#55ff55"; g.font = "bold 14px monospace";
+  ["C:\\SAM\\DATA>", "cookies: 1284", "locatie: 9871x", "zoekopdr: 3302", "verkocht aan:", " 47 bedrijven"].forEach((r, i) => g.fillText(r, 10, 24 + i * 22));
+});
+vlak(0.5, 0.4, oudePcTex, 5, 1.04, -15.295, 0);
+B(0.5, 0.03, 0.18, 0xd8cfb0, 5, 0.78, -15.15);
+B(1.2, 0.05, 0.8, 0xb5835a, 3, 0.72, -11.5);
+[[2.45, -11.85], [3.55, -11.85], [2.45, -11.15], [3.55, -11.15]].forEach(([x, z]) => B(0.06, 0.72, 0.06, 0x7a5638, x, 0, z));
+colliders.push({ x1: 2.4, x2: 3.6, z1: -11.9, z2: -11.1 });
+B(0.5, 0.03, 0.35, 0x2a2a35, 3, 0.77, -11.5);
+const xlsxTex = canvasTex(256, 160, (g) => {
+  g.fillStyle = "#fff"; g.fillRect(0, 0, 256, 160); g.fillStyle = "#1d6f42"; g.fillRect(0, 0, 256, 26); g.fillStyle = "#fff"; g.font = "bold 14px sans-serif"; g.fillText("wachtwoorden.xlsx", 10, 18);
+  g.fillStyle = "#222"; g.font = "13px monospace"; [["Insta", "Sam2010!"], ["Mail", "Sam2010!"], ["Game", "Sam2010!!"], ["Bank", "1234"]].forEach(([a, b], i) => { g.fillText(a, 12, 52 + i * 26); g.fillText(b, 110, 52 + i * 26); });
+});
+const xs = new THREE.Group(); xs.position.set(3, 0.785, -11.67); xs.rotation.x = -0.22; scene.add(xs);
+const xsk = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.33, 0.02), lambert(0x2a2a35)); xsk.position.y = 0.165; xs.add(xsk);
+const xsv = new THREE.Mesh(new THREE.PlaneGeometry(0.46, 0.29), new THREE.MeshBasicMaterial({ map: xlsxTex })); xsv.position.set(0, 0.165, 0.011); xs.add(xsv);
+const prikbordTex = canvasTex(200, 140, (g) => {
+  g.fillStyle = "#b5835a"; g.fillRect(0, 0, 200, 140); g.fillStyle = "#fff176"; g.fillRect(14, 14, 84, 70); g.fillStyle = "#222"; g.font = "bold 11px sans-serif";
+  g.fillText("2FA-herstel", 20, 32); g.fillText("8812-4471", 20, 52); g.fillText("0093-7720", 20, 70);
+  g.fillStyle = "#9fd8ff"; g.fillRect(112, 24, 72, 50); g.fillStyle = "#ff8fb0"; g.fillRect(40, 92, 120, 36);
+});
+vlak(1.0, 0.7, prikbordTex, 9.885, 1.55, -12, -Math.PI / 2, false);
+B(1.0, 0.8, 0.5, 0x8a6e55, 8.8, 0, -8.55, true); B(0.45, 0.45, 0.45, 0x2b2b2b, 8.8, 0.8, -8.55); B(0.12, 0.14, 0.12, 0x15121f, 8.8, 0.95, -8.55);
+B(0.35, 1.8, 1.4, 0x8a6e55, 0.3, 0, -12.5, true);
+[0xa78bfa, 0x4fd6d0, 0xffe35a].forEach((c, i) => B(0.25, 0.3, 0.12, c, 0.4, 0.45 + i * 0.5, -12.9 + i * 0.35));
+const kleed6 = new THREE.Mesh(new THREE.PlaneGeometry(3, 2.4), lambert(0xd05a3a)); kleed6.rotation.x = -Math.PI / 2; kleed6.position.set(5, 0.01, -11.8); scene.add(kleed6);
+
+/* ---- Garage ---- */
+B(1.8, 0.7, 3.6, 0xc0392b, 15.6, 0.3, -12, true); B(1.6, 0.55, 1.9, 0xc0392b, 15.6, 1.0, -12.2);
+B(1.62, 0.38, 1.6, 0, 15.6, 1.08, -12.2, false, new THREE.MeshLambertMaterial({ color: 0x88aacc }));
+[[-0.85, -1.2], [0.85, -1.2], [-0.85, 1.2], [0.85, 1.2]].forEach(([dx, dz]) => B(0.25, 0.6, 0.6, 0x111111, 15.6 + dx, 0, -12 + dz));
+B(1.0, 0.25, 0.04, 0xffffff, 15.6, 0.55, -13.82); B(1.0, 0.25, 0.04, 0xffffff, 15.6, 0.55, -10.18);
+B(0.8, 0.9, 2.2, 0x8a6a4a, 10.5, 0, -12, true);
+B(0.36, 0.03, 0.5, 0x2a2a35, 10.6, 0.92, -12);
+const verkoopTex = canvasTex(256, 160, (g) => {
+  g.fillStyle = "#fff"; g.fillRect(0, 0, 256, 160); g.fillStyle = "#ff9f1a"; g.fillRect(0, 0, 256, 28); g.fillStyle = "#fff"; g.font = "bold 15px sans-serif"; g.fillText("🛒 TweedeKans.nl", 10, 19);
+  g.fillStyle = "#222"; g.font = "bold 16px sans-serif"; g.fillText("🚲 Fiets te koop – €80", 12, 60); g.fillStyle = "#e00"; g.font = "bold 14px sans-serif"; g.fillText("3 nieuwe berichten!", 12, 92);
+  g.fillStyle = "#555"; g.font = "13px sans-serif"; g.fillText("'Ik betaal vooruit, klik...'", 12, 122);
+});
+vlak(0.5, 0.32, verkoopTex, 10.44, 1.12, -12, Math.PI / 2);
+B(0.04, 0.34, 0.52, 0x2a2a35, 10.41, 0.94, -12);
+B(0.9, 0.5, 0.6, 0x8b6b3a, 17.2, 0, -15.2, true); B(0.5, 0.04, 0.35, 0x555555, 17.2, 0.5, -15.2); B(0.04, 0.3, 0.35, 0x555555, 17.0, 0.5, -15.2);
+const grofTex = canvasTex(128, 48, (g) => { g.fillStyle = "#8b6b3a"; g.fillRect(0, 0, 128, 48); g.fillStyle = "#111"; g.font = "bold 20px sans-serif"; g.fillText("GROFVUIL", 12, 32); });
+vlak(0.8, 0.3, grofTex, 17.2, 0.28, -14.89, 0, false);
+const garageDeurTex = pixTex(pixelCanvas(16, 12, (g) => { for (let y = 0; y < 12; y++) for (let x = 0; x < 16; x++) px(g, x, y, shade(y % 3 === 2 ? "#6f6f6f" : "#9a9a9a", 0.9 + rnd() * 0.15)); }));
+vlak(3.6, 2.3, garageDeurTex, 14.6, 1.15, -15.885, 0, false);
+[[17.6, -9.0], [17.6, -9.6]].forEach(([x, z], i) => B(0.35, 0.4, 0.35, [0x3d7be0, 0xff6b6b][i], x, 0, z));
+plant(-9.3, -9.0); plant(9.3, -15.3);
+
+// back-up-schijf (altijd aangesloten) bij papa's computer
+B(0.2, 0.06, 0.14, 0x222222, 13.25, 0.75, -7.35);
+const backupLed = B(0.03, 0.02, 0.02, 0, 13.25, 0.79, -7.27, false, new THREE.MeshBasicMaterial({ color: 0x3aa0ff }));
+
+// Kraaienveren (geheimen)
+const VEREN = [];
+function veer(id, x, y, z, rot) {
+  const g = new THREE.Group(); g.position.set(x, y, z); g.rotation.y = rot || 0; scene.add(g);
+  const vMat = new THREE.MeshLambertMaterial({ color: 0x3b2a6b, emissive: 0x24104d });
+  const steel = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.02, 0.38), lambert(0xdddddd)); steel.position.y = 0.03; g.add(steel);
+  const vaan = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.015, 0.26), vMat); vaan.position.set(0, 0.035, -0.04); g.add(vaan);
+  const top = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.015, 0.06), vMat); top.position.set(0, 0.035, -0.2); g.add(top);
+  VEREN.push({ id, groep: g, y });
+}
+veer("veer1", -8.9, 0.02, -5.1, 0.6); veer("veer2", -5.25, 0.02, 3.5, 1.2); veer("veer3", 7.5, 2.45, -7.65, 0.3);
+veer("veer4", -8.9, 0.52, -15.3, 1.4); veer("veer5", 0.3, 1.81, -12.5, 0.9); veer("veer6", 15.6, 1.56, -12.2, 2.2);
+veer("veer7", 10.3, 1.81, -6.0, 0.5); veer("veer8", 16.9, 0.02, 7.6, 1.9);
 B(0.45, 0.45, 0.45, 0, -5.3, 1.4, 6.0, false, new THREE.MeshBasicMaterial({ color: 0xffd36b }));
 colliders.push({ x1: -5.5, x2: -5.1, z1: 5.8, z2: 6.2 });
 
@@ -1510,6 +2035,7 @@ function maakLabel(tekst, kleur) {
 }
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => setTimeout(() => {
   interacties.forEach(o => { if (o.sprite) o.sprite.userData.teken(o.sprite.userData.tekst, o.sprite.userData.kleur); });
+  if (typeof SLOTEN !== "undefined") SLOTEN.forEach(s => s.label.userData.teken(s.label.userData.tekst, s.label.userData.kleur));
 }, 300));
 function ring(x, z) {
   const r = new THREE.Mesh(new THREE.RingGeometry(0.5, 0.7, 4, 1), new THREE.MeshBasicMaterial({ color: 0xffe35a, transparent: true, opacity: 0.6, side: THREE.DoubleSide }));
@@ -1551,6 +2077,56 @@ interactief({ id: "ai", soort: "station", thema: "ai", naam: "Tablet", box: [0.7
 interactief({ id: "vergrendel", soort: "bonus", naam: "Computer", box: [1.0, 0.65, 0.3], pos: [14, 1.1, -7.5] });
 interactief({ id: "schermslot", soort: "bonus", naam: "Telefoon", box: [0.45, 0.25, 0.5], pos: [16.2, 0.5, 2.0] });
 interactief({ id: "arcade", soort: "grap", naam: "Arcadekast", box: [0.8, 1.9, 0.8], pos: [17.5, 0.95, 6.6] });
+// nieuwe stations, risico's, grappen, veren en geheim
+interactief({ id: "pesten", soort: "station", thema: "pesten", naam: "Slimme spiegel", box: [1.1, 0.95, 0.35], pos: [-3, 1.6, -15.72], label: "🪞 Slimme spiegel", labelPos: [-3, 2.4, -15.5], ringPos: [-3, -14.3], kaart: [-3, -15.5] });
+interactief({ id: "privacy", soort: "station", thema: "privacy", naam: "Oude pc", box: [1.0, 0.9, 0.8], pos: [5, 1.05, -15.4], label: "🍪 Oude pc", labelPos: [5, 1.85, -15.2], ringPos: [5, -14.0], kaart: [5, -15.4] });
+interactief({ id: "shoppen", soort: "station", thema: "shoppen", naam: "Verkoop-laptop", box: [0.8, 0.7, 0.9], pos: [10.55, 1.1, -12], label: "🛒 Verkoop-laptop", labelPos: [10.7, 1.85, -12], ringPos: [11.8, -12], kaart: [10.6, -12] });
+interactief({ id: "slotscherm", soort: "bonus", naam: "Telefoon", box: [0.35, 0.2, 0.45], pos: [-2.5, 0.92, -15.6] });
+interactief({ id: "wachtwoordlijst", soort: "bonus", naam: "Laptop", box: [0.7, 0.55, 0.5], pos: [3, 0.98, -11.55] });
+interactief({ id: "herstelcodes", soort: "bonus", naam: "Prikbord", box: [0.15, 0.8, 1.1], pos: [9.85, 1.55, -12] });
+interactief({ id: "grofvuil", soort: "bonus", naam: "Doos grofvuil", box: [1.0, 0.8, 0.7], pos: [17.2, 0.45, -15.2] });
+interactief({ id: "backupschijf", soort: "bonus", naam: "Back-up-schijf", box: [0.35, 0.2, 0.3], pos: [13.25, 0.8, -7.35] });
+interactief({ id: "wc", soort: "grap", naam: "Wc", box: [0.7, 0.9, 0.8], pos: [-0.35, 0.45, -10.6] });
+interactief({ id: "printer", soort: "grap", naam: "3D-printer", box: [0.6, 0.6, 0.6], pos: [8.8, 1.05, -8.55] });
+interactief({ id: "auto", soort: "grap", naam: "Auto", box: [2.0, 1.6, 3.8], pos: [15.6, 0.8, -12] });
+VEREN.forEach(v => { const o = interactief({ id: v.id, soort: "veer", naam: "Zwarte veer", box: [0.5, 0.35, 0.55], pos: [v.groep.position.x, v.y + 0.1, v.groep.position.z] }); o.veer = v; });
+interactief({ id: "bytes", soort: "geheim", naam: "Kraai op de vensterbank", box: [0.5, 0.5, 0.5], pos: [-10.28, 1.15, -3] });
+
+/* ---------------- Kamers op slot ---------------- */
+const SLOTEN = [];
+function slotDeur(kamer, nodig, cx, cz, horiz) {
+  const w = 1.5;
+  const mesh = B(horiz ? w : 0.1, 2.15, horiz ? 0.1 : w, 0x5a3a20, cx, 0, cz, false);
+  const plaat = B(horiz ? 0.3 : 0.12, 0.4, horiz ? 0.12 : 0.3, 0, cx, 1.0, cz, false, new THREE.MeshBasicMaterial({ color: 0xff3b3b }));
+  const coll = { x1: cx - (horiz ? w / 2 : 0.12), x2: cx + (horiz ? w / 2 : 0.12), z1: cz - (horiz ? 0.12 : w / 2), z2: cz + (horiz ? 0.12 : w / 2) };
+  colliders.push(coll); blokkers.push(mesh);
+  const s = { kamer, nodig, mesh, plaat, coll, open: false, anim: 0, horiz, cx, cz };
+  s.label = maakLabel(`🔒 ${kamer}`, "#ff8080"); s.label.position.set(cx, 2.45, cz);
+  const o = interactief({ id: "slot_" + kamer, soort: "slot", naam: "Deur " + kamer, box: horiz ? [1.6, 2.2, 0.5] : [0.5, 2.2, 1.6], pos: [cx, 1.1, cz] });
+  o.slot = s; s.inter = o;
+  SLOTEN.push(s);
+}
+slotDeur("badkamer", "phishing", -5.8, -8, true);
+slotDeur("hobbykamer", "malware", 2.0, -8, true);
+slotDeur("werkkamer", "wachtwoord", 10, -1.9, false);
+slotDeur("gameroom", "social", 10, 6.1, false);
+slotDeur("garage", "iot", 11.7, -8, true);
+const kamerOpSlot = (kamer) => SLOTEN.some(s => s.kamer === kamer && !s.open);
+function controleerSloten() {
+  SLOTEN.forEach(s => {
+    if (s.open || !S.stations[s.nodig].klaar) return;
+    s.open = true;
+    const ci = colliders.indexOf(s.coll); if (ci >= 0) colliders.splice(ci, 1);
+    const bi = blokkers.indexOf(s.mesh); if (bi >= 0) blokkers.splice(bi, 1);
+    s.plaat.material.color.set(0x3ddc97);
+    s.label.userData.teken(`🔓 ${s.kamer} open!`, "#7dff5a");
+    setTimeout(() => { s.label.visible = false; }, 6000);
+    setTimeout(() => { Geluid.sfx("deur"); hacker(`Grrr... de <b>${s.kamer}</b> is nu open. 🔓 Daar staat ${THEMAS[STATION_IN[s.kamer]].icoon} ${THEMAS[STATION_IN[s.kamer]].ding}.`, 5000); }, 2200);
+    bouwHud();
+  });
+}
+const STATION_IN = { badkamer: "pesten", hobbykamer: "privacy", werkkamer: "iot", gameroom: "ai", garage: "shoppen" };
+
 
 // Grapjes om te vinden
 const GRAPPEN = {
@@ -1568,6 +2144,18 @@ const GRAPPEN = {
     "Een sok. Van wie? Niemand weet het. Waar is de andere? Nog groter mysterie.",
     "De sok ruikt naar gymles van vorige week. 🤢",
     "Dit is geen hacker-gereedschap. Dit is gewoon een vieze sok."] },
+  wc: { naam: "Wc", prompt: "Doortrekken", emoji: "🚽", zinnen: [
+    "Je trekt door. De slimme wc speelt nu het lievelingsliedje van Kraai. 🎶",
+    "Op de wc-bril staat: 'Ook gehackt. Groetjes, K.' Bah.",
+    "De wc vraagt om een update. Zelfs de wc doet aan cybersecurity."] },
+  printer: { naam: "3D-printer", prompt: "3D-printer bekijken", emoji: "🖨️", zinnen: [
+    "De 3D-printer print... een kraai. Natuurlijk.",
+    "Op het schermpje: 'Printtijd nog 847 uur'. Kraai print een standbeeld van zichzelf.",
+    "Je drukt op stop. De printer zegt: 'Nee.' 😳"] },
+  auto: { naam: "Auto", prompt: "Auto bekijken", emoji: "🚗", zinnen: [
+    "Gelukkig: deze auto is niet slim. Wel heel vies.",
+    "In de auto ligt een parkeerbon. Van Kraai. Hij parkeerde zijn busje op de stoep.",
+    "Je toetert. In de verte toetert het busje van Kraai terug. 📢"] },
   arcade: { naam: "Arcadekast", prompt: "Arcadekast spelen", emoji: "🕹️", zinnen: [
     "Je gooit er een muntje in. Game over na 3 seconden. Skill issue. 💀",
     "Highscore: KRAAI 999999. Natuurlijk heeft hij die gehackt. 🙄",
@@ -1578,6 +2166,18 @@ const GRAPPEN = {
     "Kwak. (Vertaling: 'Heb je al een back-up gemaakt?')",
     "De eend zegt niks. De eend weet alles."] }
 };
+
+const VEER_WEETJES = [
+  "Weetje: phishing komt van het Engelse 'fishing'. Oplichters 'hengelen' naar je gegevens. 🎣",
+  "Weetje: het populairste wachtwoord ter wereld is al jaren '123456'. Echt waar. 🤦",
+  "Weetje: het woord 'bug' werd beroemd door een echte mot die in 1947 in een computer zat. 🦋",
+  "Weetje: 'ethische hackers' krijgen geld om lekken te vinden. Dat heet een 'bug bounty'. 💰",
+  "Weetje: in 1971 bestond al een programma dat zichzelf over computers verspreidde. Het heette 'Creeper'. 🐛",
+  "Weetje: 2FA met een app is veiliger dan met een sms-code. 📱",
+  "Weetje: Nederland heeft een Nationaal Cyber Security Centrum (NCSC) dat helpt tegen hackers. 🇳🇱",
+  "Weetje: veel bedrijven hebben regels waarmee je veilig een lek mag melden. Dat heet 'Coordinated Vulnerability Disclosure'. 📨"
+];
+const VEER_KRAAI = ["Hé, dat is MIJN veer! Ik was aan het ruien. Niet doorvertellen. 🪶", "Nog een veer?! Ik word kaal zo! 😱", "Geef terug! Die had ik nodig voor mijn hacker-hoed. 🎩"];
 
 /* ---------------- Speler & besturing ---------------- */
 const speler = { x: 0, z: 5.6, yaw: 0, pitch: -0.05, r: 0.3 };
@@ -1655,6 +2255,9 @@ function zoekDoel() {
     if (h.object.userData.inter) {
       const o = h.object.userData.inter;
       if (o.soort === "bonus" && S.bonus[o.id]) return null;
+      if (o.soort === "slot" && o.slot.open) return null;
+      if (o.soort === "veer" && S.veren[o.id]) return null;
+      if (o.soort === "geheim" && S.geheim) return null;
       return o;
     }
     return null; // muur ervoor
@@ -1666,6 +2269,9 @@ function promptTekstBasis(o) {
   if (o.soort === "station") return S.stations[o.thema].klaar ? `✅ ${o.naam} is al opgelost` : `<kbd>E</kbd> ${o.naam} bekijken`;
   if (o.soort === "deur") return `<kbd>E</kbd> Code invoeren`;
   if (o.soort === "grap") return `<kbd>E</kbd> ${GRAPPEN[o.id].prompt}`;
+  if (o.soort === "slot") return `🔒 Op slot. Los eerst ${THEMAS[o.slot.nodig].icoon} ${THEMAS[o.slot.nodig].ding} (${THEMAS[o.slot.nodig].kamer}) op`;
+  if (o.soort === "veer") return `<kbd>E</kbd> Zwarte veer oppakken 🪶`;
+  if (o.soort === "geheim") return `<kbd>E</kbd> Wie zit daar op de vensterbank? 🐦‍⬛`;
   return `<kbd>E</kbd> ${o.naam} bekijken`;
 }
 
@@ -1673,13 +2279,15 @@ function promptTekstBasis(o) {
 function bouwHud() {
   $("opdrLijst").innerHTML = VOLGORDE.map(t => {
     const th = THEMAS[t], k = S.stations[t].klaar;
-    return `<div class="opdr ${k ? "klaar" : ""}"><span class="vink">${k ? "✓" : ""}</span>${th.icoon} ${th.ding}<span class="waar">${th.kamer}</span></div>`;
+    const slot = !k && kamerOpSlot(th.kamer);
+    return `<div class="opdr ${k ? "klaar" : ""} ${slot ? "opslot" : ""}"><span class="vink">${k ? "✓" : slot ? "🔒" : ""}</span>${th.icoon} ${th.ding}<span class="waar">${th.kamer}</span></div>`;
   }).join("");
   $("codeSlots").innerHTML = VOLGORDE.map(t => {
     const st = S.stations[t];
     return `<div class="codeslot ${st.klaar ? "gevonden" : ""}"><span>${THEMAS[t].icoon}</span>${st.klaar ? st.cijfer : "?"}</div>`;
   }).join("");
   $("bonusRegel").textContent = `⭐ Verborgen risico's: ${Object.keys(S.bonus).length}/${Object.keys(BONUS).length}`;
+  $("verenRegel").textContent = `🪶 Veren: ${Object.keys(S.veren).length}/${VEREN.length}` + (S.geheim ? " · 🐦‍⬛ geheim!" : "");
   interacties.forEach(o => {
     if (o.soort === "station" && S.stations[o.thema].klaar && !o.afgevinkt) {
       o.afgevinkt = true; o.sprite.userData.teken("✅ " + o.naam, "#7dff5a"); if (o.ring) o.ring.visible = false;
@@ -1692,19 +2300,23 @@ function fmtTijd(s) { s = Math.max(0, Math.ceil(s)); return `${Math.floor(s / 60
 
 /* Minimap */
 const mm = $("minimap").getContext("2d");
-const MS = 6.8, MX = 4.8, MY = 7.6; // schaal en marge
-function kaartXY(x, z) { return [MX + (x + 10) * MS, MY + (z + 8) * MS]; }
+const MS = 6.8, MX = 4.8, MY = 4.4; // schaal en marge
+function kaartXY(x, z) { return [MX + (x + 10) * MS, MY + (z + 16) * MS]; }
 function tekenKaart() {
-  mm.clearRect(0, 0, 200, 124);
-  const kamers = [[-10, -8, 10, 8, "#4a5a9a", "Slaapkamer"], [0, -8, 10, 8, "#7d7d7d", "Keuken"], [-10, 0, 20, 8, "#8a6038", "Woonkamer"], [10, -8, 8, 8, "#5d6b4a", "Werkkamer"], [10, 0, 8, 8, "#5a3f7a", "Gameroom"]];
+  mm.clearRect(0, 0, 200, 172);
+  const kamers = [[-10, -8, 10, 8, "#4a5a9a", "Slaapkamer"], [0, -8, 10, 8, "#7d7d7d", "Keuken"], [-10, 0, 20, 8, "#8a6038", "Woonkamer"], [10, -8, 8, 8, "#5d6b4a", "Werkkamer"], [10, 0, 8, 8, "#5a3f7a", "Gameroom"],
+    [-10, -16, 10, 8, "#5a8aa8", "Badkamer"], [0, -16, 10, 8, "#8a6a3a", "Hobbykamer"], [10, -16, 8, 8, "#6a6a6a", "Garage"]];
   kamers.forEach(([x, z, w, d, k, n]) => {
-    const [a, b] = kaartXY(x, z); mm.fillStyle = k; mm.fillRect(a, b, w * MS, d * MS);
+    const [a, b] = kaartXY(x, z); const dicht = kamerOpSlot(n.toLowerCase());
+    mm.fillStyle = dicht ? "#2a2a2a" : k; mm.fillRect(a, b, w * MS, d * MS);
     mm.fillStyle = "rgba(255,255,255,.55)"; mm.font = "6px 'Press Start 2P', monospace"; mm.fillText(n, a + 4, b + 11);
+    if (dicht) { mm.font = "16px sans-serif"; mm.fillText("🔒", a + w * MS / 2 - 9, b + d * MS / 2 + 8); }
   });
   mm.strokeStyle = "#1a1a1a"; mm.lineWidth = 3;
   kaartMuren.forEach(([x1, z1, x2, z2]) => { const [a, b] = kaartXY(x1, z1), [c, d] = kaartXY(x2, z2); mm.beginPath(); mm.moveTo(a, b); mm.lineTo(c, d); mm.stroke(); });
   interacties.forEach(o => {
     if (!o.kaart) return;
+    if (o.soort === "station" && kamerOpSlot(THEMAS[o.thema].kamer)) return;
     const [a, b] = kaartXY(o.kaart[0], o.kaart[1]);
     let kleur = "#ffd166";
     if (o.soort === "station" && S.stations[o.thema].klaar) kleur = "#3ddc97";
@@ -1743,6 +2355,26 @@ function gebruik(o) {
     openStation(o.thema);
   } else if (o.soort === "bonus") toonBonus(o.id);
   else if (o.soort === "deur") toonKeypad();
+  else if (o.soort === "slot") {
+    hacker(`Haha, deze deur zit op slot! 🔒 Los eerst ${THEMAS[o.slot.nodig].icoon} <b>${THEMAS[o.slot.nodig].ding}</b> in de ${THEMAS[o.slot.nodig].kamer} op.`, 3800); Geluid.sfx("codeFout");
+  }
+  else if (o.soort === "veer") {
+    if (S.veren[o.id]) return;
+    S.veren[o.id] = true; o.veer.groep.visible = false; punten(25); Geluid.sfx("bonus");
+    const n = Object.keys(S.veren).length;
+    hacker(`${VEER_WEETJES[(n - 1) % VEER_WEETJES.length]}<br><i>${n === VEREN.length ? "ALLE veren gevonden! Ik ben nu helemaal kaal. 😭 +100 XP" : ZEG(VEER_KRAAI)}</i>`, 6500);
+    if (n === VEREN.length) punten(100);
+    bouwHud();
+  }
+  else if (o.soort === "geheim") {
+    if (S.geheim) return;
+    S.geheim = true; punten(150); Geluid.sfx("station");
+    openPaneel("🐦‍⬛", "Geheim gevonden!");
+    $("pBody").innerHTML = `<div class="beloning"><div style="font-size:56px">🐦‍⬛</div><h2 style="color:var(--geel)">Je vond Bytes!</h2></div>
+      <div class="weetje">Dit is <b>Bytes</b>, de huiskraai van Hacker Kraai. Hij gluurt door het raam mee. Zo werkt <b>'shoulder surfing'</b>: iemand kijkt over je schouder mee als je een pincode of wachtwoord intypt. Let dus op wie er meekijkt, en hou je hand erboven bij het pinnen!</div>
+      <div class="rij"><span class="teller">+150 XP · Geheime prestatie!</span><button class="knop" id="geheimOk">Verder</button></div>`;
+    $("geheimOk").onclick = sluitPaneel; bouwHud();
+  }
   else if (o.soort === "grap") {
     const g = GRAPPEN[o.id]; g.i = (g.i || 0);
     hacker(g.zinnen[g.i % g.zinnen.length], 4200, g.naam, g.emoji); g.i++;
@@ -1786,6 +2418,8 @@ function renderStap() {
   const stap = st.stappen[st.stap];
   if (stap.soort === "bouwer") return renderBouwer(body, thema);
   if (stap.soort === "hotspot") return renderHotspot(body, thema);
+  if (stap.soort === "vlaggen") return renderVlaggen(body, thema, stap);
+  if (stap.soort === "schakelaars") return renderSchakelaars(body, thema, stap);
   renderVraag(body, thema, stap);
 }
 function nieuwePoging(thema) {
@@ -1997,6 +2631,66 @@ function renderHotspot(body, thema) {
   }
 }
 
+/* Opdracht: rode vlaggen aanklikken */
+function renderVlaggen(body, thema, taak) {
+  const st = S.stations[thema];
+  const ids = Object.keys(taak.items), vlaggen = ids.filter(k => taak.items[k].vlag), totaal = vlaggen.length;
+  const gevonden = new Set(), geklikt = new Set(); let fout = 0, afgerond = false;
+  body.innerHTML = `<div class="vl heeftLinks"><div class="vl-links">${taak.html}</div><div class="vl-rechts">
+    <div class="context">${taak.instructie}</div>
+    <div class="rij" style="margin-top:0"><span class="teller" id="teller">Gevonden: 0 / ${totaal}</span><span class="teller" id="foutTeller" style="color:var(--rood)"></span></div>
+    <div class="uitlegLijst" id="uitlegLijst"></div>
+    <div class="rij"><span style="font-size:13px;color:var(--zacht)">Afronden kan als je er minstens ${totaal - 1} hebt.</span><button class="knop" id="klaarKnop" disabled>Klaar ✔</button></div></div></div>`;
+  body.querySelectorAll(".rv[data-id]").forEach(el => el.addEventListener("click", ev => {
+    ev.stopPropagation(); if (afgerond) return;
+    const id = el.dataset.id, info = taak.items[id]; if (!info || geklikt.has(id)) return; geklikt.add(id);
+    if (info.vlag) { gevonden.add(id); el.classList.add("gevonden"); punten(25); Geluid.sfx("xp"); }
+    else { fout++; el.classList.add("geenrisico"); punten(-10); Geluid.sfx("minXp"); $("foutTeller").textContent = `Mis: ${fout}`; }
+    const d = document.createElement("div"); d.innerHTML = (info.vlag ? "🚩 <b>Rode vlag!</b> " : "👍 <b>Geen vlag.</b> ") + info.uitleg; $("uitlegLijst").prepend(d);
+    $("teller").textContent = `Gevonden: ${gevonden.size} / ${totaal}`;
+    $("klaarKnop").disabled = gevonden.size < totaal - 1;
+    if (gevonden.size === totaal) afronden();
+  }));
+  $("klaarKnop").onclick = afronden;
+  function afronden() {
+    if (afgerond) return; afgerond = true;
+    vlaggen.forEach(k => { if (!gevonden.has(k)) body.querySelector(`[data-id="${k}"]`).classList.add("gemist"); });
+    const goed = gevonden.size >= totaal - 1 && fout <= 2;
+    registreer(thema, goed, goed ? null : taak.les); Geluid.sfx(goed ? "goed" : "fout");
+    st.stap++;
+    const kb = $("klaarKnop"); kb.replaceWith(volgendeKnop(st.stap >= st.stappen.length ? "Afronden 🏁" : "Volgende ➜"));
+    $("uitlegLijst").insertAdjacentHTML("afterbegin", `<div class="feedback ${goed ? "goed" : "fout"}" style="margin:0"><b>${goed ? ZEG(GOED_KOP) : ZEG(FOUT_KOP)}</b> ${gevonden.size} van de ${totaal} gevonden, ${fout}× mis. ${gevonden.size < totaal ? "De gemiste vlaggen zijn nu oranje." : ""}</div>`);
+  }
+}
+
+/* Opdracht: instellingen aan/uit zetten */
+function renderSchakelaars(body, thema, taak) {
+  const st = S.stations[thema];
+  const stand = taak.items.map(i => i.start);
+  body.innerHTML = `<div class="vl heeftLinks"><div class="vl-links"><div class="instelPaneel"><div class="instelKop">${taak.kop}</div>
+    ${taak.items.map((it, i) => `<div class="instelRij" data-i="${i}"><span>${it.t}</span><button class="switch ${it.start ? "aan" : ""}" data-i="${i}" aria-label="${it.t}"></button></div>`).join("")}
+    </div></div><div class="vl-rechts"><div class="context">${taak.instructie}</div><div id="instelUitleg" class="uitlegLijst"></div>
+    <div class="rij"><span></span><button class="knop groen" id="controleer">Controleer ✔</button></div></div></div>`;
+  body.querySelectorAll(".instelRij .switch").forEach(b => b.addEventListener("click", () => {
+    if (b.dataset.klaar) return; const i = +b.dataset.i; stand[i] = !stand[i]; b.classList.toggle("aan", stand[i]); Geluid.sfx("klik");
+  }));
+  $("controleer").onclick = () => {
+    let fouten = 0;
+    taak.items.forEach((it, i) => {
+      const ok = stand[i] === it.goed; if (!ok) fouten++;
+      const rij = body.querySelector(`.instelRij[data-i="${i}"]`); rij.classList.add(ok ? "ok" : "nok");
+      rij.querySelector(".switch").dataset.klaar = "1";
+      $("instelUitleg").insertAdjacentHTML("beforeend", `<div>${ok ? "✅" : "❌"} <b>${it.t}</b>: ${it.uitleg}</div>`);
+    });
+    const goed = fouten <= 1;
+    registreer(thema, goed, goed ? null : taak.les); Geluid.sfx(goed ? "goed" : "fout");
+    if (goed) punten(100); else punten(-25);
+    st.stap++;
+    $("controleer").replaceWith(volgendeKnop(st.stap >= st.stappen.length ? "Afronden 🏁" : "Volgende ➜"));
+    $("instelUitleg").insertAdjacentHTML("afterbegin", `<div class="feedback ${goed ? "goed" : "fout"}" style="margin:0"><b>${goed ? ZEG(GOED_KOP) : ZEG(FOUT_KOP)}</b> ${taak.items.length - fouten} van de ${taak.items.length} goed${goed ? "." : ". Je mag er maar 1 fout hebben."}</div>`);
+  };
+}
+
 /* Beloning na station */
 const STATION_TOASTS = {
   phishing: "Hmpf. Jij trapt dus niet in mijn nepmailtjes... Ik had er zó veel werk in gestoken. Met Comic Sans en alles. 😤",
@@ -2004,7 +2698,10 @@ const STATION_TOASTS = {
   social: "Je deelt niet eens je adres online? Saai hoor. Hoe moet ik nou je pakketjes stelen? 🙄",
   malware: "Mijn virussen! Mijn mooie USB-stick! Die had ik nog versierd met stickers! Neeeee! 🦠😭",
   iot: "Hé! Ik keek net naar een spannende aflevering via die camera! Nu zie ik niks meer. 📷😤",
-  ai: "Jij trapt niet in mijn deepfakes? Ik had nog wel een nep-video van mezelf als miljonair gemaakt. 🤖💸"
+  ai: "Jij trapt niet in mijn deepfakes? Ik had nog wel een nep-video van mezelf als miljonair gemaakt. 🤖💸",
+  pesten: "Hmpf. Jij doet niet mee met pesten? Respect. Ik bedoel... boe! 🪞",
+  shoppen: "Jij koopt geen sneakers van €29? Dan blijf ik met 400 dozen nep-schoenen zitten. 👟😭",
+  privacy: "Je hebt je cookies opgeruimd?! Nu weet ik niet meer wat je gisteren hebt gegoogeld. 🍪"
 };
 function toonMislukt(thema) {
   const st = S.stations[thema], th = THEMAS[thema], tot = st.pg + st.pf;
@@ -2023,7 +2720,7 @@ function toonMislukt(thema) {
 function toonBeloning(thema) {
   const st = S.stations[thema], th = THEMAS[thema];
   if (!st.klaar) {
-    st.klaar = true; bouwHud(); setTimeout(() => Geluid.sfx("station"), 150);
+    st.klaar = true; bouwHud(); setTimeout(() => Geluid.sfx("station"), 150); controleerSloten();
     setTimeout(() => hacker(alleKlaar() ? "Oké, oké... je hebt alle cijfers. Snel naar de <b>voordeur</b> voordat ik me bedenk! 🚪" : STATION_TOASTS[thema]), 400);
   }
   $("pProg").textContent = "Klaar!";
@@ -2150,7 +2847,7 @@ $("startKnop").addEventListener("click", () => {
   const n = $("naam").value.trim();
   if (n.length < 2) { $("naamFout").textContent = "Vul eerst je naam in (minstens 2 letters)."; $("naam").focus(); return; }
   S.naam = n; S.bezig = true; S.startMoment = Date.now();
-  SPEELTIJD = (parseInt($("speeltijd").value, 10) || 40) * 60; S.tijd = SPEELTIJD;
+  SPEELTIJD = (parseInt($("speeltijd").value, 10) || 50) * 60; S.tijd = SPEELTIJD;
   Geluid.init(); Geluid.startMuziek(); werkGeluidIcoonBij();
   $("start").classList.add("hidden"); $("hud").classList.remove("hidden"); $("crosshair").classList.remove("hidden");
   $("klikHint").classList.remove("hidden");
@@ -2192,7 +2889,7 @@ function einde(gewonnen) {
       ${VOLGORDE.map(t => { const r = S.resultaten[t], p = r.totaal ? Math.round(r.goed / r.totaal * 100) : 0;
         return `<div class="thema"><div class="kop"><span>${THEMAS[t].icoon} ${THEMAS[t].naam}</span><span>${r.totaal ? `${r.goed}/${r.totaal}${S.stations[t].poging > 1 ? ` (${S.stations[t].poging} pogingen)` : ""}${S.stations[t].klaar ? " ✅" : " ❌"}` : "niet gedaan"}</span></div>
           <div class="balk"><div style="width:${p}%;background:${THEMAS[t].kleur}"></div></div></div>`; }).join("")}
-      <div style="margin-top:8px;font-size:14px;color:var(--zacht)">⭐ Verborgen risico's gevonden: <b style="color:var(--geel)">${Object.keys(S.bonus).length}/${Object.keys(BONUS).length}</b> · 💡 Hints gebruikt: <b>${S.hints}</b></div>
+      <div style="margin-top:8px;font-size:14px;color:var(--zacht)">⭐ Verborgen risico's gevonden: <b style="color:var(--geel)">${Object.keys(S.bonus).length}/${Object.keys(BONUS).length}</b> · 🪶 Veren: <b>${Object.keys(S.veren).length}/${VEREN.length}</b>${S.geheim ? " · 🐦‍⬛ Geheim gevonden!" : ""} · 💡 Hints gebruikt: <b>${S.hints}</b></div>
     </div>
     <div class="blok" style="margin-top:14px">
       <h3>${lessen.length ? "📝 Hier kun je nog van leren" : "🏆 Je had alles goed!"}</h3>
@@ -2282,6 +2979,12 @@ function loop(nu) {
     if (o.ring && o.ring.visible) { o.ring.material.opacity = 0.35 + 0.3 * Math.sin(t * 3 + i); o.ring.scale.setScalar(1 + 0.06 * Math.sin(t * 3 + i)); }
   });
   camLed.visible = Math.sin(t * 3) > 0;
+  backupLed.visible = Math.sin(t * 5) > -0.3;
+  SLOTEN.forEach(s => { if (s.open && s.anim < 1) { s.anim = Math.min(1, s.anim + dt * 0.8); const d = s.anim * 1.45;
+    if (s.horiz) { s.mesh.position.x = s.cx - d; s.plaat.position.x = s.cx - d; } else { s.mesh.position.z = s.cz - d; s.plaat.position.z = s.cz - d; } } });
+  VEREN.forEach((v, i) => { if (v.groep.visible) { v.groep.rotation.y += dt * 0.8; v.groep.position.y = v.y + Math.abs(Math.sin(t * 2 + i)) * 0.06; } });
+  if (bytes.userData.kop) bytes.userData.kop.rotation.y = Math.sin(t * 1.3) * 0.6;
+  wolken.forEach((w, i) => { w.position.x += dt * (0.6 + (i % 3) * 0.3); if (w.position.x > 130) w.position.x = -130; });
   routerLeds.forEach((l, i) => { l.visible = i === 3 ? Math.sin(t * 6) > 0 : Math.sin(t * 4 + i * 2) > -0.6; });
   consoleLed.material.color.setHSL((t * 0.1) % 1, 0.8, 0.6);
   tvLicht.intensity = 0.45 + 0.15 * Math.sin(t * 7);
