@@ -191,6 +191,7 @@
   .naamrij input{flex:1;min-width:200px;font-size:18px;padding:12px 14px;border:3px solid #000;box-shadow:var(--bevelIn);background:#111;color:#fff;font-family:inherit}
   .naamrij input:focus{outline:3px solid var(--geel)}
   .label{font-family:var(--pix);font-size:11px}
+  .tijdKeuze{font-size:16px;padding:11px 10px;border:3px solid #000;box-shadow:var(--bevelIn);background:#111;color:#fff;font-family:inherit;font-weight:800}
   .fouttekst{color:var(--rood);font-weight:800;margin-top:6px;min-height:20px}
   .sterren{font-size:46px;letter-spacing:6px;margin:6px 0}
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
@@ -288,6 +289,11 @@
   .geluidRij input[type=range]::-moz-range-thumb{width:18px;height:22px;background:#6fbf4a;border:3px solid #000;border-radius:0}
   .geluidRij input[type=range]:disabled{opacity:.4}
   .geluidTip{font-size:13px;color:var(--zacht)}
+  .keuzeRij{align-items:flex-start}
+  .keuzes{display:flex;flex-wrap:wrap;gap:6px;flex:1;justify-content:flex-end}
+  .keuze{background:#555;color:#fff;border:3px solid #000;box-shadow:var(--bevel);padding:7px 10px;font-weight:800;font-size:13px;font-family:Nunito,sans-serif}
+  .keuze:hover{background:#7d8fd6}
+  .keuze.actief{background:#3f9b3f;box-shadow:var(--bevelIn)}
   @media (max-width:700px){.grid2,.duo,.stats{grid-template-columns:1fr}#hudLeft{display:none}.titel h1{font-size:18px}}
 
   /* ---------- Aanraakscherm (telefoon/tablet) ---------- */
@@ -331,7 +337,7 @@
     #hudTop small{font-size:6px}
     #geluidKnop{font-size:16px;min-width:46px}
     #hudRight{top:max(6px, env(safe-area-inset-top));right:max(6px, env(safe-area-inset-right));padding:3px}
-    #minimap{width:130px;height:104px}
+    #minimap{width:150px;height:93px}
     #codeBar{top:calc(max(6px, env(safe-area-inset-top)) + 54px);bottom:auto;font-size:0;gap:4px;padding:4px 6px}
     .codeslot{width:34px;height:40px;font-size:12px;gap:2px}
     .codeslot span{font-size:10px}
@@ -365,14 +371,14 @@
   <div id="hudLeft" class="hudbox">
     <h3>OPDRACHTEN</h3>
     <div id="opdrLijst"></div>
-    <div id="bonusRegel">⭐ Verborgen risico's: 0/3</div>
+    <div id="bonusRegel">⭐ Verborgen risico's: 0/5</div>
   </div>
   <div id="hudTop">
     <div class="hudbox" id="timer"><small>TIJD</small><span id="tijdTekst">25:00</span></div>
     <div class="hudbox" id="scoreBox"><small>XP</small><span id="scoreTekst">0</span><div id="xpBalk"><div></div></div></div>
     <button class="hudbox" id="geluidKnop" title="Geluid (sneltoets M)"><small style="display:block;font-family:var(--pix);font-size:8px;color:var(--zacht)">GELUID</small><span id="geluidIcoon">🔊</span></button>
   </div>
-  <div id="hudRight" class="hudbox"><canvas id="minimap" width="200" height="160"></canvas></div>
+  <div id="hudRight" class="hudbox"><canvas id="minimap" width="200" height="124"></canvas></div>
   <div id="codeBar" class="hudbox">🔒 Deurcode: <div id="codeSlots" style="display:flex;gap:8px"></div></div>
   <div id="besturing" class="hudbox">
     <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> lopen · <kbd>Shift</kbd> rennen<br>
@@ -410,15 +416,17 @@
       <span class="avatar"></span>
       <h1>Cyber Escape:<br><span>Het Gehackte Huis</span></h1>
     </div>
-    <p class="verhaal">Sam is even naar de supermarkt voor chips. Jij past op het huis. Wat kan er misgaan? Nou... alles. 🙃 <b>Hacker Kraai</b> heeft het slimme huis overgenomen. De voordeur zit op slot met een <b>code van 4 cijfers</b>. Overal in huis staan apparaten die gehackt zijn. Los de opdrachten op, vind de 4 cijfers en ontsnap binnen <b>25 minuten</b>!</p>
+    <p class="verhaal">Sam is even chips halen. Jij past op het huis. Wat kan er misgaan? Nou... alles. 🙃 <b>Hacker Kraai</b> heeft het slimme huis overgenomen. De voordeur zit op slot met een <b>code van 6 cijfers</b>. Los bij elk apparaat de vragen op. Heb je <b>minstens de helft goed</b>? Dan krijg je een cijfer. Vind alle cijfers en ontsnap op tijd!</p>
     <div class="grid2">
       <div class="blok">
         <h3>🎯 Wat moet je doen?</h3>
-        💻 Laptop in de slaapkamer: <b>phishing</b><br>
-        🎮 Gameconsole in de woonkamer: <b>wachtwoorden</b><br>
-        📱 Telefoon in de keuken: <b>privacy & oplichting</b><br>
-        🖥️ Computer in de woonkamer: <b>virussen & wifi</b><br>
-        ⭐ Bonus: vind 3 <b>verborgen risico's</b> in huis
+        💻 Laptop (slaapkamer): <b>nepberichten</b><br>
+        🎮 Gameconsole (woonkamer): <b>wachtwoorden</b><br>
+        📱 Telefoon (keuken): <b>privacy & oplichting</b><br>
+        🖥️ Computer (woonkamer): <b>virussen & wifi</b><br>
+        📷 Slimme camera (werkkamer): <b>slimme apparaten</b><br>
+        📲 Tablet (gameroom): <b>AI & deepfakes</b><br>
+        ⭐ Bonus: vind 5 <b>verborgen risico's</b>
       </div>
       <div class="blok">
         <h3>🎮 Besturing</h3>
@@ -443,6 +451,7 @@
     <label for="naam" class="label">Wat is je naam?</label>
     <div class="naamrij">
       <input id="naam" maxlength="30" placeholder="Bijv. Yara of Daan" autocomplete="off">
+      <select id="speeltijd" aria-label="Speeltijd" class="tijdKeuze"><option value="30">⏱️ 30 min</option><option value="40" selected>⏱️ 40 min</option><option value="50">⏱️ 50 min</option></select>
       <button class="knop groen" id="startKnop">▶ Start de game</button>
     </div>
     <div class="fouttekst" id="naamFout"></div>
@@ -543,7 +552,7 @@ function shade(hex, f) { const n = parseInt(hex.slice(1), 16); const r = Math.mi
 /* ---------------- Geluid & muziek (alles zelf gemaakt met Web Audio) ---------------- */
 const Geluid = (() => {
   let ctx = null, master, muziekBus, sfxBus, duikGain, ruisBuf;
-  let inst = { aan: true, muziek: 40, effecten: 75 };
+  let inst = { aan: true, muziek: 40, effecten: 75, nummer: "wissel", stappen: "zacht" };
   try { const o = JSON.parse(localStorage.getItem("cyberEscapeGeluid")); if (o && typeof o.muziek === "number") inst = Object.assign(inst, o); } catch (e) {}
   const bewaar = () => { try { localStorage.setItem("cyberEscapeGeluid", JSON.stringify(inst)); } catch (e) {} };
   const midi = m => 440 * Math.pow(2, (m - 69) / 12);
@@ -596,7 +605,13 @@ const Geluid = (() => {
     bonus() { const t = nu(); [79, 83, 86, 91, 95].forEach((m, i) => toon(midi(m), t + i * 0.05, 0.2, { type: "triangle", vol: 0.12 })); },
     station() { const t = nu(); [[72, 0], [76, 0.12], [79, 0.24], [84, 0.36]].forEach(([m, d]) => toon(midi(m), t + d, 0.16, { vol: 0.11 }));
       [72, 76, 79, 84].forEach(m => toon(midi(m), t + 0.52, 0.7, { type: "triangle", vol: 0.09 })); ruis(t + 0.52, 0.3, { filter: "highpass", freq: 6000, vol: 0.08 }); },
-    stap() { const t = nu(); ruis(t, 0.07, { freq: 380, vol: 0.32 }); toon(70 + Math.random() * 20, t, 0.06, { type: "sine", vol: 0.12 }); },
+    stap() {
+      const t = nu(), s = inst.stappen;
+      if (s === "uit") return;
+      if (s === "zacht") { ruis(t, 0.05, { freq: 220, vol: 0.14 }); return; }
+      if (s === "piep") { this._links = !this._links; const f = this._links ? 1300 : 1550; toon(f, t, 0.07, { type: "sine", vol: 0.05, naar: f * 1.25 }); return; }
+      ruis(t, 0.07, { freq: 380, vol: 0.32 }); toon(70 + Math.random() * 20, t, 0.06, { type: "sine", vol: 0.12 });
+    },
     kraai() { const t = nu(); const n = 4 + Math.floor(Math.random() * 4);
       for (let i = 0; i < n; i++) toon(320 + Math.random() * 420, t + i * 0.065, 0.055, { type: "square", vol: 0.05 }); },
     miauw() { const t = nu(); toon(650, t, 0.45, { type: "triangle", vol: 0.12, naar: 480, attack: 0.08 }); toon(900, t + 0.05, 0.15, { type: "sine", vol: 0.05, naar: 1100 }); },
@@ -612,31 +627,68 @@ const Geluid = (() => {
     test() { this.goed(); }
   };
 
-  /* Chiptune-muziek: eigen melodie, 8 maten in een lus */
-  const LEAD = [69,0,72,0,76,0,74,72, 72,0,69,0,65,0,69,0, 67,0,72,0,76,0,79,0, 74,0,0,71,74,0,79,0,
-                81,0,79,0,76,0,72,0, 77,0,76,0,72,0,69,0, 71,0,74,0,79,0,77,76, 76,0,0,0,68,0,71,0];
-  const BASRIJ = [45, 41, 48, 43, 45, 41, 43, 40];
-  let muziekAan = false, stap = 0, volgende = 0, timer = null, tempo = 124, duik = false;
-  function speelStap(s, t, sd) {
+  /* Chiptune-muziek: 4 eigen nummers van 8 maten. Bij 'wissel' gaat hij na 2 rondes naar het volgende nummer. */
+  const NUMMERS = [
+    { id: "party", naam: "🎉 Pixel Party", tempo: 124, lead: "square", leadVol: 0.045, octaaf: true,
+      noten: [69,0,72,0,76,0,74,72, 72,0,69,0,65,0,69,0, 67,0,72,0,76,0,79,0, 74,0,0,71,74,0,79,0,
+              81,0,79,0,76,0,72,0, 77,0,76,0,72,0,69,0, 71,0,74,0,79,0,77,76, 76,0,0,0,68,0,71,0],
+      bas: [45, 41, 48, 43, 45, 41, 43, 40], basType: "triangle", kick: [0, 4], snare: [2, 6], hihat: true },
+    { id: "hacker", naam: "🕶️ Hacker Hideout", tempo: 100, lead: "sawtooth", leadVol: 0.022, octaaf: false,
+      noten: [62,65,69,65,62,65,69,74, 58,62,65,62,58,62,65,70, 60,64,67,64,60,64,67,72, 57,60,64,60,57,60,64,69,
+              62,65,69,74,77,74,69,65, 58,62,65,70,74,70,65,62, 60,64,67,72,76,72,67,64, 57,61,64,69,73,69,64,61],
+      bas: [38, 34, 36, 33, 38, 34, 36, 33], basType: "square", basVol: 0.06, kick: [0, 3, 4], snare: [6], hihat: true },
+    { id: "chill", naam: "🌙 Chill Blokjes", tempo: 84, lead: "triangle", leadVol: 0.07, octaaf: false,
+      noten: [76,0,0,74,72,0,0,0, 72,0,0,69,67,0,64,0, 69,0,72,0,76,0,0,0, 74,0,0,0,71,0,0,0,
+              79,0,0,76,74,0,72,0, 72,0,69,0,67,0,0,0, 69,0,72,0,74,0,76,0, 74,0,0,0,0,0,0,0],
+      bas: [48, 45, 41, 43, 48, 45, 41, 43], basType: "sine", basVol: 0.18, basLang: true, kick: [0], snare: [4], zachteSnare: true, hihat: false },
+    { id: "race", naam: "🏃 Achtervolging", tempo: 158, lead: "square", leadVol: 0.04, octaaf: false,
+      noten: [76,79,83,79,76,79,83,88, 76,79,84,79,76,79,84,88, 74,78,81,78,74,78,81,86, 75,78,83,78,75,78,83,87,
+              88,0,86,0,83,0,79,0, 84,0,83,0,79,0,76,0, 78,0,81,0,86,0,81,0, 83,0,0,0,87,0,83,0],
+      bas: [40, 36, 38, 35, 40, 36, 38, 35], basType: "triangle", kick: [0, 2, 4, 6], snare: [2, 6], hihat: true }
+  ];
+  let muziekAan = false, stap = 0, volgende = 0, timer = null, duik = false, huidig = 0, rondes = 0, tempoExtra = 1, haast = false;
+  const kiesStartNummer = () => { const i = NUMMERS.findIndex(n => n.id === inst.nummer); return i >= 0 ? i : 0; };
+  function speelStap(n, s, t, sd) {
     const maat = Math.floor(s / 8), pos = s % 8;
-    const l = LEAD[s]; if (l) { toon(midi(l), t, sd * 0.9, { type: "square", vol: 0.045, uit: muziekBus }); toon(midi(l + 12), t, sd * 0.5, { type: "triangle", vol: 0.015, uit: muziekBus }); }
-    const r = BASRIJ[maat]; toon(midi(pos % 2 ? r + 12 : r), t, sd * 0.85, { type: "triangle", vol: 0.13, uit: muziekBus });
-    if (pos === 0 || pos === 4) { toon(120, t, 0.12, { type: "sine", vol: 0.25, naar: 45, uit: muziekBus }); }
-    if (pos === 2 || pos === 6) ruis(t, 0.1, { filter: "highpass", freq: 1500, vol: 0.09, uit: muziekBus });
-    ruis(t, 0.03, { filter: "highpass", freq: 7000, vol: pos % 2 ? 0.025 : 0.04, uit: muziekBus });
+    const l = n.noten[s];
+    if (l) { toon(midi(l), t, sd * 0.9, { type: n.lead, vol: n.leadVol, uit: muziekBus }); if (n.octaaf) toon(midi(l + 12), t, sd * 0.5, { type: "triangle", vol: 0.015, uit: muziekBus }); }
+    const r = n.bas[maat];
+    if (n.basLang) { if (pos === 0 || pos === 4) toon(midi(r), t, sd * 3.6, { type: n.basType, vol: n.basVol, uit: muziekBus, attack: 0.03 }); }
+    else toon(midi(pos % 2 ? r + 12 : r), t, sd * 0.85, { type: n.basType, vol: n.basVol || 0.13, uit: muziekBus });
+    if (n.kick.includes(pos)) toon(120, t, 0.12, { type: "sine", vol: 0.25, naar: 45, uit: muziekBus });
+    if (n.snare.includes(pos)) ruis(t, n.zachteSnare ? 0.05 : 0.1, { filter: "highpass", freq: n.zachteSnare ? 3000 : 1500, vol: n.zachteSnare ? 0.05 : 0.09, uit: muziekBus });
+    if (n.hihat) ruis(t, 0.03, { filter: "highpass", freq: 7000, vol: pos % 2 ? 0.025 : 0.04, uit: muziekBus });
   }
   function plan() {
     if (!ctx || !muziekAan) return;
-    const sd = 60 / tempo / 2;
     if (volgende < ctx.currentTime - 0.2) volgende = ctx.currentTime + 0.05;
-    while (volgende < ctx.currentTime + 0.15) { speelStap(stap, volgende, sd); volgende += sd; stap = (stap + 1) % LEAD.length; }
+    while (volgende < ctx.currentTime + 0.15) {
+      const n = NUMMERS[huidig], sd = 60 / (n.tempo * tempoExtra) / 2;
+      speelStap(n, stap, volgende, sd); volgende += sd; stap++;
+      if (stap >= n.noten.length) {
+        stap = 0; rondes++;
+        if (inst.nummer === "wissel" && rondes >= 2) {
+          rondes = 0;
+          if (haast) huidig = NUMMERS.findIndex(x => x.id === "race");
+          else { huidig = (huidig + 1) % NUMMERS.length; if (NUMMERS[huidig].id === "race") huidig = (huidig + 1) % NUMMERS.length; }
+          volgende += 0.25; // korte pauze tussen nummers
+          if (Geluid.bijNummer) Geluid.bijNummer(NUMMERS[huidig]);
+        }
+      }
+    }
   }
   return {
     init, inst,
     sfx(naam) { try { if (ctx && inst.aan && inst.effecten > 0 && SFX[naam]) SFX[naam].call(SFX); } catch (e) {} },
-    startMuziek() { if (!ctx || muziekAan) return; muziekAan = true; stap = 0; volgende = ctx.currentTime + 0.1; timer = setInterval(plan, 30); },
+    NUMMERS,
+    huidigNummer() { return NUMMERS[huidig]; },
+    startMuziek() { if (!ctx || muziekAan) return; muziekAan = true; huidig = kiesStartNummer(); stap = 0; rondes = 0; volgende = ctx.currentTime + 0.1; timer = setInterval(plan, 30); },
     stopMuziek() { muziekAan = false; clearInterval(timer); },
-    tempo(b) { tempo = b; },
+    kiesNummer(id) {
+      inst.nummer = id; bewaar();
+      if (id !== "wissel") { huidig = Math.max(0, NUMMERS.findIndex(n => n.id === id)); stap = 0; rondes = 0; if (ctx) volgende = ctx.currentTime + 0.1; }
+    },
+    haast() { haast = true; if (inst.nummer === "wissel") { huidig = NUMMERS.findIndex(x => x.id === "race"); stap = 0; rondes = 0; } else tempoExtra = 1.15; },
     duik(aan) { if (!ctx || duik === aan) return; duik = aan; duikGain.gain.setTargetAtTime(aan ? 0.45 : 1, ctx.currentTime, 0.15); },
     zet(k, v) { inst[k] = v; bewaar(); pasToe(); },
     wissel() { inst.aan = !inst.aan; bewaar(); pasToe(); return inst.aan; }
@@ -650,7 +702,19 @@ function geluidBediening(el) {
     <div class="geluidRij"><span class="naam">Geluid aan</span><button class="switch ${i.aan ? "aan" : ""}" id="gAan" aria-label="Geluid aan of uit"></button></div>
     <div class="geluidRij"><span class="naam">🎵 Muziek</span><input type="range" min="0" max="100" step="5" value="${i.muziek}" id="gMuz" aria-label="Volume muziek"><span class="waarde" id="gMuzW">${i.muziek}%</span></div>
     <div class="geluidRij"><span class="naam">💥 Effecten</span><input type="range" min="0" max="100" step="5" value="${i.effecten}" id="gSfx" aria-label="Volume effecten"><span class="waarde" id="gSfxW">${i.effecten}%</span></div>
+    <div class="geluidRij keuzeRij"><span class="naam">🎶 Nummer</span><div class="keuzes" id="gNummer">
+      <button class="keuze" data-v="wissel">🔀 Wisselen</button>
+      ${Geluid.NUMMERS.map(n => `<button class="keuze" data-v="${n.id}">${n.naam}</button>`).join("")}</div></div>
+    <div class="geluidRij keuzeRij"><span class="naam">👟 Stappen</span><div class="keuzes" id="gStappen">
+      <button class="keuze" data-v="zacht">Zacht</button><button class="keuze" data-v="blok">Blokjes</button>
+      <button class="keuze" data-v="piep">Piepschoenen</button><button class="keuze" data-v="uit">Uit</button></div></div>
     <div class="geluidTip">Tip: druk tijdens het spelen op <kbd>M</kbd> om het geluid snel aan of uit te zetten.</div></div>`;
+  const markeer = (box, v) => box.querySelectorAll(".keuze").forEach(b => b.classList.toggle("actief", b.dataset.v === v));
+  const nb = el.querySelector("#gNummer"), sb = el.querySelector("#gStappen");
+  markeer(nb, i.nummer); markeer(sb, i.stappen);
+  nb.onclick = (e) => { const b = e.target.closest(".keuze"); if (!b) return; Geluid.init(); Geluid.kiesNummer(b.dataset.v); markeer(nb, b.dataset.v); };
+  sb.onclick = (e) => { const b = e.target.closest(".keuze"); if (!b) return; Geluid.init(); Geluid.zet("stappen", b.dataset.v); markeer(sb, b.dataset.v);
+    setTimeout(() => Geluid.sfx("stap"), 50); setTimeout(() => Geluid.sfx("stap"), 330); };
   const zetStand = () => { ["gMuz", "gSfx"].forEach(id => el.querySelector("#" + id).disabled = !i.aan); };
   zetStand();
   el.querySelector("#gAan").onclick = (e) => { Geluid.init(); const aan = Geluid.wissel(); e.currentTarget.classList.toggle("aan", aan); zetStand(); werkGeluidIcoonBij(); if (aan) Geluid.sfx("blip"); };
@@ -669,10 +733,12 @@ const THEMAS = {
   phishing:   { naam: "Phishing & nepberichten",     icoon: "🎣", ding: "Laptop",      kamer: "slaapkamer", kleur: "#ff6b6b" },
   wachtwoord: { naam: "Wachtwoorden & 2FA",           icoon: "🔑", ding: "Gameconsole", kamer: "woonkamer",  kleur: "#ffd166" },
   social:     { naam: "Social engineering & privacy", icoon: "🕵️", ding: "Telefoon",    kamer: "keuken",     kleur: "#4ecdc4" },
-  malware:    { naam: "Malware, updates & wifi",      icoon: "🦠", ding: "Computer",    kamer: "woonkamer",  kleur: "#a78bfa" }
+  malware:    { naam: "Malware, updates & wifi",      icoon: "🦠", ding: "Computer",    kamer: "woonkamer",  kleur: "#a78bfa" },
+  iot:        { naam: "Slimme apparaten (IoT)",        icoon: "📷", ding: "Slimme camera", kamer: "werkkamer", kleur: "#ff9f43" },
+  ai:         { naam: "AI, deepfakes & nepnieuws",     icoon: "🤖", ding: "Tablet",      kamer: "gameroom",   kleur: "#5ad1ff" }
 };
-const VOLGORDE = ["phishing", "wachtwoord", "social", "malware"];
-const SPEELTIJD = 25 * 60;
+const VOLGORDE = ["phishing", "wachtwoord", "social", "malware", "iot", "ai"];
+let SPEELTIJD = 40 * 60;
 
 const S = {
   naam: "", score: 0, tijd: SPEELTIJD, bezig: false, klaar: false,
@@ -680,7 +746,7 @@ const S = {
   gewaarschuwd5: false, gewaarschuwd1: false
 };
 VOLGORDE.forEach(t => {
-  S.stations[t] = { stap: 0, klaar: false, cijfer: 1 + Math.floor(Math.random() * 9) };
+  S.stations[t] = { stap: 0, klaar: false, cijfer: 1 + Math.floor(Math.random() * 9), pg: 0, pf: 0, poging: 0, stappen: null };
   S.resultaten[t] = { goed: 0, totaal: 0 };
 });
 
@@ -707,6 +773,7 @@ function punten(n) {
   p.classList.remove("go"); void p.offsetWidth; p.classList.add("go");
 }
 function registreer(thema, goed, les) {
+  const st = S.stations[thema]; if (goed) st.pg++; else st.pf++;
   S.resultaten[thema].totaal++;
   if (goed) S.resultaten[thema].goed++;
   else if (les) S.lessen.push({ thema, les });
@@ -751,145 +818,345 @@ function mail(o) { return Object.assign({ soort: "mail" }, o); }
 function chat(o) { return Object.assign({ soort: "chat" }, o); }
 function mc(o)   { return Object.assign({ soort: "mc" }, o); }
 
+function schud(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function trek(pot, n) { return schud(pot).slice(0, n).map(q => Object.assign({}, q)); }
+
+/* Vragenpotten: elke poging trekt een willekeurige set. Taal: kort en eenvoudig. */
+const POT = {
+  phishing: [
+    mail({ van: "PakjesPost", adres: "service@pakjespost-bezorging.info", onderwerp: "Je pakket kan niet bezorgd worden 📦",
+      body: "Beste klant,<br><br>Je moet nog <b>€1,95</b> betalen. Doe dit binnen <b>12 uur</b>. Anders gaat je pakket terug.",
+      link: "Nu betalen", phishing: true,
+      uitleg: "Nep! Het adres eindigt op <b>.info</b> en is niet van de bezorger. Ze maken je gehaast en willen geld via een link.",
+      hint: "Kijk goed naar het mailadres.", les: "Klein bedrag + haast + link = bijna altijd phishing." }),
+    mail({ context: "Je zit op het De Horst College. Mevrouw Jansen is je mentor.",
+      van: "Mevrouw Jansen (mentor)", adres: "m.jansen@dehorst-college.nl", onderwerp: "Rooster volgende week",
+      body: "Hoi allemaal,<br><br>Dinsdag valt het 3e uur uit. Kijk in de schoolapp voor je rooster.<br><br>Groetjes, mevrouw Jansen",
+      phishing: false,
+      uitleg: "Echt. Het komt van het adres van school. Er staat geen link in en ze vraagt niks geheims.",
+      hint: "Vraagt ze om geld, een wachtwoord of een klik?", les: "Een echt bericht vraagt niet om wachtwoorden of geld." }),
+    mail({ van: "StreamFlix", adres: "streamflix-support@account-verificatie.com", onderwerp: "LAATSTE WAARSCHUWING: account geblokkeerd!",
+      body: "Je betaling is mislukt. Log <b>binnen 24 uur</b> in en vul je bankgegevens in. Anders verwijderen we je account.",
+      link: "Inloggen", phishing: true,
+      uitleg: "Nep! Ze dreigen en maken haast. Het adres is niet van StreamFlix. Ze willen je bankgegevens.",
+      hint: "Waarom zouden ze je bang maken?", les: "Dreigen + haast + inloggen via link = phishing." }),
+    mail({ context: "Gisteren heb je zelf een controller besteld bij GameStore.",
+      van: "GameStore", adres: "bestellingen@gamestore.nl", onderwerp: "Je bestelling #48213 is onderweg 🎮",
+      body: "Hoi Sam,<br><br>Je controller komt morgen. Je hoeft niets te doen.<br><br>Groet, GameStore",
+      phishing: false,
+      uitleg: "Echt. Je hebt zelf iets besteld, het adres klopt en ze vragen niks.",
+      hint: "Lees de situatie boven de mail nog eens.", les: "Past de mail bij iets wat je zelf deed en vraagt hij niks? Dan is hij meestal echt." }),
+    mail({ context: "Je hebt <b>niks</b> besteld bij GameStore.",
+      van: "GameStore", adres: "service@gamestore-nl.shop", onderwerp: "Bestelling geannuleerd – geld terug",
+      body: "Je bestelling van €89,99 is geannuleerd. Klik hieronder en vul je bankgegevens in om je geld terug te krijgen.",
+      link: "Geld terugvragen", phishing: true,
+      uitleg: "Nep! Je hebt niks besteld. Het adres lijkt op GameStore, maar eindigt op <b>.shop</b>. Ze willen je bankgegevens.",
+      hint: "Het adres lijkt echt. Kijk naar het einde.", les: "Een nep-adres lijkt vaak bijna echt. Kijk naar het einde van het adres." }),
+    chat({ wie: "+31 6 41 77 20 93", berichten: [
+        "Hoi! Dit is mijn nieuwe nummer. Mijn telefoon viel in de wc 😩",
+        "Kun je me snel helpen? Ik moet vandaag €389 betalen en mijn bank-app doet het niet.",
+        "Morgen krijg je het terug! ❤️ Je broer"],
+      phishing: true,
+      uitleg: "Nep! Dit is WhatsApp-fraude. Bel je broer op zijn <b>oude</b> nummer. Stuur nooit geld naar een nieuw nummer.",
+      hint: "Hoe weet je zeker dat het je broer is?", les: "Nieuw nummer + vraagt geld = eerst bellen naar het oude nummer." }),
+    chat({ wie: "Mama ❤️", berichten: [
+        "Wil je straks brood halen? Geld ligt op tafel.",
+        "Ik ben om 6 uur thuis. Doei!"],
+      phishing: false,
+      uitleg: "Echt. Het is het nummer dat je al kent. Ze vraagt geen geld, geen code en geen link.",
+      hint: "Kent je telefoon dit nummer al?", les: "Een bekend nummer dat niks geheims vraagt, is meestal gewoon echt." }),
+    mail({ van: "Prijzenteam NL", adres: "winnaar@gratis-prijzen-nl.xyz", onderwerp: "🎉 JIJ WINT EEN NIEUWE TELEFOON!",
+      body: "Jij bent de <b>1.000.000ste bezoeker</b>! Vul je naam, adres en geboortedatum in. Op = op!",
+      link: "Prijs ophalen", phishing: true,
+      uitleg: "Nep! Je kunt niet winnen als je niet meedoet. Ze willen je gegevens.",
+      hint: "Heb je ergens aan meegedaan?", les: "Te mooi om waar te zijn? Dan is het nep." }),
+    mail({ van: "Jouw Bank", adres: "klantenservice@mijnbank-pasvernieuwen.com", onderwerp: "Je bankpas verloopt",
+      body: "Je bankpas verloopt binnenkort. Vraag via de link een nieuwe aan. Vul daarbij je pincode in.",
+      link: "Nieuwe pas aanvragen", phishing: true,
+      uitleg: "Nep! Een bank vraagt <b>nooit</b> om je pincode. En een nieuwe pas krijg je vanzelf.",
+      hint: "Wie mag jouw pincode weten?", les: "Een bank vraagt nooit om je pincode of inlogcodes." }),
+    mail({ context: "De app van InstaPlaats is van de website <b>instaplaats.com</b>.",
+      van: "InstaPlaats", adres: "security@mail.instaplaats.com", onderwerp: "Nieuwe inlog op je account",
+      body: "Iemand logde in op je account vanaf een nieuwe telefoon. Was jij dit niet? Open dan de app en verander je wachtwoord.",
+      phishing: false,
+      uitleg: "Echt. Het adres eindigt op <b>instaplaats.com</b>. Er staat geen link in. Ze zeggen: open zelf de app.",
+      hint: "Waar eindigt het adres? En is er een link?", les: "Een echte waarschuwing laat je zelf de app openen, zonder link." }),
+    mail({ context: "De app van InstaPlaats is van de website <b>instaplaats.com</b>.",
+      van: "InstaPlaats", adres: "support@instaplaats.com.inlog-check.net", onderwerp: "Bevestig je account",
+      body: "We willen zeker weten dat jij het bent. Log in via de knop. Doe je dit niet, dan sluiten we je account.",
+      link: "Account bevestigen", phishing: true,
+      uitleg: "Nep! Het adres begint met instaplaats.com, maar eindigt op <b>inlog-check.net</b>. Alleen het einde telt.",
+      hint: "Lees het adres helemaal tot het einde.", les: "Alleen het laatste stuk van het adres telt (voor .nl, .com, enz.)." }),
+    chat({ wie: "Sms van OV-Service", berichten: [
+        "Je hebt een boete van €35 voor je OV-kaart.",
+        "Betaal vandaag via ov-boete-betalen.nl, anders wordt het €135."],
+      phishing: true,
+      uitleg: "Nep! Echte boetes komen niet via een sms-link. Ze dreigen met een hoger bedrag om je bang te maken.",
+      hint: "Wat doen ze om je snel te laten betalen?", les: "Sms met link + dreigen = nep. Check het zelf via de officiële app." })
+  ],
+
+  wachtwoord: [
+    mc({ vraag: "Welk wachtwoord is het sterkst?",
+      opties: [{ t: "Welkom123" }, { t: "Sam2010!" }, { t: "P@ssw0rd" }, { t: "pizza-fiets-wolk-oranje", ok: true }],
+      uitleg: "Lang is sterk. Vier losse woorden zijn lang en makkelijk te onthouden. Trucjes als @ in plaats van a kennen hackers al.",
+      hint: "Langer is sterker.", les: "Een wachtzin van 4 losse woorden is sterker dan een kort 'slim' wachtwoord." }),
+    mc({ vraag: "Welk wachtwoord kan iemand die jou kent het makkelijkst raden?",
+      opties: [{ t: "Max2015! (naam van je hond + jaar)", ok: true }, { t: "zebra-lamp-wolk-tosti" }, { t: "Tq#9vL!2pXm7" }, { t: "boot-koffie-regen-groen" }],
+      uitleg: "Namen van huisdieren, je verjaardag of je club staan vaak online. Die probeert een hacker het eerst.",
+      hint: "Wat kun je over iemand op social media vinden?", les: "Gebruik geen namen of datums uit je eigen leven in je wachtwoord." }),
+    mc({ context: "Sam heeft hetzelfde wachtwoord voor Instagram, zijn game en zijn mail. Eén website wordt gehackt.",
+      vraag: "Wat gebeurt er dan?",
+      opties: [{ t: "Niks, alleen die ene website heeft een probleem" }, { t: "Hackers proberen het wachtwoord ook op zijn andere accounts", ok: true }, { t: "Zijn wachtwoord verandert vanzelf" }, { t: "De website betaalt hem geld terug" }],
+      uitleg: "Hackers proberen gestolen wachtwoorden overal. Zo ben je alles in één keer kwijt.",
+      hint: "Wat doet een hacker met een gestolen wachtwoord?", les: "Gebruik voor elk account een ander wachtwoord." }),
+    mc({ context: "Je krijgt een sms met een inlogcode. Maar jij logt nergens in.",
+      vraag: "Wat doe je?",
+      opties: [{ t: "De code sturen naar wie erom vraagt" }, { t: "Niks doen" }, { t: "Code aan niemand geven en je wachtwoord veranderen", ok: true }, { t: "De code in de klassen-app zetten: 'Van wie is deze?' 🙋" }],
+      uitleg: "Iemand anders kent je wachtwoord! Door 2FA komt hij er nog niet in. Verander snel je wachtwoord.",
+      hint: "Wie probeert er in te loggen?", les: "Inlogcode zonder dat jij inlogt = iemand kent je wachtwoord. Meteen veranderen!" }),
+    mc({ vraag: "Waar bewaar je je wachtwoorden het best?",
+      opties: [{ t: "Op een briefje bij je laptop" }, { t: "In een notitie 'wachtwoorden' op je telefoon" }, { t: "In een wachtwoordmanager", ok: true }, { t: "Je gebruikt overal hetzelfde, dan hoef je niks te bewaren" }],
+      uitleg: "Een wachtwoordmanager is een kluis met een slot. Je hoeft dan maar één sterk wachtwoord te onthouden.",
+      hint: "Welke plek heeft een slot?", les: "Bewaar wachtwoorden in een wachtwoordmanager." }),
+    mc({ vraag: "Wat is 2FA (tweestapsverificatie)?",
+      opties: [{ t: "Twee wachtwoorden achter elkaar typen" }, { t: "Inloggen met je wachtwoord én een tweede stap, zoals een code op je telefoon", ok: true }, { t: "Twee keer per jaar je wachtwoord veranderen" }, { t: "Een wachtwoord dat twee keer zo lang is" }],
+      uitleg: "Met 2FA heb je je wachtwoord én iets anders nodig, zoals je telefoon. Een hacker met alleen je wachtwoord komt er dan niet in.",
+      hint: "Twee verschillende dingen...", les: "2FA = wachtwoord + iets extra's (zoals een code op je telefoon)." }),
+    mc({ context: "Je beste vriend vraagt je wachtwoord. Hij wil je game-level voor je halen.",
+      vraag: "Wat doe je?",
+      opties: [{ t: "Geven, het is je beste vriend" }, { t: "Geven en daarna niet veranderen" }, { t: "Niet geven. Je wachtwoord is alleen van jou", ok: true }, { t: "Alleen de helft geven" }],
+      uitleg: "Vriendschappen veranderen. En je vriend kan het per ongeluk delen. Je wachtwoord deel je met niemand.",
+      hint: "Blijft een geheim geheim als je het deelt?", les: "Deel je wachtwoord met niemand, ook niet met vrienden." }),
+    mc({ vraag: "Wanneer moet je je wachtwoord veranderen?",
+      opties: [{ t: "Elke week" }, { t: "Als iemand het weet of als de website gehackt is", ok: true }, { t: "Nooit, ook niet als het gelekt is" }, { t: "Alleen op je verjaardag" }],
+      uitleg: "Een sterk wachtwoord mag je houden. Verander het wél meteen als iemand het weet of als het gelekt is.",
+      hint: "Wanneer is er gevaar?", les: "Verander je wachtwoord meteen als het gelekt is of iemand het weet." }),
+    mc({ vraag: "Welke schermvergrendeling op je telefoon is het veiligst?",
+      opties: [{ t: "Geen, dat is het snelst" }, { t: "Een veeg-patroon in de vorm van een L" }, { t: "Pincode 1234" }, { t: "Een pincode van 6 cijfers of je vingerafdruk", ok: true }],
+      uitleg: "Een L-patroon of 1234 raadt iemand zo. Kies een lange pincode of je vingerafdruk/gezicht.",
+      hint: "Wat is het moeilijkst te raden?", les: "Gebruik een lange pincode of vingerafdruk op je telefoon." }),
+    mc({ context: "Je hoort dat een website gehackt is. Jij hebt daar een account.",
+      vraag: "Wat doe je eerst?",
+      opties: [{ t: "Wachten tot de website je mailt" }, { t: "Je wachtwoord daar veranderen, en overal waar je hetzelfde gebruikte", ok: true }, { t: "Al je accounts overal verwijderen" }, { t: "Niks, het overkomt jou toch niet" }],
+      uitleg: "Snel zijn is belangrijk. Verander het wachtwoord, ook op andere sites met hetzelfde wachtwoord.",
+      hint: "Waar werkt dat wachtwoord nog meer?", les: "Website gehackt? Meteen dat wachtwoord overal veranderen." })
+  ],
+
+  social: [
+    chat({ wie: "InstaPlaats Support ✔️", berichten: [
+        "Je account heeft de regels overtreden. Over <b>1 uur</b> is hij weg ⚠️",
+        "Stuur ons de 6 cijfers uit de sms die je net kreeg. Dan lossen we het op."],
+      vraag: "Wat doe je?",
+      opties: [{ t: "De code sturen, ik wil mijn account houden" }, { t: "Vragen of ze echt van InstaPlaats zijn" }, { t: "Niet reageren. Blokkeren en melden", ok: true }, { t: "Terugsturen: 'Eerst jouw wachtwoord' 😏" }],
+      uitleg: "Echte support vraagt <b>nooit</b> om je code via een bericht. Met die code nemen ze je account over. Ook een ✔️ kan nep zijn.",
+      hint: "Vraagt een echt bedrijf om je code in een DM?", les: "Echte support vraagt nooit om je code of wachtwoord." }),
+    mc({ context: "In een game zegt iemand: \"Ik ben moderator. Geef je wachtwoord, dan krijg je 5000 gratis munten!\"",
+      vraag: "Wat is dit?",
+      opties: [{ t: "Een mooie kans" }, { t: "Oplichting: 'gratis' is het lokaas", ok: true }, { t: "Normaal, moderators hebben je wachtwoord nodig" }, { t: "Een test van de game, dus het mag" }],
+      uitleg: "Een moderator heeft nooit je wachtwoord nodig. 'Gratis' is het lokaas. Jouw account is de prijs.",
+      hint: "Wie heeft jouw wachtwoord nodig? Niemand.", les: "Gratis spullen voor je wachtwoord = oplichting." }),
+    mc({ context: "Je krijgt een vriendschapsverzoek van 'Lisa', met haar naam en foto. Maar je bent al vrienden met Lisa.",
+      vraag: "Wat doe je?",
+      opties: [{ t: "Accepteren, het is Lisa" }, { t: "Lisa in het echt of via haar bekende nummer vragen of het klopt", ok: true }, { t: "Het nieuwe account je nummer sturen" }, { t: "Allebei accepteren: dubbele Lisa, dubbele likes 📈" }],
+      uitleg: "Dit is waarschijnlijk een nep-account. Daarmee vragen oplichters om geld of codes. Check het via een andere manier.",
+      hint: "Kun je twee keer vrienden zijn met dezelfde persoon?", les: "Dubbel vriendschapsverzoek? Check het bij de echte persoon." }),
+    mc({ context: "Iemand belt: \"Ik ben van de helpdesk van school. Je account is gehackt. Wat is je wachtwoord? Dan los ik het op.\"",
+      vraag: "Wat doe je?",
+      opties: [{ t: "Wachtwoord geven, het is de school" }, { t: "Ophangen en zelf de school of je mentor bellen", ok: true }, { t: "Alleen je gebruikersnaam geven" }, { t: "Vragen of hij later terugbelt" }],
+      uitleg: "Een echte helpdesk vraagt nooit je wachtwoord. Bel zelf terug via een nummer dat je kent.",
+      hint: "Wie heeft jouw wachtwoord nodig?", les: "Niemand vraagt echt om je wachtwoord. Hang op en bel zelf terug." }),
+    mc({ context: "Een leuke quiz online: 'Wat is je rappersnaam? Naam van je eerste huisdier + de straat waar je woonde!'",
+      vraag: "Wat is hier het gevaar?",
+      opties: [{ t: "Geen, het is maar een grapje" }, { t: "Dit zijn vaak antwoorden op beveiligingsvragen van accounts", ok: true }, { t: "Je krijgt een rare rappersnaam" }, { t: "De quiz is te moeilijk" }],
+      uitleg: "Veel accounts vragen 'Naam van je eerste huisdier?' als je je wachtwoord vergeet. Zo'n quiz verzamelt die antwoorden.",
+      hint: "Waar wordt 'naam van je eerste huisdier' ook voor gebruikt?", les: "Vul geen quizzen in met persoonlijke dingen zoals huisdier of straat." }),
+    mc({ vraag: "Wat is het veiligst voor je social media-account?",
+      opties: [{ t: "Openbaar, dan krijg je meer volgers" }, { t: "Privé: alleen mensen die jij goedkeurt zien je posts", ok: true }, { t: "Iedereen accepteren die je volgt" }, { t: "Je wachtwoord in je bio zetten" }],
+      uitleg: "Met een privé-account kies jij wie je posts ziet. Vreemden kunnen dan minder over je te weten komen.",
+      hint: "Wie mag jouw posts zien?", les: "Zet je account op privé en accepteer alleen mensen die je kent." }),
+    mc({ context: "Je app heeft een kaart waarop vrienden zien waar jij bent.",
+      vraag: "Wat is slim?",
+      opties: [{ t: "Delen met iedereen, ook met onbekenden" }, { t: "Alleen delen met goede vrienden, of uitzetten", ok: true }, { t: "Altijd aan laten, het maakt niet uit" }, { t: "Je huis als 'thuis' markeren voor iedereen" }],
+      uitleg: "Als vreemden weten waar je bent, is dat gevaarlijk. Deel je locatie alleen met mensen die je echt kent.",
+      hint: "Wie mag weten waar je bent?", les: "Deel je locatie alleen met mensen die je echt kent." }),
+    mc({ context: "Iemand uit een game, die je nooit in het echt zag, vraagt je adres. Hij wil je een cadeau sturen.",
+      vraag: "Wat doe je?",
+      opties: [{ t: "Je adres sturen, cadeaus zijn leuk" }, { t: "Alleen je straat sturen" }, { t: "Niet doen en het vertellen aan een volwassene die je vertrouwt", ok: true }, { t: "Het adres van school sturen" }],
+      uitleg: "Je weet niet wie hij echt is. Geef nooit je adres aan iemand die je alleen online kent. Praat erover met een volwassene.",
+      hint: "Weet je zeker wie dit is?", les: "Geef je adres nooit aan iemand die je alleen online kent." })
+  ],
+
+  malware: [
+    mc({ context: "Op het schoolplein ligt een USB-stick. Op het label staat: <b>'Cijferlijst 2026'</b>.",
+      vraag: "Wat doe je?",
+      opties: [{ t: "In mijn laptop stoppen om te zien van wie hij is" }, { t: "Inleveren bij de receptie of ICT", ok: true }, { t: "Mee naar huis nemen en daar bekijken" }, { t: "Een nacht in rijst leggen, dat helpt altijd 🍚" }],
+      uitleg: "Hackers leggen soms expres USB-sticks met virussen neer. Een spannend label maakt je nieuwsgierig.",
+      hint: "Waarom staat er juist dít label op?", les: "Gevonden USB-stick? Niet insteken, maar inleveren." }),
+    mc({ html: '<div class="nepPopup"><h3>⚠️ WAARSCHUWING!</h3><div class="groot">Je computer heeft 5 virussen!</div><div>Bel NU: <b>0900-1234567</b></div><div style="margin-top:8px"><span style="background:#e00;color:#fff;padding:6px 14px;border-radius:6px;font-weight:800">Virussen verwijderen</span></div></div>',
+      vraag: "Deze melding komt op een website. Wat doe je?",
+      opties: [{ t: "Het nummer bellen" }, { t: "Op 'Virussen verwijderen' klikken" }, { t: "Het tabblad of de browser sluiten", ok: true }, { t: "Je wachtwoord intypen om het te stoppen" }],
+      uitleg: "Nep! Een website kan niet in je computer kijken. Wie belt, krijgt een oplichter aan de lijn.",
+      hint: "Kan een website in je computer kijken?", les: "Enge virusmelding op een website = nep. Tabblad sluiten." }),
+    mc({ context: "Je telefoon zegt: <b>'Beveiligingsupdate klaar om te installeren'</b>.",
+      vraag: "Wat doe je?",
+      opties: [{ t: "Uitstellen, updates zijn irritant" }, { t: "Zo snel mogelijk installeren", ok: true }, { t: "Nooit installeren, dan blijft alles werken" }, { t: "Telefoon in de vriezer, dan bevriezen de virussen 🧊" }],
+      uitleg: "Een update maakt gaten dicht waar hackers doorheen kunnen. Hoe langer je wacht, hoe langer het gat open blijft.",
+      hint: "Wat repareert een beveiligingsupdate?", les: "Updates meteen installeren: ze maken gaten dicht." }),
+    mc({ context: "In het winkelcentrum is gratis wifi zonder wachtwoord. Je wilt je bank-app gebruiken.",
+      vraag: "Wat is het veiligst?",
+      opties: [{ t: "Gewoon doen, wifi is wifi" }, { t: "Voor de bank-app je mobiele data gebruiken", ok: true }, { t: "Inloggen via de browser in plaats van de app" }, { t: "Snel typen, dan ziet niemand het" }],
+      uitleg: "Op open wifi kunnen anderen soms meekijken. Het kan zelfs een nep-netwerk van een hacker zijn.",
+      hint: "Wie heeft dit wifi-netwerk gemaakt?", les: "Op open wifi niet bankieren. Gebruik mobiele data." }),
+    mc({ context: "Een filmpje belooft gratis skins. Je moet <b>'GratisMunten_Generator.exe'</b> downloaden.",
+      vraag: "Wat doe je?",
+      opties: [{ t: "Downloaden en starten" }, { t: "Eerst de virusscanner uitzetten, dan downloaden" }, { t: "Niet downloaden. Alleen apps uit de officiële store", ok: true }, { t: "Downloaden op de laptop van je ouders" }],
+      uitleg: "Zulke 'generators' bestaan niet echt. Er zit vaak een virus in dat je accounts steelt.",
+      hint: "Bestaat 'gratis' echt?", les: "Gratis munten-generators = virus. Alleen apps uit officiële stores." }),
+    mc({ vraag: "Wat is <b>ransomware</b>?",
+      opties: [{ t: "Een virus dat je bestanden op slot zet en dan geld vraagt", ok: true }, { t: "Een programma dat je computer sneller maakt" }, { t: "Reclame in apps" }, { t: "Een virus dat alleen je muis laat bewegen" }],
+      uitleg: "Ransomware zet je bestanden op slot en vraagt losgeld. Een back-up beschermt je.",
+      hint: "'Ransom' is Engels voor 'losgeld'.", les: "Ransomware zet je bestanden op slot en vraagt losgeld." }),
+    mc({ vraag: "Hoe bescherm je je bestanden het best tegen ransomware?",
+      opties: [{ t: "Je bureaublad opruimen" }, { t: "Een back-up maken op een andere plek, zoals de cloud of een externe schijf", ok: true }, { t: "Je computer elke dag herstarten" }, { t: "Alleen 's avonds internetten" }],
+      uitleg: "Met een back-up heb je een kopie. Zet een virus je bestanden op slot? Dan haal je ze gewoon terug.",
+      hint: "Wat heb je nodig als je bestanden weg zijn?", les: "Maak back-ups op een andere plek." }),
+    mc({ context: "Een zaklamp-app vraagt toegang tot je <b>contacten</b> en je <b>microfoon</b>.",
+      vraag: "Wat doe je?",
+      opties: [{ t: "Toestaan, anders werkt hij niet" }, { t: "Weigeren of de app niet gebruiken", ok: true }, { t: "Alleen de microfoon toestaan" }, { t: "Toestaan en hopen dat het goed gaat" }],
+      uitleg: "Een zaklamp heeft je contacten en microfoon niet nodig. Zo'n app wil waarschijnlijk je gegevens.",
+      hint: "Wat heeft een zaklamp nodig?", les: "Geef apps alleen toegang die ze echt nodig hebben." }),
+    mc({ context: "Je krijgt een mail van een onbekende met een bijlage: <b>factuur.pdf.exe</b>",
+      vraag: "Wat doe je?",
+      opties: [{ t: "Openen, het is maar een pdf" }, { t: "Openen en daarna de virusscanner aanzetten" }, { t: "Niet openen: het eindigt op .exe, dus het is een programma", ok: true }, { t: "Doorsturen naar je vrienden om te vragen wat het is" }],
+      uitleg: "Het laatste stuk telt: <b>.exe</b>. Dat is een programma, geen pdf. Waarschijnlijk een virus.",
+      hint: "Kijk naar het allerlaatste stuk van de naam.", les: "Bijlage die eindigt op .exe van een onbekende? Niet openen." }),
+    mc({ vraag: "Heb je een virusscanner nodig als je al updates installeert?",
+      opties: [{ t: "Nee, updates zijn genoeg" }, { t: "Nee, alleen oude computers hebben dat nodig" }, { t: "Ja: updates én een virusscanner aan laten staan (zit vaak al ingebouwd)", ok: true }, { t: "Ja, maar alleen op vrijdag" }],
+      uitleg: "Updates maken gaten dicht. Een virusscanner vangt virussen die toch binnenkomen. Je hebt ze allebei nodig.",
+      hint: "Doen ze hetzelfde?", les: "Gebruik updates én een virusscanner." })
+  ],
+
+  iot: [
+    mc({ vraag: "Wat is een 'slim apparaat' (IoT)?",
+      opties: [{ t: "Een apparaat met internet, zoals een slimme lamp of camera", ok: true }, { t: "Een apparaat dat zelf kan denken" }, { t: "Elk apparaat met een stekker" }, { t: "Een rekenmachine" }],
+      uitleg: "IoT betekent 'Internet of Things'. Het zijn apparaten die met internet verbonden zijn. Daardoor kunnen ze ook gehackt worden.",
+      hint: "Wat hebben slimme apparaten allemaal?", les: "IoT = apparaten met internet. Ook die kunnen gehackt worden." }),
+    mc({ context: "Je koopt een nieuwe slimme camera.",
+      vraag: "Wat doe je als eerste?",
+      opties: [{ t: "Meteen ophangen in je kamer" }, { t: "Het standaard wachtwoord veranderen", ok: true }, { t: "Het wachtwoord van de doos laten staan, dat is makkelijk" }, { t: "Hem koppelen aan de wifi van de buren" }],
+      uitleg: "Veel apparaten hebben een standaard wachtwoord, zoals 'admin'. Hackers hebben lijsten met die wachtwoorden.",
+      hint: "Wie kent het wachtwoord van de doos nog meer?", les: "Verander altijd het standaard wachtwoord van een nieuw apparaat." }),
+    mc({ vraag: "Waarom is een camera met wachtwoord 'admin' gevaarlijk?",
+      opties: [{ t: "De camera gaat sneller kapot" }, { t: "Het beeld wordt wazig" }, { t: "Hackers kunnen dan live meekijken", ok: true }, { t: "Niemand weet toch dat je een camera hebt" }],
+      uitleg: "Hackers zoeken op internet naar camera's met standaard wachtwoorden. Dan kunnen ze meekijken in je huis.",
+      hint: "Wat kan iemand met jouw camera?", les: "Een zwak wachtwoord op een camera = vreemden kunnen meekijken." }),
+    mc({ context: "De app van je slimme deurbel zegt: 'Er is een update'.",
+      vraag: "Wat doe je?",
+      opties: [{ t: "Niks, een deurbel hoeft geen update" }, { t: "De update installeren", ok: true }, { t: "De deurbel uitzetten" }, { t: "Wachten tot hij kapot gaat" }],
+      uitleg: "Ook slimme apparaten krijgen updates tegen hackers. Installeer ze, net als op je telefoon.",
+      hint: "Waarom krijgt je telefoon updates?", les: "Installeer ook updates op slimme apparaten." }),
+    mc({ context: "Een slimme speaker luistert altijd of iemand 'Hé speaker' zegt.",
+      vraag: "Wat is slim om te doen?",
+      opties: [{ t: "Niks, hij hoort toch niks" }, { t: "De microfoon uitzetten als je hem niet gebruikt en opnames in de app wissen", ok: true }, { t: "Er een sok overheen doen 🧦" }, { t: "Hem in de badkamer zetten" }],
+      uitleg: "De speaker kan stukjes opnemen. Zet de microfoon uit als je hem niet nodig hebt. In de app kun je opnames wissen.",
+      hint: "Wat staat er altijd aan?", les: "Zet de microfoon van slimme speakers uit als je ze niet gebruikt." }),
+    mc({ vraag: "Waar hang je een slimme camera beter <b>niet</b>?",
+      opties: [{ t: "Bij de voordeur" }, { t: "In de slaapkamer of badkamer", ok: true }, { t: "In de garage" }, { t: "Bij de schuur" }],
+      uitleg: "Wordt de camera gehackt, dan kijkt iemand mee op je meest privé plekken. Hang hem daar dus niet.",
+      hint: "Waar wil je zeker geen vreemde ogen?", les: "Hang geen camera's in slaap- of badkamer." }),
+    mc({ context: "In de app zie je dat de slimme lamp om 3 uur 's nachts aan en uit ging. Iedereen sliep.",
+      vraag: "Wat doe je?",
+      opties: [{ t: "Niks, de lamp is gewoon raar" }, { t: "Het wachtwoord van de app veranderen en kijken wie er toegang heeft", ok: true }, { t: "Het grappig vinden en een filmpje maken" }, { t: "Een nieuwe lamp kopen, verder niks" }],
+      uitleg: "Misschien heeft iemand anders toegang tot je app. Verander het wachtwoord en haal onbekende gebruikers weg.",
+      hint: "Wie bediende de lamp?", les: "Raar gedrag van een slim apparaat? Wachtwoord veranderen en toegang checken." }),
+    mc({ vraag: "Waar zet je slimme apparaten het veiligst op thuis?",
+      opties: [{ t: "Op hetzelfde wifi als je laptop" }, { t: "Op een apart gastnetwerk", ok: true }, { t: "Op de wifi van de buren" }, { t: "Op open wifi zonder wachtwoord" }],
+      uitleg: "Op een apart netwerk kan een gehackt apparaat niet bij je laptop of telefoon komen.",
+      hint: "Hoe houd je ze gescheiden?", les: "Zet slimme apparaten op een apart (gast)netwerk." })
+  ],
+
+  ai: [
+    mc({ vraag: "Wat is een <b>deepfake</b>?",
+      opties: [{ t: "Een nep-foto, -video of -stem gemaakt met AI die echt lijkt", ok: true }, { t: "Een heel diepe zwemsprong" }, { t: "Een virus dat je foto's wist" }, { t: "Een filter dat je huid mooier maakt" }],
+      uitleg: "Met AI kun je iemand dingen laten zeggen of doen die nooit gebeurd zijn. Het ziet er vaak heel echt uit.",
+      hint: "'Fake' betekent nep.", les: "Een deepfake is nep-beeld of nep-geluid, gemaakt met AI." }),
+    mc({ context: "Je ziet een video van een bekende YouTuber: \"Stuur me €20, dan krijg je €200 terug!\"",
+      vraag: "Wat is dit waarschijnlijk?",
+      opties: [{ t: "Een echte actie, hij is toch bekend" }, { t: "Een deepfake: een nep-video om je geld te stelen", ok: true }, { t: "Een giveaway die altijd klopt" }, { t: "Een update van de app" }],
+      uitleg: "Oplichters maken met AI nep-video's van bekende mensen. Geld terug krijgen dat 10 keer zo veel is? Nep.",
+      hint: "Klinkt het te mooi?", les: "Bekende persoon belooft geld in een video? Waarschijnlijk een deepfake." }),
+    mc({ context: "'Mama' belt met een onbekend nummer. Ze klinkt precies als mama. Ze zegt dat ze meteen geld nodig heeft.",
+      vraag: "Wat doe je?",
+      opties: [{ t: "Meteen geld sturen, ze klinkt echt" }, { t: "Ophangen en mama zelf bellen op haar eigen nummer", ok: true }, { t: "Je pincode geven zodat zij kan pinnen" }, { t: "Vragen hoeveel ze precies nodig heeft" }],
+      uitleg: "Met AI kunnen oplichters een stem nadoen. Bel altijd zelf terug op het nummer dat je kent.",
+      hint: "Hoe weet je zeker dat het mama is?", les: "Stem klinkt echt maar vraagt geld? Ophangen en zelf terugbellen." }),
+    mc({ vraag: "Mag je persoonlijke dingen (adres, wachtwoord, foto's van vrienden) in een AI-chatbot typen?",
+      opties: [{ t: "Ja, een chatbot vertelt niks door" }, { t: "Nee, wat je intypt kan bewaard en gebruikt worden", ok: true }, { t: "Ja, als je 'geheim' erbij typt" }, { t: "Alleen je wachtwoord" }],
+      uitleg: "Wat je in een chatbot typt, kan opgeslagen worden. Typ dus geen geheime of persoonlijke dingen.",
+      hint: "Waar blijft de tekst die je typt?", les: "Typ geen persoonlijke gegevens in een AI-chatbot." }),
+    mc({ context: "Een AI-chatbot geeft je een antwoord voor je huiswerk.",
+      vraag: "Klopt het antwoord altijd?",
+      opties: [{ t: "Ja, een computer maakt geen fouten" }, { t: "Nee, AI maakt soms fouten. Controleer het", ok: true }, { t: "Ja, als het lang is" }, { t: "Alleen bij wiskunde niet" }],
+      uitleg: "AI kan dingen verzinnen die heel zeker klinken. Check belangrijke dingen altijd in een andere bron.",
+      hint: "Kan AI zich vergissen?", les: "AI kan fouten maken. Controleer het antwoord." }),
+    mc({ context: "In de groepsapp: \"SCHOKKEND: morgen zijn alle scholen dicht!!!\" Er staat geen bron bij.",
+      vraag: "Wat doe je?",
+      opties: [{ t: "Meteen doorsturen naar iedereen" }, { t: "Eerst checken op de site van school of een betrouwbare nieuwssite", ok: true }, { t: "Geloven, het staat online" }, { t: "Morgen gewoon thuisblijven" }],
+      uitleg: "Nepnieuws verspreidt zich snel. Hoofdletters, uitroeptekens en geen bron zijn alarmsignalen. Check eerst.",
+      hint: "Waar staat het nog meer?", les: "Geen bron en veel uitroeptekens? Eerst checken, dan pas delen." }),
+    mc({ context: "Iemand maakt met AI een nepfoto van een klasgenoot en zet hem in de groepsapp.",
+      vraag: "Wat doe je?",
+      opties: [{ t: "Doorsturen, het is maar een grap" }, { t: "Niet doorsturen en het melden bij een docent of mentor", ok: true }, { t: "Er een reactie onder zetten" }, { t: "Zelf ook een nepfoto maken" }],
+      uitleg: "Een nepfoto kan iemand heel erg kwetsen. Delen maakt het erger, en het kan strafbaar zijn. Meld het.",
+      hint: "Hoe zou jij het vinden?", les: "Nepfoto van iemand? Niet delen en melden." }),
+    mc({ vraag: "Hoe kun je een AI-nepfoto soms herkennen?",
+      opties: [{ t: "Hij is altijd zwart-wit" }, { t: "Rare handen of vingers, vreemde tekst of een vage achtergrond", ok: true }, { t: "Er staat altijd 'AI' op" }, { t: "Je kunt het nooit zien" }],
+      uitleg: "AI maakt vaak foutjes in handen, tekst en achtergronden. Maar let op: AI wordt steeds beter.",
+      hint: "Waar maakt AI vaak fouten?", les: "Let bij AI-foto's op handen, tekst en achtergrond." }),
+    mc({ context: "Een app zegt: 'Upload een foto van iemand. Wij maken hem grappig met AI!'",
+      vraag: "Van wie mag je een foto uploaden?",
+      opties: [{ t: "Van iedereen, het is toch grappig" }, { t: "Alleen van jezelf, of als de ander het goed vindt", ok: true }, { t: "Van je leraar" }, { t: "Van bekende mensen" }],
+      uitleg: "Een foto van iemand anders mag je niet zomaar gebruiken. Vraag het eerst. De app kan de foto ook bewaren.",
+      hint: "Is het jouw gezicht?", les: "Gebruik alleen foto's van anderen als zij het goed vinden." })
+  ]
+};
+
 const STATIONS = {
-  phishing: {
-    titel: "Laptop – De inbox van Sam",
-    intro: "Ik heb Sam's inbox volgestopt met berichten. Sommige zijn echt, andere zijn van mij... 😈 Kun jij zien welke <b>phishing</b> zijn?",
-    uitlegIntro: "Bekijk elk bericht goed. Let op het <b>adres van de afzender</b>, <b>haast</b>, <b>rare links</b> en vragen om <b>geld of gegevens</b>.",
-    weetje: "Phishing herken je aan: een vreemd afzenderadres, haast (\"binnen 24 uur!\"), dreigen, te mooi om waar te zijn, en vragen om in te loggen, te betalen of gegevens te geven. Twijfel? Klik niet, maar ga zelf naar de app of website.",
-    stappen: [
-      mail({ van: "PakjesPost", adres: "service@pakjespost-bezorging.info", onderwerp: "Je pakket kan niet worden bezorgd 📦",
-        body: "Beste klant,<br><br>Je pakket staat klaar, maar er moet nog <b>€1,95 verzendkosten</b> betaald worden. Betaal binnen <b>12 uur</b>, anders gaat je pakket terug naar de afzender.",
-        link: "Nu betalen", phishing: true,
-        uitleg: "Het adres eindigt op <b>.info</b> en is niet van de echte bezorger. Ze maken je gehaast (\"binnen 12 uur\") en willen dat je via een link betaalt.",
-        hint: "Kijk goed naar het e-mailadres achter de naam.", les: "Een klein bedrag betalen via een link + haast = bijna altijd phishing." }),
-      mail({ context: "Je zit op het De Horst College. Mevrouw Jansen is je mentor.",
-        van: "Mevrouw Jansen (mentor)", adres: "m.jansen@dehorst-college.nl", onderwerp: "Rooster volgende week",
-        body: "Hoi allemaal,<br><br>Volgende week dinsdag vervalt het 3e uur. Kijk in de schoolapp voor het nieuwe rooster.<br><br>Groetjes,<br>mevrouw Jansen",
-        phishing: false,
-        uitleg: "Dit bericht is echt. Het komt van het adres van je school, er staat geen link in en ze vragen niets geheims.",
-        hint: "Wordt er om geld, een wachtwoord of een klik gevraagd?", les: "Niet elk bericht is nep: echte berichten vragen niet om wachtwoorden, geld of snelle klikken." }),
-      mail({ van: "StreamFlix", adres: "streamflix-support@account-verificatie.com", onderwerp: "LAATSTE WAARSCHUWING: account wordt geblokkeerd!",
-        body: "Wij konden je betaling niet verwerken.<br><br>Log <b>binnen 24 uur</b> in en vul je bankgegevens opnieuw in. Anders wordt je account <b>definitief verwijderd</b>.",
-        link: "Inloggen", phishing: true,
-        uitleg: "Dreigen, hoofdletters en haast zijn alarmsignalen. Het adres is niet van StreamFlix zelf. Ze willen je inloggegevens en bankgegevens stelen.",
-        hint: "Ze dreigen en maken je bang. Waarom zouden ze dat doen?", les: "Dreigen + haast + inloggen via een link = phishing. Open de app zelf om te checken." }),
-      mail({ context: "Gisteren heb je zelf een controller besteld bij GameStore.",
-        van: "GameStore", adres: "bestellingen@gamestore.nl", onderwerp: "Je bestelling #48213 is onderweg 🎮",
-        body: "Hoi Sam,<br><br>Goed nieuws! Je controller is verzonden en komt morgen aan. Je hoeft niets te doen.<br><br>Groet,<br>team GameStore",
-        phishing: false,
-        uitleg: "Echt! Je hebt zelf iets besteld, het adres klopt, ze noemen je naam en vragen niets. Twijfel je toch? Kijk dan in de app of op de website zelf.",
-        hint: "Lees de situatie boven de mail nog eens.", les: "Een mail die past bij iets wat je zelf hebt gedaan en niets vraagt, is meestal echt." }),
-      chat({ wie: "+31 6 41 77 20 93", berichten: [
-          "Hoi! Dit is mijn nieuwe nummer, mijn telefoon is in de wc gevallen 😩",
-          "Kun je me snel helpen? Ik moet vandaag een rekening van €389 betalen en mijn bank-app werkt nog niet.",
-          "Ik betaal het morgen terug, beloofd! ❤️ Je broer"],
-        phishing: true,
-        uitleg: "Dit is <b>WhatsApp-fraude</b> (vriend-in-nood). Bel je broer op zijn oude, bekende nummer om te checken. Maak nooit geld over naar een nieuw nummer.",
-        hint: "Hoe weet je zeker dat dit echt je broer is?", les: "Nieuw nummer + vraagt om geld = bel eerst het oude, bekende nummer." }),
-      mail({ van: "Prijzenteam Nederland", adres: "winnaar@gratis-prijzen-nl.xyz", onderwerp: "🎉 GEFELICITEERD! Jij wint een nieuwe telefoon!",
-        body: "Jij bent de <b>1.000.000ste bezoeker</b>!<br><br>Vul je naam, adres en geboortedatum in om je prijs te claimen. Op = op!",
-        link: "Claim je prijs", phishing: true,
-        uitleg: "Je kunt niet winnen als je niet hebt meegedaan. Ze willen je gegevens. <b>.xyz</b>, hoofdletters en \"Op = op!\" zijn alarmsignalen.",
-        hint: "Heb je ergens aan meegedaan?", les: "Te mooi om waar te zijn? Dan is het dat ook." })
-    ]
-  },
-
-  wachtwoord: {
-    titel: "Gameconsole – Account op slot",
-    intro: "Ik heb het wachtwoord van de gameconsole geraden. Het was <b>sam2010</b>, haha! 😂 Laat maar zien of jij iets beters weet...",
-    uitlegIntro: "Beantwoord de vragen over wachtwoorden en maak daarna een nieuw, <b>sterk</b> wachtwoord voor de console.",
-    weetje: "Een sterk wachtwoord is <b>lang</b> (minstens 12 tekens). Een wachtzin van 4 losse woorden werkt prima. Gebruik voor elk account een <b>ander</b> wachtwoord, een wachtwoordmanager onthoudt ze voor je. Zet <b>tweestapsverificatie (2FA)</b> aan, dan heeft een hacker meer nodig dan alleen je wachtwoord.",
-    stappen: [
-      mc({ vraag: "Welk wachtwoord is het sterkst?",
-        opties: [{ t: "Welkom123" }, { t: "Sam2010!" }, { t: "P@ssw0rd" }, { t: "pizza-fiets-wolk-oranje", ok: true }, { t: "wachtwoord (niemand verwacht dat je dat écht doet 🧠)" }],
-        uitleg: "Lengte is het belangrijkst. Vier losse woorden achter elkaar is lang, moeilijk te raden en makkelijk te onthouden. \"P@ssw0rd\" lijkt slim, maar hackers kennen dat trucje al lang.",
-        hint: "Langer is sterker.", les: "Lengte wint: een wachtzin van 4 losse woorden is sterker dan een kort 'slim' wachtwoord." }),
-      mc({ context: "Sam gebruikt hetzelfde wachtwoord voor Instagram, zijn game-account en zijn e-mail. Een van die websites wordt gehackt.",
-        vraag: "Wat gebeurt er dan waarschijnlijk?",
-        opties: [{ t: "Niks, alleen die ene website heeft een probleem" }, { t: "Hackers proberen dat wachtwoord ook op zijn andere accounts", ok: true }, { t: "Het wachtwoord wordt automatisch veranderd" }, { t: "De hackers sturen een excuuskaartje 💌" }],
-        uitleg: "Hackers proberen gestolen wachtwoorden overal uit. Zo raak je in één keer al je accounts kwijt. Gebruik dus voor elk account een ander wachtwoord.",
-        hint: "Hackers zijn lui: wat zouden ze met een gestolen wachtwoord doen?", les: "Gebruik nooit overal hetzelfde wachtwoord." }),
-      mc({ context: "Je krijgt een sms met een inlogcode. Maar jij probeert helemaal niet in te loggen.",
-        vraag: "Wat doe je?",
-        opties: [{ t: "De code sturen naar wie erom vraagt" }, { t: "De code in de klassen-app zetten: 'Is deze van iemand?' 🙋" }, { t: "Niks, gewoon negeren" }, { t: "De code aan niemand geven en meteen je wachtwoord veranderen", ok: true }],
-        uitleg: "Iemand anders kent je wachtwoord en probeert in te loggen! (En in de klassen-app zetten? Dan heeft de hele klas je code. Plus Kraai.) Dankzij 2FA komt die er niet in. Verander snel je wachtwoord en geef de code aan niemand.",
-        hint: "Wie probeert er eigenlijk in te loggen?", les: "Een inlogcode die je niet zelf hebt aangevraagd = iemand kent je wachtwoord. Meteen veranderen!" }),
-      mc({ vraag: "Waar bewaar je je wachtwoorden het best?",
-        opties: [{ t: "Op een briefje bij je laptop" }, { t: "Met stift op je arm, dan heb je ze altijd bij je ✍️" }, { t: "In een wachtwoordmanager", ok: true }, { t: "Nergens: ik gebruik overal hetzelfde" }],
-        uitleg: "Een wachtwoordmanager is een beveiligde kluis voor al je wachtwoorden. Jij hoeft er maar één te onthouden: het sterke hoofdwachtwoord.",
-        hint: "Welke plek is beveiligd met een slot?", les: "Bewaar wachtwoorden in een wachtwoordmanager, niet op briefjes of in notities." }),
-      { soort: "bouwer" }
-    ]
-  },
-
-  social: {
-    titel: "Telefoon – Sam's social media",
-    intro: "Sam deelt álles online. Daardoor weet ik precies waar hij woont en wanneer hij weg is. Handig! 🕵️",
-    uitlegIntro: "Zoek eerst wat Sam te veel deelt in zijn post. Daarna krijg je berichten van mensen die je proberen te misleiden.",
-    weetje: "<b>Social engineering</b> is oplichting waarbij iemand jou misleidt in plaats van een computer te hacken. Ze doen zich voor als support, een vriend of een moderator. Geef nooit codes of wachtwoorden en check altijd via een andere manier. Deel online geen adres, telefoonnummer, school of vakantieplannen.",
-    stappen: [
-      { soort: "hotspot" },
-      chat({ wie: "InstaPlaats Support ✔️", berichten: [
-          "Hallo, je account heeft onze regels overtreden en wordt over <b>1 uur verwijderd</b> ⚠️",
-          "Om dit te voorkomen moet je de 6-cijferige code sturen die je net per sms hebt gekregen."],
-        vraag: "Wat doe je?",
-        opties: [{ t: "De code sturen, ik wil mijn account niet kwijt" }, { t: "Vragen of ze het echt zijn" }, { t: "Terugsturen: 'Eerst jouw wachtwoord, dan het mijne' 😏" }, { t: "Niet reageren, blokkeren en melden", ok: true }],
-        uitleg: "Echte support vraagt <b>nooit</b> om je code of wachtwoord via een DM. Met die code nemen ze je account over. Ook een vinkje ✔️ in de naam kan gewoon een emoji zijn! (En nee, 'Eerst jouw wachtwoord' werkt ook niet. Lekker geprobeerd.)",
-        hint: "Zou een echt bedrijf je via een privébericht om een code vragen?", les: "Echte support vraagt nooit om je code of wachtwoord. Blokkeren en melden." }),
-      mc({ context: "In een online game zegt iemand: \"Ik ben moderator. Geef me je wachtwoord, dan krijg je 5000 gratis gamemunten!\"",
-        vraag: "Wat is hier aan de hand?",
-        opties: [{ t: "Een mooie kans, snel doen!" }, { t: "Social engineering: hij gebruikt iets gratis als lokkertje", ok: true }, { t: "Normaal, moderators hebben je wachtwoord nodig" }, { t: "Hem 5001 munten bieden voor zíjn wachtwoord 🤑" }],
-        uitleg: "Moderators hebben nooit je wachtwoord nodig. \"Gratis\" is het lokaas, je account is de prijs.",
-        hint: "Wie heeft je wachtwoord écht nodig? (Antwoord: niemand.)", les: "Gratis spullen in ruil voor je wachtwoord = oplichting." }),
-      mc({ context: "Je krijgt een vriendschapsverzoek van een account met de naam en foto van je klasgenoot Lisa. Maar jullie zijn al vrienden online.",
-        vraag: "Wat doe je?",
-        opties: [{ t: "Accepteren, het is Lisa toch?" }, { t: "Allebei accepteren: dubbele Lisa = dubbele likes 📈" }, { t: "Lisa in de klas of via haar bekende nummer vragen of het klopt", ok: true }, { t: "Het nieuwe account je telefoonnummer sturen" }],
-        uitleg: "Waarschijnlijk is dit een <b>nep-account</b> (gekloond). Oplichters gebruiken het om jou en Lisa's vrienden om geld of codes te vragen. Check altijd via een andere manier.",
-        hint: "Kun je twee keer vrienden zijn met dezelfde persoon?", les: "Dubbel vriendschapsverzoek? Check bij de echte persoon via een andere manier." })
-    ]
-  },
-
-  malware: {
-    titel: "Computer – Virus-alarm!",
-    intro: "Ik heb overal in de buurt virussen verstopt: op USB-sticks, in pop-ups en in 'gratis' downloads. Muhaha! 🦠",
-    uitlegIntro: "Wat doe jij in deze situaties? Kies steeds het veiligste antwoord.",
-    weetje: "<b>Malware</b> (zoals virussen en ransomware) komt binnen via rare downloads, onbekende USB-sticks en nep-pop-ups. Bescherm jezelf met <b>updates</b>, apps uit <b>officiële stores</b> en <b>back-ups</b>. Op open wifi doe je geen gevoelige dingen: gebruik dan mobiele data.",
-    stappen: [
-      mc({ context: "Op het schoolplein vind je een USB-stick met een label: <b>'Cijferlijst 2026'</b>.",
-        vraag: "Wat doe je?",
-        opties: [{ t: "Even in mijn laptop stoppen om te kijken van wie hij is" }, { t: "Inleveren bij de receptie of de ICT-afdeling", ok: true }, { t: "Meenemen en thuis bekijken" }, { t: "Eerst een nacht in een bak rijst leggen, dat helpt altijd 🍚" }],
-        uitleg: "Hackers laten soms expres USB-sticks met malware liggen. Een spannend label maakt je nieuwsgierig, en daar rekenen ze op. (En rijst helpt alleen bij een natte telefoon. Eigenlijk zelfs dan niet.)",
-        hint: "Waarom zou iemand juist dít label op een stick zetten?", les: "Gevonden USB-stick? Niet insteken, maar inleveren." }),
-      mc({ html: '<div class="nepPopup"><h3>⚠️ WAARSCHUWING!</h3><div class="groot">Je computer is besmet met 5 virussen!</div><div>Bel NU de helpdesk: <b>0900-1234567</b></div><div style="margin-top:8px"><span style="background:#e00;color:#fff;padding:6px 14px;border-radius:6px;font-weight:800">Virussen verwijderen</span></div></div>',
-        vraag: "Deze melding verschijnt op een website. Wat doe je?",
-        opties: [{ t: "Snel het nummer bellen" }, { t: "Op 'Virussen verwijderen' klikken" }, { t: "De laptop dichtklappen en onder je bed schuiven, voor altijd 🛏️" }, { t: "Het tabblad of de browser sluiten", ok: true }],
-        uitleg: "Dit is een <b>nep-pop-up</b> (scareware). Een website kan niet zien of je computer virussen heeft. Wie belt, krijgt een oplichter aan de lijn die toegang tot je computer wil.",
-        hint: "Kan een website echt in je computer kijken?", les: "Enge virusmelding op een website = nep. Tabblad sluiten." }),
-      mc({ context: "Je telefoon geeft een melding: <b>'Beveiligingsupdate beschikbaar'</b>.",
-        vraag: "Wat doe je?",
-        opties: [{ t: "Uitstellen, updates zijn irritant (voor de 47e keer)" }, { t: "Zo snel mogelijk installeren", ok: true }, { t: "Telefoon in de vriezer, dan bevriezen de virussen 🧊" }, { t: "Nooit installeren, dan blijft alles werken" }],
-        uitleg: "Updates repareren beveiligingslekken. (En virussen houden niet van kou, maar je telefoon ook niet.) Hackers kennen die lekken ook, dus hoe langer je wacht, hoe langer de deur openstaat.",
-        hint: "Wat repareert een beveiligingsupdate?", les: "Updates meteen installeren: ze dichten gaten waar hackers doorheen kunnen." }),
-      mc({ context: "In het winkelcentrum is open wifi zonder wachtwoord: <b>'Gratis_WiFi_Centrum'</b>. Je wilt je bank-app gebruiken.",
-        vraag: "Wat is het veiligst?",
-        opties: [{ t: "Gewoon doen, wifi is wifi" }, { t: "Voor de bank-app je mobiele data gebruiken", ok: true }, { t: "Inloggen via de browser in plaats van de app" }, { t: "Fluisteren tijdens het typen, dan hoort niemand je pincode 🤫" }],
-        uitleg: "Op open wifi kunnen anderen soms meekijken. Het kan zelfs een nep-netwerk van een hacker zijn met een betrouwbare naam. Doe gevoelige dingen via mobiele data.",
-        hint: "Wie heeft dit wifi-netwerk eigenlijk gemaakt?", les: "Open wifi: niet bankieren of inloggen op belangrijke accounts. Gebruik mobiele data." }),
-      mc({ context: "Een filmpje belooft gratis skins: download <b>'GratisMunten_Generator.exe'</b>.",
-        vraag: "Wat doe je?",
-        opties: [{ t: "Downloaden en starten" }, { t: "Eerst de virusscanner uitzetten, dan downloaden" }, { t: "Downloaden en heel hard hopen 🙏" }, { t: "Niet downloaden: alleen apps uit officiële stores", ok: true }],
-        uitleg: "Zulke 'generators' bestaan niet echt. Ze bevatten vaak malware die je wachtwoorden en accounts steelt.",
-        hint: "Bestaat 'gratis' echt?", les: "Gratis munten/skins-generators = malware. Alleen officiële stores." }),
-      mc({ vraag: "Wat is <b>ransomware</b>?",
-        opties: [{ t: "Een virus dat je bestanden op slot zet en dan geld (losgeld) vraagt", ok: true }, { t: "Een programma dat je computer sneller maakt" }, { t: "Een nieuwe dans op TikTok 🕺" }, { t: "Een soort reclame in apps" }],
-        uitleg: "Ransomware gijzelt je bestanden. Maak daarom <b>back-ups</b> (bijv. in de cloud of op een externe schijf). Dan ben je niets kwijt.",
-        hint: "'Ransom' is Engels voor 'losgeld'.", les: "Ransomware zet je bestanden op slot. Back-ups maken beschermt je." })
-    ]
-  }
+  phishing: { titel: "Laptop – De inbox van Sam", vragen: 8,
+    intro: "Ik heb Sam's inbox volgestopt met berichten. Sommige zijn echt, andere zijn van mij... 😈",
+    uitlegIntro: "Is het bericht <b>echt</b> of <b>nep</b>? Let op het <b>adres</b>, <b>haast</b>, <b>links</b> en vragen om <b>geld of gegevens</b>. Meer dan de helft fout? Dan geen cijfer!",
+    weetje: "Phishing herken je aan: een raar adres, haast, dreigen, te mooi om waar te zijn, en vragen om in te loggen of te betalen. Twijfel je? Klik niet. Open zelf de app.",
+    maakStappen: () => trek(POT.phishing, 8) },
+  wachtwoord: { titel: "Gameconsole – Account op slot",
+    intro: "Ik heb het wachtwoord van de console geraden. Het was <b>sam2010</b>, haha! 😂",
+    uitlegIntro: "Beantwoord de vragen over wachtwoorden. Maak daarna een nieuw, <b>sterk</b> wachtwoord. Meer dan de helft fout? Dan geen cijfer!",
+    weetje: "Een sterk wachtwoord is <b>lang</b> (minstens 12 tekens), bijvoorbeeld 4 losse woorden. Gebruik overal een <b>ander</b> wachtwoord en een wachtwoordmanager. Zet <b>2FA</b> aan.",
+    maakStappen: () => trek(POT.wachtwoord, 6).concat([{ soort: "bouwer" }]) },
+  social: { titel: "Telefoon – Sam's social media",
+    intro: "Sam deelt álles online. Nu weet ik waar hij woont en wanneer hij weg is. Handig! 🕵️",
+    uitlegIntro: "Zoek eerst wat Sam te veel deelt. Daarna krijg je berichten van oplichters. Meer dan de helft fout? Dan geen cijfer!",
+    weetje: "Oplichters doen zich voor als support, een vriend of een helpdesk. Geef nooit codes of wachtwoorden. Check via een andere manier. Deel geen adres, nummer, school of vakantie online.",
+    maakStappen: () => [{ soort: "hotspot" }].concat(trek(POT.social, 5)) },
+  malware: { titel: "Computer – Virus-alarm!",
+    intro: "Ik heb overal virussen verstopt: op USB-sticks, in pop-ups en in 'gratis' downloads. Muhaha! 🦠",
+    uitlegIntro: "Wat doe jij? Kies steeds het <b>veiligste</b> antwoord. Meer dan de helft fout? Dan geen cijfer!",
+    weetje: "Virussen komen binnen via rare downloads, onbekende USB-sticks en nep-meldingen. Bescherm je met <b>updates</b>, een <b>virusscanner</b>, apps uit de <b>officiële store</b> en <b>back-ups</b>.",
+    maakStappen: () => trek(POT.malware, 7) },
+  iot: { titel: "Slimme camera – Wie kijkt er mee?",
+    intro: "Ik kijk mee via de slimme camera van papa. Het wachtwoord was 'admin'. Hoe makkelijk wil je het hebben? 📷",
+    uitlegIntro: "Vragen over <b>slimme apparaten</b>: camera's, speakers en lampen met internet. Meer dan de helft fout? Dan geen cijfer!",
+    weetje: "Slimme apparaten (IoT) hebben internet en kunnen dus gehackt worden. Verander het <b>standaard wachtwoord</b>, installeer <b>updates</b>, zet ze op een <b>gastnetwerk</b> en hang geen camera op privé plekken.",
+    maakStappen: () => trek(POT.iot, 6) },
+  ai: { titel: "Tablet – Echt of AI?",
+    intro: "Ik maak met AI nep-video's en nep-stemmen. Zelfs mijn moeder trapt erin! 🤖",
+    uitlegIntro: "Vragen over <b>AI, deepfakes en nepnieuws</b>. Meer dan de helft fout? Dan geen cijfer!",
+    weetje: "AI kan nep-foto's, -video's en -stemmen maken. Vraagt iemand om geld? Bel zelf terug. Check nieuws via een betrouwbare bron. Typ geen persoonlijke dingen in een chatbot. Deel nooit nepfoto's van anderen.",
+    maakStappen: () => trek(POT.ai, 6) }
 };
 
 const BONUS = {
+  vergrendel: { titel: "Computer niet vergrendeld", tekst: "De computer van papa staat open. Iedereen kan bij zijn mail en bank! Vergrendel je computer als je wegloopt: <b>Windows-toets + L</b>.", toast: "Nee! Via die open computer las ik alles! 😱" },
+  schermslot: { titel: "Telefoon zonder schermslot", tekst: "Deze telefoon heeft geen pincode. Wie hem vindt, kan alles zien en je accounts gebruiken. Zet altijd een <b>schermvergrendeling</b> aan.", toast: "Die telefoon was mijn favoriete speeltje! 📱" },
   postit: { titel: "Wachtwoord op een briefje", tekst: "Op het briefje bij de laptop staat <b>'ww: Sam2010!'</b>. Iedereen die in de kamer komt, kan het lezen. Onthoud een wachtzin of gebruik een wachtwoordmanager.", toast: "Hé! Dat briefje was van MIJ! 😤" },
   pincode: { titel: "Pincode op de koelkast", tekst: "Op de koelkast hangt <b>'Pincode bankpas: 4821'</b>. Een pincode schrijf je nergens op, zeker niet waar bezoek het kan zien.", toast: "Die pincode had ik nog nodig... 😒" },
   router: { titel: "Router met standaard wachtwoord", tekst: "Op de router zit een sticker: <b>'admin / admin'</b>. Dat is het standaard wachtwoord en hackers hebben lijsten met al die wachtwoorden. Verander het wachtwoord van je router en je wifi.", toast: "Nee! Via die router kwam ik binnen! 🙀" }
@@ -909,7 +1176,7 @@ camera.rotation.order = "YXZ";
 
 scene.add(new THREE.HemisphereLight(0xffffff, 0x8a93b8, 0.55));
 scene.add(new THREE.AmbientLight(0xffffff, 0.28));
-[[-5, -4, 0xffe2b8], [5, -4, 0xfff4e0], [-5, 4, 0xffe2b8], [5, 4, 0xffe2b8]].forEach(([x, z, c]) => {
+[[-5, -4, 0xffe2b8], [5, -4, 0xfff4e0], [-5, 4, 0xffe2b8], [5, 4, 0xffe2b8], [14, -4, 0xfff0d0], [14, 4, 0xd8c8ff]].forEach(([x, z, c]) => {
   const l = new THREE.PointLight(c, 0.55, 13, 1.2); l.position.set(x, 2.5, z); scene.add(l);
   const lamp = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.4, 0.4), new THREE.MeshBasicMaterial({ color: 0xffe9a8 }));
   lamp.position.set(x, 2.6, z); scene.add(lamp);
@@ -994,13 +1261,20 @@ function vloer(w, d, x, z, mat) { const m = new THREE.Mesh(new THREE.PlaneGeomet
 vloer(20, 8, 0, 4, new THREE.MeshLambertMaterial({ color: 0xa8743f, map: pixTex(plankCanvas, 20, 8) }));
 vloer(10, 8, -5, -4, new THREE.MeshLambertMaterial({ color: 0x6f86d6, map: pixTex(wolCanvas, 10, 8) }));
 vloer(10, 8, 5, -4, new THREE.MeshLambertMaterial({ color: 0xffffff, map: pixTex(tegelCanvas, 5, 4) }));
-const plafond = new THREE.Mesh(new THREE.PlaneGeometry(20, 16), new THREE.MeshLambertMaterial({ color: 0xc9a46a, map: pixTex(plankCanvas, 20, 16) }));
-plafond.rotation.x = Math.PI / 2; plafond.position.set(0, H, 0); scene.add(plafond);
+vloer(8, 8, 14, -4, new THREE.MeshLambertMaterial({ color: 0x8a6a4a, map: pixTex(plankCanvas, 8, 8) }));
+vloer(8, 8, 14, 4, new THREE.MeshLambertMaterial({ color: 0x6a4fb0, map: pixTex(wolCanvas, 8, 8) }));
+const plafond = new THREE.Mesh(new THREE.PlaneGeometry(28, 16), new THREE.MeshLambertMaterial({ color: 0xc9a46a, map: pixTex(plankCanvas, 28, 16) }));
+plafond.rotation.x = Math.PI / 2; plafond.position.set(4, H, 0); scene.add(plafond);
 
 /* Muren */
-muur(-10, -8, 10, -8);
-muur(-10, 8, -0.8, 8); muur(0.8, 8, 10, 8); muur(-0.8, 8, 0.8, 8, 2.2, H);
-muur(-10, -8, -10, 8); muur(10, -8, 10, 8);
+muur(-10, -8, 18, -8);
+muur(-10, 8, -0.8, 8); muur(0.8, 8, 18, 8); muur(-0.8, 8, 0.8, 8, 2.2, H);
+muur(-10, -8, -10, 8); muur(18, -8, 18, 8);
+// muur tussen oude en nieuwe kamers, met 2 deuren
+muur(10, -8, 10, -2.6); muur(10, -1.2, 10, 5.4); muur(10, 6.8, 10, 8);
+muur(10, -2.6, 10, -1.2, 2.2, H); muur(10, 5.4, 10, 6.8, 2.2, H);
+// muur tussen werkkamer en gameroom, met deur
+muur(10, 0, 13.2, 0); muur(14.6, 0, 18, 0); muur(13.2, 0, 14.6, 0, 2.2, H);
 muur(-10, 0, -6.6, 0); muur(-5.0, 0, 3.6, 0); muur(5.2, 0, 10, 0);
 muur(-6.6, 0, -5.0, 0, 2.2, H); muur(3.6, 0, 5.2, 0, 2.2, H);
 muur(0, -8, 0, 0);
@@ -1013,7 +1287,10 @@ const raamTex = pixTex(pixelCanvas(16, 12, (g) => {
 }));
 function raam(x, y, z, rotY) { vlak(1.4, 1.0, raamTex, x, y, z, rotY); }
 raam(-6.5, 1.6, -7.89, 0);
-raam(9.89, 1.6, -2, -Math.PI / 2);
+raam(17.89, 1.6, -2, -Math.PI / 2);
+raam(14, 1.6, -7.89, 0);
+raam(17.89, 1.6, 3, -Math.PI / 2);
+raam(12, 1.6, 7.89, Math.PI);
 raam(-5, 1.6, 7.89, Math.PI);
 raam(6, 1.6, 7.89, Math.PI);
 raam(-9.89, 1.6, -3, Math.PI / 2 * 1); // slaapkamer zijraam
@@ -1150,6 +1427,61 @@ function plant(x, z) {
 }
 plant(-9.4, 7.4); plant(9.4, 7.4); plant(-0.5, -0.6 - 0.1); plant(0.6, -7.4);
 B(0.12, 1.4, 0.12, 0x6b4a2b, -5.3, 0, 6.0);
+
+/* ---- Werkkamer (papa) ---- */
+B(2.0, 0.06, 0.8, 0xc8a27a, 14, 0.72, -7.4);
+[[13.05, -7.75], [14.95, -7.75], [13.05, -7.05], [14.95, -7.05]].forEach(([x, z]) => B(0.06, 0.72, 0.06, 0x8a6a4a, x, 0, z));
+colliders.push({ x1: 13, x2: 15, z1: -7.8, z2: -7.0 });
+B(0.9, 0.55, 0.05, 0x111111, 14, 0.85, -7.62); B(0.12, 0.1, 0.12, 0x222222, 14, 0.77, -7.6);
+const papaTex = canvasTex(256, 160, (g) => {
+  g.fillStyle = "#e9eef7"; g.fillRect(0, 0, 256, 160); g.fillStyle = "#1e66c9"; g.fillRect(0, 0, 256, 26);
+  g.fillStyle = "#fff"; g.font = "bold 15px sans-serif"; g.fillText("Ingelogd: Papa", 10, 18);
+  g.fillStyle = "#222"; g.font = "bold 16px sans-serif"; g.fillText("🏦 Bankieren", 14, 60); g.fillText("📧 Mail (34)", 14, 92);
+  g.fillStyle = "#0a8a3a"; g.font = "bold 14px sans-serif"; g.fillText("Ik ben zo terug...", 14, 135);
+});
+vlak(0.84, 0.48, papaTex, 14, 1.115, -7.59, 0);
+B(0.5, 0.08, 0.5, 0x333344, 14, 0.45, -6.5); B(0.5, 0.6, 0.06, 0x333344, 14, 0.5, -6.25); B(0.08, 0.45, 0.08, 0x222222, 14, 0, -6.5);
+colliders.push({ x1: 13.7, x2: 14.3, z1: -6.8, z2: -6.2 });
+B(0.14, 0.22, 0.14, 0x30343a, 14.8, 0.75, -7.4); // slimme speaker
+B(0.35, 1.8, 1.4, 0x8a6e55, 10.3, 0, -6.0, true);
+[0x3d7be0, 0xff6b6b, 0x3ddc97, 0xffd166].forEach((c, i) => B(0.25, 0.3, 0.12, c, 10.4, 0.4 + (i % 2) * 0.6, -6.5 + i * 0.3));
+// kast met slimme camera
+B(0.5, 1.2, 1.2, 0x8a6e55, 17.6, 0, -4, true);
+B(0.3, 0.22, 0.3, 0xf0f0f0, 17.55, 1.2, -4);
+B(0.04, 0.12, 0.12, 0x111111, 17.38, 1.25, -4);
+const camLed = B(0.02, 0.03, 0.03, 0, 17.37, 1.36, -3.92, false, new THREE.MeshBasicMaterial({ color: 0xff2222 }));
+plant(17.4, -7.4);
+const kleed3 = new THREE.Mesh(new THREE.PlaneGeometry(3, 2.2), lambert(0x4f7a5a)); kleed3.rotation.x = -Math.PI / 2; kleed3.position.set(14.5, 0.01, -4); scene.add(kleed3);
+
+/* ---- Gameroom ---- */
+B(1.1, 0.45, 1.1, 0xd23a6a, 14, 0, 4.6, true); B(1.0, 0.35, 0.3, 0xb02a58, 14, 0.45, 5.0);
+B(0.36, 0.03, 0.26, 0x111111, 14, 0.46, 4.3);
+const tabletTex = canvasTex(160, 112, (g) => {
+  g.fillStyle = "#111827"; g.fillRect(0, 0, 160, 112); g.fillStyle = "#5ad1ff"; g.font = "bold 15px sans-serif"; g.fillText("🤖 AI-video", 12, 26);
+  g.fillStyle = "#ffd166"; g.font = "bold 13px sans-serif"; g.fillText("'Gratis geld!!!'", 12, 56); g.fillStyle = "#fff"; g.fillText("▶ 1,2 mln views", 12, 88);
+});
+const tabletScherm = new THREE.Mesh(new THREE.PlaneGeometry(0.32, 0.22), new THREE.MeshBasicMaterial({ map: tabletTex }));
+tabletScherm.rotation.x = -Math.PI / 2; tabletScherm.position.set(14, 0.492, 4.3); scene.add(tabletScherm);
+// arcadekast
+B(0.7, 1.8, 0.7, 0x2b2b8a, 17.5, 0, 6.6, true);
+const arcadeTex = canvasTex(128, 112, (g) => { g.fillStyle = "#000"; g.fillRect(0, 0, 128, 112); g.fillStyle = "#ffe35a"; g.font = "bold 16px monospace"; g.fillText("INSERT", 30, 46); g.fillText("COIN", 42, 70); g.fillStyle = "#ff5577"; g.fillRect(20, 86, 12, 12); g.fillRect(96, 86, 12, 12); });
+vlak(0.5, 0.42, arcadeTex, 17.14, 1.3, 6.6, -Math.PI / 2);
+// bijzettafel met telefoon zonder schermslot
+B(0.5, 0.4, 0.5, 0x9a7b5a, 16.2, 0, 2.0, true);
+B(0.16, 0.02, 0.3, 0x222222, 16.2, 0.4, 2.0);
+const openTelTex = canvasTex(96, 180, (g) => { g.fillStyle = "#2a9d8f"; g.fillRect(0, 0, 96, 180); g.fillStyle = "#fff"; g.font = "bold 14px sans-serif"; g.fillText("🔓 Open!", 14, 40); g.font = "12px sans-serif"; g.fillText("Geen code", 14, 70); [100, 130].forEach(y => g.fillRect(10, y, 76, 20)); });
+const openTel = new THREE.Mesh(new THREE.PlaneGeometry(0.14, 0.27), new THREE.MeshBasicMaterial({ map: openTelTex }));
+openTel.rotation.x = -Math.PI / 2; openTel.position.set(16.2, 0.412, 2.0); scene.add(openTel);
+// ledstrip + poster
+B(7.6, 0.05, 0.05, 0, 14, 2.6, 7.85, false, new THREE.MeshBasicMaterial({ color: 0xb04dff }));
+B(0.05, 0.05, 7.6, 0, 17.85, 2.6, 4, false, new THREE.MeshBasicMaterial({ color: 0x4dd2ff }));
+const gamePosterTex = pixTex(pixelCanvas(12, 16, (g) => {
+  for (let y = 0; y < 16; y++) for (let x = 0; x < 12; x++) px(g, x, y, shade("#1b2a6b", 0.8 + rnd() * 0.3));
+  g.fillStyle = "#55ff55"; [[5, 3], [6, 3], [4, 4], [7, 4], [3, 5], [8, 5], [3, 6], [8, 6], [4, 7], [7, 7], [5, 8], [6, 8]].forEach(([x, y]) => g.fillRect(x, y, 1, 1));
+  g.fillStyle = "#ffe35a"; g.fillRect(2, 12, 8, 1); g.fillRect(3, 13, 6, 1);
+}));
+vlak(0.9, 1.2, gamePosterTex, 11.5, 1.6, 0.115, 0, false);
+const kleed4 = new THREE.Mesh(new THREE.PlaneGeometry(3, 3), lambert(0x2fb6a5)); kleed4.rotation.x = -Math.PI / 2; kleed4.position.set(14, 0.01, 4.4); scene.add(kleed4);
 B(0.45, 0.45, 0.45, 0, -5.3, 1.4, 6.0, false, new THREE.MeshBasicMaterial({ color: 0xffd36b }));
 colliders.push({ x1: -5.5, x2: -5.1, z1: 5.8, z2: 6.2 });
 
@@ -1214,6 +1546,11 @@ interactief({ id: "eend", soort: "grap", naam: "Badeend", box: [0.3, 0.3, 0.3], 
 interactief({ id: "postit", soort: "bonus", naam: "Briefje", box: [0.45, 0.45, 0.15], pos: [-2.3, 1.35, -7.83] });
 interactief({ id: "pincode", soort: "bonus", naam: "Briefje", box: [0.15, 0.45, 0.45], pos: [9.0, 1.35, -4.4] });
 interactief({ id: "router", soort: "bonus", naam: "Router", box: [0.7, 0.4, 0.45], pos: [3, 0.95, 7.67] });
+interactief({ id: "iot", soort: "station", thema: "iot", naam: "Slimme camera", box: [0.8, 0.8, 0.9], pos: [17.45, 1.3, -4], label: "📷 Slimme camera", labelPos: [17.3, 2.05, -4], ringPos: [16.2, -4], kaart: [17.5, -4] });
+interactief({ id: "ai", soort: "station", thema: "ai", naam: "Tablet", box: [0.7, 0.4, 0.6], pos: [14, 0.6, 4.3], label: "📲 Tablet", labelPos: [14, 1.25, 4.3], ringPos: [14, 3.0], kaart: [14, 4.4] });
+interactief({ id: "vergrendel", soort: "bonus", naam: "Computer", box: [1.0, 0.65, 0.3], pos: [14, 1.1, -7.5] });
+interactief({ id: "schermslot", soort: "bonus", naam: "Telefoon", box: [0.45, 0.25, 0.5], pos: [16.2, 0.5, 2.0] });
+interactief({ id: "arcade", soort: "grap", naam: "Arcadekast", box: [0.8, 1.9, 0.8], pos: [17.5, 0.95, 6.6] });
 
 // Grapjes om te vinden
 const GRAPPEN = {
@@ -1231,6 +1568,11 @@ const GRAPPEN = {
     "Een sok. Van wie? Niemand weet het. Waar is de andere? Nog groter mysterie.",
     "De sok ruikt naar gymles van vorige week. 🤢",
     "Dit is geen hacker-gereedschap. Dit is gewoon een vieze sok."] },
+  arcade: { naam: "Arcadekast", prompt: "Arcadekast spelen", emoji: "🕹️", zinnen: [
+    "Je gooit er een muntje in. Game over na 3 seconden. Skill issue. 💀",
+    "Highscore: KRAAI 999999. Natuurlijk heeft hij die gehackt. 🙄",
+    "INSERT COIN. Je hebt geen munten. Je hebt alleen XP.",
+    "Er zit een briefje op: 'Niet aankomen. Groetjes, papa.' Oeps."] },
   eend: { naam: "Badeend", prompt: "Badeend bekijken", emoji: "🦆", zinnen: [
     "Een badeend naast de computer. Programmeurs praten tegen badeenden als hun code niet werkt. Echt waar!",
     "Kwak. (Vertaling: 'Heb je al een back-up gemaakt?')",
@@ -1337,7 +1679,7 @@ function bouwHud() {
     const st = S.stations[t];
     return `<div class="codeslot ${st.klaar ? "gevonden" : ""}"><span>${THEMAS[t].icoon}</span>${st.klaar ? st.cijfer : "?"}</div>`;
   }).join("");
-  $("bonusRegel").textContent = `⭐ Verborgen risico's: ${Object.keys(S.bonus).length}/3`;
+  $("bonusRegel").textContent = `⭐ Verborgen risico's: ${Object.keys(S.bonus).length}/${Object.keys(BONUS).length}`;
   interacties.forEach(o => {
     if (o.soort === "station" && S.stations[o.thema].klaar && !o.afgevinkt) {
       o.afgevinkt = true; o.sprite.userData.teken("✅ " + o.naam, "#7dff5a"); if (o.ring) o.ring.visible = false;
@@ -1350,11 +1692,11 @@ function fmtTijd(s) { s = Math.max(0, Math.ceil(s)); return `${Math.floor(s / 60
 
 /* Minimap */
 const mm = $("minimap").getContext("2d");
-const MS = 9.5, MX = 5, MY = 4; // schaal en marge
+const MS = 6.8, MX = 4.8, MY = 7.6; // schaal en marge
 function kaartXY(x, z) { return [MX + (x + 10) * MS, MY + (z + 8) * MS]; }
 function tekenKaart() {
-  mm.clearRect(0, 0, 200, 160);
-  const kamers = [[-10, -8, 10, 8, "#4a5a9a", "Slaapkamer"], [0, -8, 10, 8, "#7d7d7d", "Keuken"], [-10, 0, 20, 8, "#8a6038", "Woonkamer"]];
+  mm.clearRect(0, 0, 200, 124);
+  const kamers = [[-10, -8, 10, 8, "#4a5a9a", "Slaapkamer"], [0, -8, 10, 8, "#7d7d7d", "Keuken"], [-10, 0, 20, 8, "#8a6038", "Woonkamer"], [10, -8, 8, 8, "#5d6b4a", "Werkkamer"], [10, 0, 8, 8, "#5a3f7a", "Gameroom"]];
   kamers.forEach(([x, z, w, d, k, n]) => {
     const [a, b] = kaartXY(x, z); mm.fillStyle = k; mm.fillRect(a, b, w * MS, d * MS);
     mm.fillStyle = "rgba(255,255,255,.55)"; mm.font = "6px 'Press Start 2P', monospace"; mm.fillText(n, a + 4, b + 11);
@@ -1427,7 +1769,8 @@ function renderStap() {
   const thema = actiefThema; if (!thema) return;
   const st = S.stations[thema], def = STATIONS[thema], body = $("pBody");
   $("paneel").scrollTop = 0;
-  const n = def.stappen.length;
+  if (!st.stappen) nieuwePoging(thema);
+  const n = st.stappen.length;
   if (st.stap === 0 && !st.introGezien) {
     $("pProg").textContent = `${n} opdrachten`;
     body.innerHTML = `<div style="display:flex;gap:12px;align-items:flex-start;background:#120f2b;border:2px solid var(--neon);border-radius:16px;padding:12px;margin-bottom:14px">
@@ -1438,12 +1781,16 @@ function renderStap() {
     $("introOk").onclick = () => { st.introGezien = true; renderStap(); };
     return;
   }
-  if (st.stap >= n) { toonBeloning(thema); return; }
-  $("pProg").textContent = `Opdracht ${st.stap + 1} / ${n}`;
-  const stap = def.stappen[st.stap];
+  if (st.stap >= n) { if (st.pf > (st.pg + st.pf) / 2) toonMislukt(thema); else toonBeloning(thema); return; }
+  $("pProg").textContent = `Opdracht ${st.stap + 1} / ${n}` + (st.poging > 1 ? ` · poging ${st.poging}` : "");
+  const stap = st.stappen[st.stap];
   if (stap.soort === "bouwer") return renderBouwer(body, thema);
   if (stap.soort === "hotspot") return renderHotspot(body, thema);
   renderVraag(body, thema, stap);
+}
+function nieuwePoging(thema) {
+  const st = S.stations[thema];
+  st.stappen = STATIONS[thema].maakStappen(); st.stap = 0; st.pg = 0; st.pf = 0; st.poging++;
 }
 function volgendeKnop(tekst = "Volgende ➜") {
   const b = document.createElement("button"); b.className = "knop"; b.textContent = tekst;
@@ -1471,6 +1818,7 @@ function renderVraag(body, thema, q) {
     duo = true;
   }
   if (q.html) links += q.html;
+  if (!duo) { if (!q._volgorde) q._volgorde = schud(opties); opties = q._volgorde; }
   const rechts = `<div class="vraagkop"><div class="vraag">${vraag}</div>${q.hint ? '<button class="hintknop" id="hintKnop">💡 Hint<br>-50 XP</button>' : ""}</div>
     <div id="hintVak"></div>
     <div class="opties ${duo ? "duo" : opties.length >= 3 ? "raster" : ""}" id="opties"></div>
@@ -1503,7 +1851,7 @@ function renderVraag(body, thema, q) {
     $("fbVak").innerHTML = `<div class="feedback ${goed ? "goed" : "fout"}"><div class="fbKop"><h3>${goed ? ZEG(GOED_KOP) : ZEG(FOUT_KOP)}</h3><span id="verderVak"></span></div>${q.uitleg}</div>`;
     if (hk) hk.disabled = true;
     $("hintVak").innerHTML = "";
-    $("verderVak").appendChild(volgendeKnop(st.stap >= STATIONS[thema].stappen.length ? "Afronden 🏁" : "Volgende ➜"));
+    $("verderVak").appendChild(volgendeKnop(st.stap >= st.stappen.length ? "Afronden 🏁" : "Volgende ➜"));
     $("fbVak").scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 }
@@ -1654,16 +2002,32 @@ const STATION_TOASTS = {
   phishing: "Hmpf. Jij trapt dus niet in mijn nepmailtjes... Ik had er zó veel werk in gestoken. Met Comic Sans en alles. 😤",
   wachtwoord: "Wat?! Een sterk wachtwoord én 2FA? Dat is niet eerlijk!",
   social: "Je deelt niet eens je adres online? Saai hoor. Hoe moet ik nou je pakketjes stelen? 🙄",
-  malware: "Mijn virussen! Mijn mooie USB-stick! Die had ik nog versierd met stickers! Neeeee! 🦠😭"
+  malware: "Mijn virussen! Mijn mooie USB-stick! Die had ik nog versierd met stickers! Neeeee! 🦠😭",
+  iot: "Hé! Ik keek net naar een spannende aflevering via die camera! Nu zie ik niks meer. 📷😤",
+  ai: "Jij trapt niet in mijn deepfakes? Ik had nog wel een nep-video van mezelf als miljonair gemaakt. 🤖💸"
 };
+function toonMislukt(thema) {
+  const st = S.stations[thema], th = THEMAS[thema], tot = st.pg + st.pf;
+  if (!st.mislukMelding) { st.mislukMelding = true; Geluid.sfx("fout");
+    setTimeout(() => hacker("Haha! Meer dan de helft fout? Dan hou ik dat cijfer lekker zelf. 😎 Probeer het maar opnieuw.", 4500), 300); }
+  $("pProg").textContent = "Niet gehaald";
+  $("pBody").innerHTML = `<div class="beloning"><div style="font-size:52px">🔒</div>
+    <h2 style="color:var(--rood)">Geen cijfer...</h2>
+    <p style="font-size:16px;font-weight:800;margin:10px 0">${th.icoon} Je had ${st.pg} van de ${tot} goed. Dat is te weinig.</p>
+    <p style="color:var(--zacht);margin:0">Je moet <b>minstens de helft goed</b> hebben om een cijfer te krijgen.</p></div>
+    <div class="weetje">🧠 <b>Lees dit nog even:</b> ${STATIONS[thema].weetje}</div>
+    <div class="rij"><button class="knop grijs" id="misLater">Later proberen</button><button class="knop groen" id="misOpnieuw">🔄 Opnieuw (nieuwe vragen)</button></div>`;
+  $("misLater").onclick = sluitPaneel;
+  $("misOpnieuw").onclick = () => { st.mislukMelding = false; nieuwePoging(thema); renderStap(); };
+}
 function toonBeloning(thema) {
-  const st = S.stations[thema], th = THEMAS[thema], r = S.resultaten[thema];
+  const st = S.stations[thema], th = THEMAS[thema];
   if (!st.klaar) {
     st.klaar = true; bouwHud(); setTimeout(() => Geluid.sfx("station"), 150);
     setTimeout(() => hacker(alleKlaar() ? "Oké, oké... je hebt alle cijfers. Snel naar de <b>voordeur</b> voordat ik me bedenk! 🚪" : STATION_TOASTS[thema]), 400);
   }
   $("pProg").textContent = "Klaar!";
-  $("pBody").innerHTML = `<div class="beloning"><div style="font-size:15px;font-weight:800;color:var(--zacht)">${th.icoon} ${th.naam}: ${r.goed} van de ${r.totaal} goed</div>
+  $("pBody").innerHTML = `<div class="beloning"><div style="font-size:15px;font-weight:800;color:var(--zacht)">${th.icoon} ${th.naam}: ${st.pg} van de ${st.pg + st.pf} goed</div>
     <div style="margin:10px 0 4px;font-weight:800">Je hebt een cijfer van de deurcode gevonden:</div>
     <div class="bigdigit">${st.cijfer}</div></div>
     <div class="weetje">🧠 <b>Onthoud:</b> ${STATIONS[thema].weetje}</div>
@@ -1683,7 +2047,7 @@ function toonKeypad() {
     $("kpOk").onclick = sluitPaneel; return;
   }
   let invoer = "";
-  $("pBody").innerHTML = `<p style="text-align:center;margin-top:0">Voer de 4 cijfers in, in de volgorde van de deurcode onderin je scherm (🎣 🔑 🕵️ 🦠).</p>
+  $("pBody").innerHTML = `<p style="text-align:center;margin-top:0">Voer de ${VOLGORDE.length} cijfers in, in de volgorde van de deurcode op je scherm (${VOLGORDE.map(t => THEMAS[t].icoon).join(" ")}).</p>
     <div class="kpDisplay" id="kpDisp"></div><div class="keypad" id="kp"></div><div id="kpMelding" style="text-align:center;margin-top:12px;font-weight:800;min-height:22px"></div>`;
   const toetsenKp = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "⌫", "0", "✔"];
   toetsenKp.forEach(k => {
@@ -1691,7 +2055,7 @@ function toonKeypad() {
     if (k === "✔") b.style.background = "#239a68";
     b.onclick = () => druk(k); $("kp").appendChild(b);
   });
-  function teken() { $("kpDisp").innerHTML = [0, 1, 2, 3].map(i => `<div>${invoer[i] || ""}</div>`).join(""); }
+  function teken() { $("kpDisp").innerHTML = VOLGORDE.map((_, i) => `<div>${invoer[i] || ""}</div>`).join(""); }
   function druk(k) {
     if (k !== "✔") Geluid.sfx("toets");
     if (k === "⌫") invoer = invoer.slice(0, -1);
@@ -1699,7 +2063,7 @@ function toonKeypad() {
       const code = VOLGORDE.map(t => S.stations[t].cijfer).join("");
       if (invoer === code) { Geluid.sfx("deur"); keypadMat.color.set(0x3ddc97); $("kpMelding").innerHTML = '<span style="color:var(--groen)">🔓 De deur gaat open!</span>'; setTimeout(() => einde(true), 900); }
       else { Geluid.sfx("codeFout"); $("kpDisp").classList.remove("shake"); void $("kpDisp").offsetWidth; $("kpDisp").classList.add("shake"); $("kpMelding").innerHTML = '<span style="color:var(--rood)">❌ Verkeerde code. De deur lacht je uit. 🚪😂 Kijk goed naar de volgorde!</span>'; invoer = ""; }
-    } else if (invoer.length < 4) invoer += k;
+    } else if (invoer.length < VOLGORDE.length) invoer += k;
     teken();
   }
   teken();
@@ -1786,6 +2150,7 @@ $("startKnop").addEventListener("click", () => {
   const n = $("naam").value.trim();
   if (n.length < 2) { $("naamFout").textContent = "Vul eerst je naam in (minstens 2 letters)."; $("naam").focus(); return; }
   S.naam = n; S.bezig = true; S.startMoment = Date.now();
+  SPEELTIJD = (parseInt($("speeltijd").value, 10) || 40) * 60; S.tijd = SPEELTIJD;
   Geluid.init(); Geluid.startMuziek(); werkGeluidIcoonBij();
   $("start").classList.add("hidden"); $("hud").classList.remove("hidden"); $("crosshair").classList.remove("hidden");
   $("klikHint").classList.remove("hidden");
@@ -1825,9 +2190,9 @@ function einde(gewonnen) {
     <div class="blok">
       <h3>📊 Per onderwerp</h3>
       ${VOLGORDE.map(t => { const r = S.resultaten[t], p = r.totaal ? Math.round(r.goed / r.totaal * 100) : 0;
-        return `<div class="thema"><div class="kop"><span>${THEMAS[t].icoon} ${THEMAS[t].naam}</span><span>${r.totaal ? `${r.goed}/${r.totaal}` : "niet gedaan"}</span></div>
+        return `<div class="thema"><div class="kop"><span>${THEMAS[t].icoon} ${THEMAS[t].naam}</span><span>${r.totaal ? `${r.goed}/${r.totaal}${S.stations[t].poging > 1 ? ` (${S.stations[t].poging} pogingen)` : ""}${S.stations[t].klaar ? " ✅" : " ❌"}` : "niet gedaan"}</span></div>
           <div class="balk"><div style="width:${p}%;background:${THEMAS[t].kleur}"></div></div></div>`; }).join("")}
-      <div style="margin-top:8px;font-size:14px;color:var(--zacht)">⭐ Verborgen risico's gevonden: <b style="color:var(--geel)">${Object.keys(S.bonus).length}/3</b> · 💡 Hints gebruikt: <b>${S.hints}</b></div>
+      <div style="margin-top:8px;font-size:14px;color:var(--zacht)">⭐ Verborgen risico's gevonden: <b style="color:var(--geel)">${Object.keys(S.bonus).length}/${Object.keys(BONUS).length}</b> · 💡 Hints gebruikt: <b>${S.hints}</b></div>
     </div>
     <div class="blok" style="margin-top:14px">
       <h3>${lessen.length ? "📝 Hier kun je nog van leren" : "🏆 Je had alles goed!"}</h3>
@@ -1902,7 +2267,7 @@ function loop(nu) {
   if (S.bezig && !S.klaar) {
     const sec = Math.ceil(S.tijd);
     if (S.tijd < 60 && sec !== S.laatsteTik) { S.laatsteTik = sec; Geluid.sfx("tik"); }
-    if (S.tijd < 120 && !S.snelTempo) { S.snelTempo = true; Geluid.tempo(150); }
+    if (S.tijd < 120 && !S.snelTempo) { S.snelTempo = true; Geluid.haast(); }
   }
   camera.position.set(speler.x, 1.6 + (loopt ? Math.sin(t * 9) * 0.03 : 0), speler.z);
   camera.rotation.y = speler.yaw; camera.rotation.x = speler.pitch;
@@ -1916,6 +2281,7 @@ function loop(nu) {
     }
     if (o.ring && o.ring.visible) { o.ring.material.opacity = 0.35 + 0.3 * Math.sin(t * 3 + i); o.ring.scale.setScalar(1 + 0.06 * Math.sin(t * 3 + i)); }
   });
+  camLed.visible = Math.sin(t * 3) > 0;
   routerLeds.forEach((l, i) => { l.visible = i === 3 ? Math.sin(t * 6) > 0 : Math.sin(t * 4 + i * 2) > -0.6; });
   consoleLed.material.color.setHSL((t * 0.1) % 1, 0.8, 0.6);
   tvLicht.intensity = 0.45 + 0.15 * Math.sin(t * 7);
