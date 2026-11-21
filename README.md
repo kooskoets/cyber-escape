@@ -32,7 +32,7 @@ Door de ramen kijk je naar buiten: de tuin, de straat, buurhuizen en het busje v
 
 ## Voor de docent
 
-- **Speelduur:** kies op het startscherm 40, 50 (standaard) of 60 minuten.
+- **Speelduur:** kies op het startscherm 20, 25 of 30 minuten (standaard en maximum: 30).
 - **Spelregel:** heeft een leerling bij een station **meer dan de helft fout**, dan is er geen cijfer. Hij doet het station opnieuw, met andere vragen.
 - **Vragen:** elk station trekt willekeurige vragen uit een grotere pot (in totaal 94 vragen) en de antwoorden staan elke keer in een andere volgorde. Daarnaast zijn er doe-opdrachten: rode vlaggen aanklikken in een phishingmail en een nepwebshop, instellingen goed zetten (router, app-rechten), een wachtwoord maken en privacyrisico's in een post zoeken.
 - **Apparaten:** laptop/Chromebook (toetsenbord + muis) en telefoon/tablet (aanraakbediening, liggend spelen).

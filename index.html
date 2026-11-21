@@ -487,7 +487,7 @@
     <label for="naam" class="label">Wat is je naam?</label>
     <div class="naamrij">
       <input id="naam" maxlength="30" placeholder="Bijv. Yara of Daan" autocomplete="off">
-      <select id="speeltijd" aria-label="Speeltijd" class="tijdKeuze"><option value="40">⏱️ 40 min</option><option value="50" selected>⏱️ 50 min</option><option value="60">⏱️ 60 min</option></select>
+      <select id="speeltijd" aria-label="Speeltijd" class="tijdKeuze"><option value="20">⏱️ 20 min</option><option value="25">⏱️ 25 min</option><option value="30" selected>⏱️ 30 min</option></select>
       <button class="knop groen" id="startKnop">▶ Start de game</button>
     </div>
     <div class="fouttekst" id="naamFout"></div>
@@ -777,7 +777,7 @@ const THEMAS = {
   privacy:    { naam: "Privacy & jouw gegevens",       icoon: "🍪", ding: "Oude pc",     kamer: "hobbykamer", kleur: "#c9a46a" }
 };
 const VOLGORDE = ["phishing", "wachtwoord", "social", "malware", "iot", "ai", "pesten", "shoppen", "privacy"];
-let SPEELTIJD = 50 * 60;
+let SPEELTIJD = 30 * 60;
 
 const S = {
   naam: "", score: 0, tijd: SPEELTIJD, bezig: false, klaar: false,
@@ -2875,7 +2875,7 @@ $("startKnop").addEventListener("click", () => {
   const n = $("naam").value.trim();
   if (n.length < 2) { $("naamFout").textContent = "Vul eerst je naam in (minstens 2 letters)."; $("naam").focus(); return; }
   S.naam = n; S.bezig = true; S.startMoment = Date.now();
-  SPEELTIJD = (parseInt($("speeltijd").value, 10) || 50) * 60; S.tijd = SPEELTIJD;
+  SPEELTIJD = Math.min(30, parseInt($("speeltijd").value, 10) || 30) * 60; S.tijd = SPEELTIJD;
   Geluid.init(); Geluid.startMuziek(); werkGeluidIcoonBij();
   $("start").classList.add("hidden"); $("hud").classList.remove("hidden"); $("crosshair").classList.remove("hidden");
   $("klikHint").classList.remove("hidden");
