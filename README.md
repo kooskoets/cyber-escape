@@ -1,5 +1,7 @@
 # 🕵️ Cyber Escape: Het Gehackte Huis
 
+> 🚐 **Nieuw: deel 2, De Gehackte Camper:** https://kooskoets.github.io/cyber-escape/camper/
+
 Een 3D-escape room in de browser waarin vmbo-leerlingen (12–16 jaar) spelenderwijs leren over cybersecurity.
 
 **▶ Speel de game:** https://kooskoets.github.io/cyber-escape/
